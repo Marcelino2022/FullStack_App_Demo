@@ -1,0 +1,50 @@
+.card-login{
+    margin-top: 150px;
+}
+
+.card{
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px #0040ff;
+    border-color: #ffffff;
+}
+
+#Logo-Login img{
+    display: block;
+    height: 100px;
+    width: auto;
+    background-color: #042a9c;
+    border-radius: 100px;
+    margin-top: -70px;
+    margin-left: 40%;
+
+}
+
+#forgetPassword{
+    display: flex;
+    justify-content: end;
+    flex-wrap: nowrap;
+}
+
+#rememberMe{
+    display: flex;
+    justify-content: start;
+    flex-wrap: nowrap;
+}
+
+a{
+    color:  #0431B4;
+    text-decoration: none;
+    font-style: italic;
+}
+
+.btn-entrar{
+    background-color: #0431B4;
+    border-radius: 50Px;
+    border: #0431B4;
+}
+
+.btn-entrar:hover{
+    background-color: #042a9c;
+    border-radius: 50Px;
+    border: #042a9c;
+}

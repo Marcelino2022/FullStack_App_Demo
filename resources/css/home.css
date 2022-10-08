@@ -1,0 +1,111 @@
+.cover{
+    margin-top: -25px;
+    margin-bottom: 50px;
+}
+
+#content-cover{
+    margin-top: -160px;
+    margin-bottom: 160px;
+    color: white;
+}
+
+.coordenacao{
+    border-radius: 20px;
+    background: linear-gradient(#ffffff, #f1f8ff);
+    box-shadow: 0px 0px 6px 0px;
+    color: #042a9c;
+}
+
+.info-coordenacao{
+   display: flex;
+   align-items: center;
+}
+
+.info-coordenacao span{
+    margin-right: 50px;
+}
+
+.info-coordenacao i{
+    font-size: 16px;
+    color: #0034cf;
+}
+
+.cards{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.cards .col-md-3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 150px;
+    width: 150px;
+    background: linear-gradient(#042a9c, #131b72);
+    color: white;
+    border-radius: 100%;
+    box-shadow: 0px 0px 8px 2px #042a9c88;
+    transition: 0.8 ease-in;
+    padding: 5px;
+}
+
+.login-card:hover{
+    border-radius: 100%;
+    box-shadow: 0px 0px 8px 4px #042a9c88;
+    color: white;
+}
+
+
+.cards i{
+    font-size: 40px;
+
+}
+#Logo-Login img{
+    display: block;
+    height: 100px;
+    width: auto;
+    background-color: #042a9c;
+    border-radius: 100px;
+    margin-top: -70px;
+    margin-left: 40%;
+}
+
+#forgetPassword{
+    display: flex;
+    justify-content: end;
+    flex-wrap: nowrap;
+}
+
+#rememberMe{
+    display: flex;
+    justify-content: start;
+    flex-wrap: nowrap;
+}
+
+a{
+    color:  #0431B4;
+    text-decoration: none;
+    font-style: bolder;
+}
+
+.btn-entrar{
+    background-color: #0431B4;
+    border-radius: 50Px;
+    border: #0431B4;
+}
+
+.btn-entrar:hover{
+    background-color: #042a9c;
+    border-radius: 50Px;
+    border: #042a9c;
+}
