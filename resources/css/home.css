@@ -1,11 +1,6 @@
-.cover{
-    margin-top: -25px;
-    margin-bottom: 50px;
-}
-
 #content-cover{
-    margin-top: -160px;
-    margin-bottom: 160px;
+    margin-top: -150px;
+    margin-bottom: 150px;
     color: white;
 }
 
@@ -68,8 +63,13 @@
 
 .cards i{
     font-size: 40px;
-
 }
+
+.cards button{
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
 #Logo-Login img{
     display: block;
     height: 100px;

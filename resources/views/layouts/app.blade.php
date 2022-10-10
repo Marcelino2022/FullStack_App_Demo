@@ -9,9 +9,6 @@
 
     <title>{{ config('app.name', 'Pra-já') }}</title>
 
-    <!---Style-->
-    <link href="../../css/app.css" rel="stylesheet">
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,14 +17,15 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
 </head>
+
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Pra-já') }}
-                </a>
+                <a class="navbar-brand" href="{{ url('/') }}"><h3>PRA-JÁ</h3></a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -43,10 +41,10 @@
                                   Membros
                                 </a>
                                 <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{{route('todos')}}">Todos</a></li>
+                                  <li><hr class="dropdown-divider"></li>
                                   <li><a class="dropdown-item" href="">Coordenadores</a></li>
                                   <li><a class="dropdown-item" href="#">Vice-Coordenados</a></li>
-                                  <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="#">Todos</a></li>
                                 </ul>
                              </li>
                         @endauth
@@ -69,16 +67,24 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
+
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    <img src="../../../public/imagens/User-1.jpg" class="float-start avatar" alt="...">
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                                            <i class="bi bi-person"></i> {{ Auth::user()->name }}
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-tools"></i> Perfil</a>
+                                        <a class="list-group-item list-group-item-action disabled"><br></a>
+                                        <a class="list-group-item list-group-item-action" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                            <i class="bi bi-power"></i>Terminar Sessão
+                                        </a>
+                                    </div>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
@@ -90,10 +96,6 @@
                 </div>
             </div>
         </nav>
-
-        <style>
-            @import '../../css/app.css';
-        </style>
 
         <main class="py-4">
             @yield('content')

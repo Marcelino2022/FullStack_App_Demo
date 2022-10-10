@@ -23,3 +23,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/coordenacoes', function(){
     return view('app.coordenacoes');
 })->name('coordenacoes')->middleware('auth');
+
+Route::get('/todos-os-membros', function(){
+    return view('app.membros');
+})->name('todos')->middleware('auth');

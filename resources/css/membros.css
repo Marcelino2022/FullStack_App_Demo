@@ -1,26 +1,44 @@
+
 .margem-top{
     margin-top: 80px;
 }
 
-.coordenacao{
+.membro{
     border-radius: 20px;
     background: linear-gradient(#042a9c, #001450);
     box-shadow: 0px 0px 6px 0px;
     color: white;
 }
 
-.info-coordenacao{
+.membro .cabecalho-card{
+    display: flex;
+    align-items: center;
+    height: 70px;
+}
+
+.cabecalho-card h6{
+    color: #7c9dfd;
+}
+
+.avatar{
+    height: 60px;
+    width: 60px;
+    border-radius: 100px;
+    margin-right: 15px;
+}
+
+.info-membro{
    display: flex;
    justify-content: space-around;
    flex-wrap: wrap;
    align-items: center;
 }
 
-.info-coordenacao span{
+.info-membro span{
     margin-right: 50px;
 }
 
-.info-coordenacao i{
+.info-membro i{
     font-size: 16px;
     color: #7c9dfd;
 }

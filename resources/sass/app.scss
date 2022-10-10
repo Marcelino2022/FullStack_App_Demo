@@ -6,3 +6,43 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+body {
+    color: #001962;
+}
+
+body { color: #001962;}
+
+.nav-link { color: #00279d; }
+
+.nav-link:hover { color: #001f7e; }
+
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 2, 95, 0.132) !important;
+}
+
+.dropdown-menu{
+    --bs-dropdown-min-width: 15rem;
+    font-size: 16px;
+}
+
+.list-group-item{
+    color: #001962;
+}
+
+.list-group-item i{
+    color: #002cb2;
+}
+
+a{
+    text-decoration: none;
+}
+
+.avatar{
+
+    height: 40px;
+    width: 40px;
+    border-radius: 100px;
+    border: 2px solid #0024907c;;
+}
+

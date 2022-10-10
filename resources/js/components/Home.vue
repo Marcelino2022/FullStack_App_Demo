@@ -1,5 +1,6 @@
 <template>
-    <link rel="stylesheet" href="../../css/app.css">
+
+    <adicionarMembro-component></adicionarMembro-component>
 
     <div class = "cover">
         <img src="../../../public/imagens/Cover.png" class="img-fluid" alt="...">
@@ -25,12 +26,12 @@
 
         <div class="row cards mb-5">
             <div class="col-md-3">
-                <a href="">
+                <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
                     <div class="card login-card">
                         <div><i class="bi bi-person"></i></div>
                         <h5>Adicionar Membro</h5>
                     </div>
-                </a>
+                </button>
             </div>
 
             <div class="col-md-3">
