@@ -25,6 +25,7 @@ import AdicionarMembrosComponent from './components/AdicionarMembro.vue';
 import ModalComponent from './components/Modal.vue';
 import AdicionarMembroComponent from './components/AdicionarMembro.vue';
 import AdicionarCoordenacaoComponent from './components/AdicionarCoordenacao.vue';
+import AdicionarLocalidadeComponent from './components/AdicionarCoordenacao.vue';
 
 
 app.component('example-component', ExampleComponent);
@@ -32,12 +33,13 @@ app.component('login-component', LoginComponent);
 app.component('home-component', HomeComponent);
 app.component('coordenacoes-component', CoordenacoesComponent);
 app.component('membros-component', MembrosComponent);
-
 app.component('adicionarMembro-component', AdicionarMembrosComponent);
+app.component('adicionarLocalidade-component', AdicionarLocalidadeComponent);
 
 app.component('modal-component', ModalComponent);
 app.component('adicionarMembro-component', AdicionarMembroComponent);
 app.component('adicionarCoordenacao-component', AdicionarCoordenacaoComponent);
+app.component('adicionarLocalidade-component', AdicionarLocalidadeComponent);
 
 
 /**

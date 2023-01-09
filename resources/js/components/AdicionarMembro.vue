@@ -85,6 +85,13 @@
                         <input type="text" class="form-control" id="recipient-name">
                         <span class="icon-input"><i class="bi bi-phone-vibrate-fill"></i></span>
                     </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="recipient-name" class="col-form-label">Cópia do Documento</label>
+                        <input type="file" class="form-control" id="recipient-name">
+                        <span class="icon-input"><i class="bi bi-card-text"></i></span>
+                    </div>
+
                 </div>
             </form>
         </template>

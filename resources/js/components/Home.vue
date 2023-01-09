@@ -2,6 +2,7 @@
 
     <adicionarMembro-component></adicionarMembro-component>
     <adicionarCoordenacao-component></adicionarCoordenacao-component>
+    <adicionarLocalidade-component></adicionarLocalidade-component>
 
 
     <div class = "cover">
@@ -47,22 +48,31 @@
             </div>
 
             <div class="col-md-3">
-                <button>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#provinciaModal">
                     <div class="card menu-card">
                         <div><i class="bi bi-pin-map-fill"></i></div>
-                        <p>Adicionar Localidade</p>
+                        <p>Adicionar Província</p>
                     </div>
                 </button>
             </div>
 
             <div class="col-md-3">
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#localidadeModal">
+                    <div class="card menu-card">
+                        <div><i class="bi bi-pin-map-fill"></i></div>
+                        <p>Adicionar Município</p>
+                    </div>
+                </button>
+            </div>
+
+            <!--div class="col-md-3">
                 <button>
                     <div class="card menu-card">
                         <div><i class="bi bi-calendar3"></i></div>
                         <p>Agendar Atividade</p>
                     </div>
                 </button>
-            </div>
+            </div-->
 
         </div>
     </div>

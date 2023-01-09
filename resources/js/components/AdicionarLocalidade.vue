@@ -1,5 +1,5 @@
 <template>
-    <modal-component id="coordenacaoModal" titulo="Adicionar Coordenação">
+    <modal-component id="localidadeModal" titulo="Adicionar Localidade">
         <template v-slot:conteudo>
             <form>
                 <div class="row">
