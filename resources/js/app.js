@@ -20,14 +20,20 @@ import LoginComponent from './components/Login.vue';
 import HomeComponent from './components/Home.vue';
 import CoordenacoesComponent from './components/Coordenacoes.vue';
 import MembrosComponent from './components/Membros.vue';
-import AdicionarMembrosComponent from './components/AdicionarMembro.vue';
+import ModalComponent from './components/Modal.vue';
+import AdicionarMembroComponent from './components/AdicionarMembro.vue';
+import AdicionarCoordenacaoComponent from './components/AdicionarCoordenacao.vue';
+
 
 app.component('example-component', ExampleComponent);
 app.component('login-component', LoginComponent);
 app.component('home-component', HomeComponent);
 app.component('coordenacoes-component', CoordenacoesComponent);
 app.component('membros-component', MembrosComponent);
-app.component('adicionarMembro-component', AdicionarMembrosComponent);
+app.component('modal-component', ModalComponent);
+app.component('adicionarMembro-component', AdicionarMembroComponent);
+app.component('adicionarCoordenacao-component', AdicionarCoordenacaoComponent);
+
 
 /**
  * The following block of code may be used to automatically register your

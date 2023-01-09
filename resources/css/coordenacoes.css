@@ -4,9 +4,20 @@
 
 .coordenacao{
     border-radius: 20px;
-    background: linear-gradient(#042a9c, #001450);
-    box-shadow: 0px 0px 6px 0px;
-    color: white;
+    background: #08088A;
+    /*box-shadow: 0px 0px 6px 0px;*/
+    border: 1px solid #F2F2F2;
+    color: white
+}
+
+.coordenacao .cabecalho-card{
+    display: flex;
+    align-items: center;
+    height: 70px;
+}
+
+.cabecalho-card h3{
+    margin-left: 20px;
 }
 
 .info-coordenacao{
@@ -22,6 +33,7 @@
 
 .info-coordenacao i{
     font-size: 16px;
+    font-weight: bolder;
     color: #7c9dfd;
 }
 
@@ -31,18 +43,21 @@
 
 .btn i{
     margin-right: 5px;
-    color: white;
+    color: #f8fafc;
 }
 
 #filter label{
     padding-left: 83px;
-    color: #001962;
+    color: #1C1C1C;
 }
 
 .form-select{
     padding-left: 60px;
-    border-color: #001962;
-    color: #001962;
+    border-color:#1C1C1C;
+    color:#1C1C1C;
+    border-color: #08088A;
+    background-color: white;
+
 }
 
 .icon-form{
@@ -50,5 +65,5 @@
     display: block;
     margin-top: -50px;
     margin-left: 15px;
-    color: #001962;
+    color:#08088A;
 }

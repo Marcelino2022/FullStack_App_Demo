@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('Telefone',15);
             $table->string('Tipo',6);
             $table->unsignedBigInteger('coordenacao_id');
+            $table->timestamps();
         });
     }
 

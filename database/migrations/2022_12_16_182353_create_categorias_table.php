@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mobilizadores', function (Blueprint $table) {
+        Schema::create('categorias', function (Blueprint $table) {
             $table->id();
-            $table->string('Codigo_Mobilizador', 6);
-            $table->unsignedBigInteger('membro_id');
+            $table->string('Designacao_Categoria', 30);
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mobilizadores');
+        Schema::dropIfExists('categorias');
     }
 };

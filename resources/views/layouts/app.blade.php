@@ -22,10 +22,10 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
+        <nav class="navbar navbar-expand-md fixed-top" id="bg-header">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}"><h3>PRA-JÁ</h3></a>
-
+                <a class="navbar-brand" href="{{ url('/') }}"></a>
+                <img src="https://th.bing.com/th/id/OIP.FLZA1XVHArMTlpRvQogtDAAAAA?pid=ImgDet&rs=1" class="logo" alt="Pra-Já">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -41,10 +41,10 @@
                                   Membros
                                 </a>
                                 <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="{{route('todos')}}">Todos</a></li>
+                                  <li><a class="dropdown-item" href="">Juventude</a></li>
+                                  <li><a class="dropdown-item" href="#"> Mulheres</a></li>
                                   <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="">Coordenadores</a></li>
-                                  <li><a class="dropdown-item" href="#">Vice-Coordenados</a></li>
+                                  <li><a class="dropdown-item" href="{{route('todos')}}">Todos</a></li>
                                 </ul>
                              </li>
                         @endauth
@@ -69,7 +69,7 @@
                             <li class="nav-item dropdown">
 
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="../../../public/imagens/User-1.jpg" class="float-start avatar" alt="...">
+                                    <img src="https://a7.pnghunt.com/preview/1010/196/39/forehead-silhouette-face-monochrome-contacts.jpg" class="float-start avatar" alt="...">
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

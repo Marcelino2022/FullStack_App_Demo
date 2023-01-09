@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('funcoes', function (Blueprint $table) {
             $table->id();
-            $table->string('Designacao_Funcao', 30);
-            $table->unsignedBigInteger('ID_Membro');
+            $table->string('Designacao_Funcao', 50);
             $table->timestamps();
         });
     }

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('Designacao_Municipio', 20);
             $table->string('Codigo_Municipio', 5);
-            $table->unsignedBigInteger('ID_Provincia');
+            $table->unsignedBigInteger('provincia_id');
+            $table->timestamps();
         });
     }
 

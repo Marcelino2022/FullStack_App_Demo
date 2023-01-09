@@ -26,8 +26,11 @@ class MembroController extends Controller
 
         //COLETA DE DADOS DA ENTIDADE DO RELACIONAMENTO COORDENAÇÃO TEM MEMBROS
         if($request->has('atributos_coordenacao')){
+
             $atributos_coordenacao = 'coordenacao:id,'.$request->atributos_coordenacao;
-            $membroRepository->selectAtributosRegistosRelacionados($atributos_coordenacao);
+            $atributos_categoria = 'categoria:id,'.$request->atributos_categoria;
+
+            $membroRepository->selectAtributosRegistosRelacionados($atributos_coordenacao, $atributos_categoria);
         } else{
             $membroRepository->selectAtributosRegistosRelacionados('coordenacao');
         }
@@ -69,9 +72,9 @@ class MembroController extends Controller
             'Imagem_Membro' =>          $imagem_URN,
             'Telemovel_Membro' =>       $request->Telemovel_Membro,
             'Email_Membro' =>           $request->Email_Membro,
-            'ID_Mobilizador' =>         $request->ID_Mobilizador,
-            'ID_Responsavel' =>         $request->ID_Responsavel,
+            'mobilizador_id' =>         $request->mobilizador_id,
             'coordenacao_id' =>         $request->coordenacao_id,
+            'categoria_id' =>           $request->categoria_id,
         ]);
 
         //$membro = $this->membro->create($request->all());
@@ -86,7 +89,7 @@ class MembroController extends Controller
      */
     public function show($id)
     {
-        $membro = $this->membro->with('coordenacao')->find($id);
+        $membro = $this->membro->with('coordenacao, categoria')->find($id);
         if($membro === null)
             return response()->json(['msg' => 'Ação recusada, os dados do recurso solicitado são inválidos'], 404);
         else

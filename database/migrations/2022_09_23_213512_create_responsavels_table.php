@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('responsavels', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('ID_Responsavel');
-            $table->unsignedBigInteger('ID_Membro');
-            
+            $table->unsignedBigInteger('responsavel_id');
+            $table->unsignedBigInteger('membro_id');
+            $table->timestamps();
+
         });
     }
 

@@ -9,7 +9,7 @@ class Coordenacao extends Model
 {
     use HasFactory;
     protected $table = 'coordenacoes';
-    protected $fillable = ['Designacao_Coordenacao', 'Endereco_Coordenacao', 'Bairro', 'Email', 'ID_Localidade'];
+    protected $fillable = ['Designacao_Coordenacao', 'Endereco_Coordenacao', 'Bairro', 'Email', 'localidade_id'];
 
     public function rules(){
         return [
@@ -17,7 +17,7 @@ class Coordenacao extends Model
             "Endereco_Coordenacao" => 'required|unique:coordenacoes',
             "Bairro" => 'required|unique:coordenacoes',
             "Email" => 'required|unique:coordenacoes',
-            "ID_Localidade" => 'required|unique:coordenacoes'
+            "localidade_id" => 'required|unique:coordenacoes'
         ];
     }
 
@@ -29,7 +29,7 @@ class Coordenacao extends Model
             'Designacao_Coordenacao.unique' => 'A designação da Entidade já existe',
             'Email.unique' => 'O Email :attribute já existe uma Coordenação',
             'Bairro.unique' => 'No bairo :attribute já existe uma Coordenação',
-            'ID_Localidade.unique' => 'Não pode registar uma nova coordenação para a Localidade indicada, pois já existe uma Coordenação'
+            'localidade_id.unique' => 'Não pode registar uma nova coordenação para a Localidade indicada, pois já existe uma Coordenação'
         ];
     }
 
