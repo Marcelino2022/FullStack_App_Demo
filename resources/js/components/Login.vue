@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" id = "background">
         <div class="row justify-content-center card-login">
             <div class="col-md-5">
                 <div class="card p-3">

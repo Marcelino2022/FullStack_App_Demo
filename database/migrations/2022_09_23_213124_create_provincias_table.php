@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('Designacao_Provincia', 20);
             $table->string('Codigo_Provincia', 5);
+            $table->timestamps();
         });
     }
 

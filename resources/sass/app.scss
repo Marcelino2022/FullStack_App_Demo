@@ -7,11 +7,8 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
-body {
-    color: #001962;
-}
 
-body { color: #001962;}
+body { color: #08088A}
 
 .nav-link { color: #00279d; }
 
@@ -24,25 +21,76 @@ body { color: #001962;}
 .dropdown-menu{
     --bs-dropdown-min-width: 15rem;
     font-size: 16px;
+    color: #1C1C1C;
 }
 
+/*.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
+    clear: both;
+    font-weight: 400;
+    color: #1C1C1C;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}*/
+
 .list-group-item{
-    color: #001962;
+    color: #001962 !important;
 }
 
 .list-group-item i{
     color: #002cb2;
 }
 
-a{
+/*a{
     text-decoration: none;
-}
+}*/
 
 .avatar{
 
     height: 40px;
     width: 40px;
     border-radius: 100px;
-    border: 2px solid #0024907c;;
+    border: 2px solid #08088A;
 }
 
+.navbar {
+    background-color: #0101DF;
+    color: white;
+    border-bottom: 5px solid #08088A;
+}
+
+.navbar a{
+    color: white;
+    transition: ease-in 0.3;
+}
+
+.navbar a:hover{
+    color: #d8d8d8;
+    transition: ease-in 0.3;
+}
+
+.navbar .logo{
+    border-radius:100%;
+    width: 50px;
+    border: 2px solid white;
+}
+
+.dropdown-menu a{
+    font-size: 14px;
+    color: #1C1C1C;
+}
+
+.dropdown-menu a:hover{
+    color: #1C1C1C;
+}
+
+.navbar-nav {
+    --bs-nav-link-color: #f8fafc;
+    --bs-nav-link-hover-color: #f8fafc;
+    --bs-nav-link-disabled-color: #f8fafc;
+}

@@ -1,7 +1,7 @@
 <template>
 
     <div class="container">
-        <h1 class="margem-top">Membros</h1>
+        <h2 class="margem-top">Membros</h2>
         <hr class="mb-3">
 
         <div class="row mb-5">
@@ -39,6 +39,8 @@
                 </div>
             </div>
         </div>
+
+        <hr class="mb-3 mt-5">
     </div>
 </template>
 

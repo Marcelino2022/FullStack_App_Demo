@@ -23,11 +23,11 @@ return new class extends Migration
             $table->string('Imagem_Membro', 100);
             $table->string('Telemovel_Membro',12);
             $table->string('Email_Membro', 30);
-            $table->unsignedBigInteger('ID_Mobilizador');
-            $table->unsignedBigInteger('ID_Responsavel');
+            $table->unsignedBigInteger('mobilizador_id');
+            $table->unsignedBigInteger('funcao_id');
             $table->unsignedBigInteger('coordenacao_id');
+            $table->unsignedBigInteger('categoria_id');
             $table->timestamps();
-
         });
     }
 

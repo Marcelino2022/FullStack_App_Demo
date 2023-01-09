@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('Endereco_Coordenacao', 100);
             $table->string('Bairro', 50);
             $table->string('Email', 50);
-            $table->unsignedBigInteger('ID_Localidade');
+            $table->unsignedBigInteger('localidade_id');
             $table->timestamps();
         });
     }

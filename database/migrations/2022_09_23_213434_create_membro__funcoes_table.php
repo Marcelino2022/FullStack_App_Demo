@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('membro__funcoes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('ID_Funcao');
-            $table->unsignedBigInteger('ID_Membro');
+            $table->unsignedBigInteger('funcao_id');
+            $table->unsignedBigInteger('membro_id');
             $table->timestamps();
         });
     }

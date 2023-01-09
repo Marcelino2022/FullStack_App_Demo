@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('localidades', function (Blueprint $table) {
             $table->id();
-            $table->string('Designacao_Localidade', 20);
-            $table->unsignedBigInteger('ID_Provincia');
+            $table->string('Designacao_Localidade', 50);
+            $table->unsignedBigInteger('municipio_id');
+            $table->timestamps();
         });
     }
 

@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('mobilizadores', function (Blueprint $table) {
             $table->id();
             $table->string('Codigo_Mobilizador', 6);
-            $table->unsignedBigInteger('ID_Membro');
+            $table->unsignedBigInteger('membro_id');
+            $table->timestamps();
         });
     }
 

@@ -2,7 +2,7 @@
 
     <div class="container mt-3">
 
-        <h1 class="margem-top">Coordenações</h1>
+        <h2 class="margem-top">Coordenações</h2>
 
         <hr class="mb-3">
 
@@ -21,7 +21,13 @@
 
         <div class="card mb-3 coordenacao">
             <div class="card-body">
-                <h1 class="mb-1">Coordenação Provincial de Luanda</h1>
+                <div class="cabecalho-card">
+                    <img src="../../../public/imagens/Logo-Web.png" class="float-start avatar" alt="...">
+                    <div>
+                        <h3 class="mb-1">Coordenação Provincial de Luanda</h3>
+                    </div>
+                </div>
+
                 <hr>
                 <div class="info-coordenacao">
                     <div class="mb-2"><i class="bi bi-envelope-fill"></i> coordenacao@luanda.com</div>
@@ -32,7 +38,10 @@
                 </div>
             </div>
         </div>
+
+        <hr class="mb-3 mt-5">
     </div>
+
 </template>
 
 <style scoped>
