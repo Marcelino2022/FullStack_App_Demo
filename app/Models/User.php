@@ -21,7 +21,7 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name',
         'email',
-        'membro_id',
+        'coordenacao_id',
         'password',
     ];
 
@@ -68,14 +68,14 @@ class User extends Authenticatable implements JWTSubject
 
     public function rules(){
         return[
-            "membro_id" => 'required|unique:coordenacoes'
+            "coordenacao_id" => 'required|unique:coordenacoes'
         ];
     }
 
     public function feedback(){
         return[
             'required' => 'O campo :attribute é obrigatório',
-            'membro_id.unique' => 'Verifique os dados de autenticação do Utilizador.'
+            'coordenacao_id.unique' => 'Verifique os dados de autenticação da Coordenacao.'
         ];
     }
 

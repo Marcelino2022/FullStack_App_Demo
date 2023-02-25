@@ -2,6 +2,7 @@
 
     <div class="container mt-3">
 
+        <adicionarCoordenacao-component></adicionarCoordenacao-component>
         <h2 class="margem-top">Coordenações</h2>
 
         <hr class="mb-3">
@@ -17,29 +18,29 @@
                 <label for="floatingSelect">Filtrar por:</label>
                 <span class="icon-form"><i class="bi bi-filter-circle-fill"></i></span>
             </div>
-        </div>
+            
+            <div class="col-md-6"></div>
 
-        <div class="card mb-3 coordenacao">
-            <div class="card-body">
-                <div class="cabecalho-card">
-                    <img src="../../../public/imagens/Logo-Web.png" class="float-start avatar" alt="...">
-                    <div>
-                        <h3 class="mb-1">Coordenação Provincial de Luanda</h3>
-                    </div>
-                </div>
-
-                <hr>
-                <div class="info-coordenacao">
-                    <div class="mb-2"><i class="bi bi-envelope-fill"></i> coordenacao@luanda.com</div>
-                    <div class="mb-2 ml-5"><i class="bi bi-phone-fill"></i> 923 451 241</div>
-                    <div class="mb-2 ml-5"><i class="bi bi-geo-alt-fill"></i> Avenidada Deolinda Rodrigues 23</div>
-                    <div class="mb-2 ml-5"><button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i> Editar</button></div>
-                    <div class="mb-2 ml-5"><button type="button" class="btn btn-danger"><i class="bi bi-trash3-fill"></i> Eliminar</button></div>
-                </div>
+            <div class="col-md-3 mt-1 col-btn">
+                <buttonComponent-component class="button-component" data-bs-toggle="modal" data-bs-target="#coordenacaoModal">
+                    <template v-slot:icon><i class="bi bi-plus-circle"></i></template>
+                    <template v-slot:conteudo>Adicionar Coordenação</template>
+                </buttonComponent-component>
             </div>
+
         </div>
 
         <hr class="mb-3 mt-5">
+        <card-component titulo="Coordenação Provincial de Luanda">
+            <template v-slot:image> <img src="../../../public/imagens/Logo-Web.png" class="float-start avatar" alt="..."></template>
+            <template v-slot:rodape>
+                <div class="mb-2"><i class="bi bi-envelope-fill icon-color"></i> coordenacao@luanda.com</div>
+                <div class="mb-2 ml-5"><i class="bi bi-phone-fill icon-color"></i> 923 451 241</div>
+                <div class="mb-2 ml-5"><i class="bi bi-geo-alt-fill icon-color"></i> Avenidada Deolinda Rodrigues 23</div>
+                <div class="mb-2 ml-5"><button type="button " class="btn btn-success"><i class="bi bi-pencil-square"></i> Editar</button></div>
+                <div class="mb-2 ml-5"><button type="button" class="btn btn-danger"><i class="bi bi-trash3-fill"></i> Eliminar</button></div>
+            </template>
+        </card-component>
     </div>
 
 </template>

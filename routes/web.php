@@ -31,3 +31,7 @@ Route::get('/coordenacoes', function(){
 Route::get('/todos-os-membros', function(){
     return view('app.membros');
 })->name('todos')->middleware('auth');
+
+Route::get('/provincias', function(){
+    return view('app.provincias');
+})->name('todas')->middleware('auth');

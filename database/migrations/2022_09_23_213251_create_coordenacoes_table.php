@@ -17,9 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('Designacao_Coordenacao', 50);
             $table->string('Endereco_Coordenacao', 100);
-            $table->string('Bairro', 50);
+            $table->string('Endereco', 50);
+            $table->string('Telefone', 10);
+            $table->string('Telemovel', 10);
             $table->string('Email', 50);
             $table->unsignedBigInteger('localidade_id');
+            $table->unsignedBigInteger('permissoes_id');
             $table->timestamps();
         });
     }

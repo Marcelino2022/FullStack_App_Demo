@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <register-component></register-component>
+    <provincia-component></provincia-component>
 @endsection
+

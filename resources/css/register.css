@@ -1,0 +1,53 @@
+.card-register{
+    margin-top: 150px;
+}
+
+.card{
+    border-radius: 20px;
+    border-color: #ffffff;
+}
+
+#Logo-register img{
+    display: block;
+    height: 100px;
+    width: auto;
+    background-color: #0101DF;
+    border-radius: 100px;
+    margin-top: -70px;
+    margin-left: 40%;
+
+}
+
+#forgetPassword{
+    display: flex;
+    justify-content: end;
+    flex-wrap: nowrap;
+}
+
+#rememberMe{
+    display: flex;
+    justify-content: start;
+    flex-wrap: nowrap;
+}
+
+a{
+    color:  #0101DF;
+    text-decoration: none;
+    font-style: italic;
+}
+
+.btn-entrar{
+    background-color: #0101DF;
+    border-radius: 50Px;
+    border: #0101DF;
+    color: 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.btn-entrar:hover{
+    background-color: #0404B4;
+    border-radius: 50Px;
+    border: #0404B4;
+}
+
+
+

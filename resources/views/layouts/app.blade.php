@@ -32,21 +32,37 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav ml-auto">
                         @auth
                             <li class="nav-item"><a class="nav-link" href="{{route('home')}}">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{route('coordenacoes')}}">Coordenacões</a></li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                   Membros
                                 </a>
                                 <ul class="dropdown-menu">
                                   <li><a class="dropdown-item" href="">Juventude</a></li>
                                   <li><a class="dropdown-item" href="#"> Mulheres</a></li>
                                   <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="{{route('todos')}}">Todos</a></li>
+                                  <li><a class="dropdown-item" href="{{route('todos')}}">Todos os membros</a></li>
                                 </ul>
                              </li>
+
+                             <li class="nav-item"><a class="nav-link" href="{{route('home')}}">Permissões</a></li>
+
+                             <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Locais
+                                </a>
+                                <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="/provincias">Províncias</a></li>
+                                  <li><a class="dropdown-item" href="#"> Municípios</a></li>
+                                  <li><a class="dropdown-item" href="#"> Localidades</a></li>
+                                  <li><hr class="dropdown-divider"></li>
+                                  <li><a class="dropdown-item" href="{{route('todos')}}">Todos os Locais</a></li>
+                                </ul>
+                             </li>
+
                         @endauth
                     </ul>
 
@@ -62,7 +78,7 @@
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('') }}</a>
                                 </li>
                             @endif
                         @else
@@ -72,9 +88,9 @@
                                     <img src="https://a7.pnghunt.com/preview/1010/196/39/forehead-silhouette-face-monochrome-contacts.jpg" class="float-start avatar" alt="...">
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-end" id="" aria-labelledby="navbarDropdown">
                                     <div class="list-group">
-                                        <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                                        <a href="#" class="list-group-item list-group-item-action active" id="dropMenu" aria-current="true">
                                             <i class="bi bi-person"></i> {{ Auth::user()->name }}
                                         </a>
                                         <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-tools"></i> Perfil</a>

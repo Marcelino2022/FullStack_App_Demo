@@ -1,7 +1,7 @@
-
 .margem-top{
-    margin-top: 80px;
+    margin-top: 8rem;
 }
+
 
 .btn{
     border-radius: 50px;
@@ -9,18 +9,21 @@
 
 .btn i{
     margin-right: 5px;
-    color: white;
+    color: #f8fafc;
 }
 
 #filter label{
     padding-left: 83px;
-    color: #001962;
+    color: #1C1C1C;
 }
 
 .form-select{
     padding-left: 60px;
+    border-color:#1C1C1C;
+    color:#1C1C1C;
     border-color: #08088A;
-    color: #001962;
+    background-color: white;
+
 }
 
 .icon-form{
@@ -28,8 +31,9 @@
     display: block;
     margin-top: -50px;
     margin-left: 15px;
-    color: #08088A
+    color:#08088A;
 }
+
 
 .col-btn{
     display: flex;
@@ -39,4 +43,3 @@
 .info-footer .icon-color{
     color: #7c9dfd !important;
 }
-

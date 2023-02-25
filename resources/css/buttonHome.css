@@ -1,0 +1,27 @@
+.button-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 150px;
+    width: 150px;
+    background: #0B0B3B;
+    box-shadow: 0 0 6px 4px #E0E0F8;
+    color: #f8fafc;
+    border-radius: 100%;
+    color: 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    padding: 15px;
+}
+
+.button-card:hover{
+    border-radius: 100%;
+    background-color: #0B0B61;
+    color: #f8fafc;
+}
+
+a{
+    text-decoration: none;
+}
+.cards i{
+    font-size: 40px;
+}

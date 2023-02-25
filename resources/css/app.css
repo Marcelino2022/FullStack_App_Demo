@@ -6,3 +6,7 @@
 html{
     font-family: 'Ubuntu', sans-serif;
 }
+
+.info-footer .icon-color{
+    color: #7c9dfd !important;
+}

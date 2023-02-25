@@ -1,0 +1,34 @@
+.genericCard{
+    border-radius: 30px;
+    background: #0101DF;
+    border: 1px solid #F2F2F2;
+}
+
+.genericCard .cabecalho-card{
+    background-color: #08088A;
+    color: #F2F2F2;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    padding: .6rem;
+}
+
+.cabecalho-card h3{
+    margin-left: 20px;
+}
+
+.cabecalho-card h6{
+    margin-left: 20px;
+    color: #7c9dfd;
+}
+
+.info-footer{
+   display: flex;
+   justify-content: space-around;
+   flex-wrap: wrap;
+   align-items: center;
+   font-weight: bold;
+   color: #F2F2F2;
+}
+
+

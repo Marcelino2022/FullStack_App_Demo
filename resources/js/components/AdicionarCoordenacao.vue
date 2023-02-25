@@ -66,6 +66,31 @@
                         <input type="text" class="form-control" id="recipient-name">
                         <span class="icon-input"><i class="bi bi-geo-alt-fill"></i></span>
                     </div>
+
+                    <div class="col-md-6  mb-3">
+                        <label for="text" class="col-form-label">Permissão</label>
+                        <select class="form-select" name="" id="">
+                            <option selected>Selecione aqui</option>
+                            <option value="">Nível Naconal</option>
+                            <option value="">Nível Provincial</option>
+                            <option value="">Nível Municipal</option>
+                            <option value="">Nível de Localidade</option>
+                        </select>
+                        <span class="icon-input"><i class="bi bi-check-all"></i></span>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="recipient-name" class="col-form-label">Palavra Passe:</label>
+                        <input type="password" class="form-control" id="recipient-name">
+                        <span class="icon-input"><i class="bi bi-unlock-fill"></i></span>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="recipient-name" class="col-form-label">Confirme a Palavra Passe:</label>
+                        <input type="password" class="form-control" id="recipient-name">
+                        <span class="icon-input"><i class="bi bi-lock-fill"></i></span>
+                    </div>
+
                 </div>
             </form>
         </template>
@@ -73,6 +98,7 @@
             <button type="button" class="btn btn-secondario" data-bs-dismiss="modal">Fechar</button>
             <button type="button" class="btn btn-principal">Submeter</button>
         </template>
+        
     </modal-component>
 </template>
 

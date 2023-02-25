@@ -94,3 +94,20 @@ body { color: #08088A}
     --bs-nav-link-hover-color: #f8fafc;
     --bs-nav-link-disabled-color: #f8fafc;
 }
+
+.list-group-item.active {
+    z-index: 2;
+    color: #f8fafc !important;
+    color: var(--bs-list-group-active-color);
+    background-color: #002cb2;
+    border-color: #002cb2;
+}
+
+.list-group-item.active i{
+    color: white !important;
+}
+
+.list-group-item i{
+    margin-right: 0.3rem;
+}
+

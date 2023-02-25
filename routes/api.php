@@ -18,7 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::middleware('jwt.auth')->group(function(){
+Route::middleware('jwt.auth')->group(function(){
 
     Route::post('me', 'App\Http\Controllers\AuthController@me');
     Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
@@ -34,7 +34,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::apiResource('responsavel', 'App\Http\Controllers\responsavelController');
     Route::apiResource('telefone_coordenacao', 'App\Http\Controllers\TelefoneCoordenacaoController');
     Route::apiResource('categoria', 'App\Http\Controllers\CategoriaController');
-//});
+    Route::apiResource('permissoes', 'App\Http\Controllers\PermissoesController');
+});
 
 Route::post('/', 'App\Http\Controllers\AuthController@login');
 

@@ -21,7 +21,7 @@ class Provincia extends Model
     public function feedback(){
         return [
             'required' => 'O campo :attribute é obrigatório',
-            'Designacao_Provincia.min' => "O campo Designação da Coordenação tem de ter no mínimo 3 caracteres",
+            'Designacao_Provincia.min' => "O campo Designação da Província tem de ter no mínimo 3 caracteres",
             'Designacao_Provincia.unique' => 'A Província já existe.',
             'Codigo_Provincia.unique' => 'O código da Província Já existe.',
         ];

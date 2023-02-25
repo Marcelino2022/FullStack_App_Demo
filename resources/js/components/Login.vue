@@ -9,6 +9,7 @@
                      </div>
 
                      <div class="card-body">
+                        <div class="mb-3"><h3>Entrar</h3></div><hr>
                         <form method="POST" action="" @submit.prevent="login($event)">
                             <input type="hidden" name="_token" :value = "csrf_token">
 
@@ -55,7 +56,7 @@
 </style>
 
 <script>
-    export default{
+    export default {
         props: [ 'csrf_token'],
         data(){
             return {
@@ -65,7 +66,7 @@
         },
         methods: {
             login(e){
-                let url = 'http://127.0.0.1:8000/api/login'
+                let url = 'http://127.0.0.1:8000/api/'
                 let configuracao = {
                     method: 'post',
                     body:  new URLSearchParams({
