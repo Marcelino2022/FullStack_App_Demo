@@ -1,9 +1,9 @@
 <template>
-    <modal-component id="provinciaModal" titulo="Adicionar provinciade">
+    <modal-component id="editarProvinciaModal" titulo="Editar dados Provincia">
 
         <template v-slot:alertas>
-            <alert-component tipo="success" :detalhes="transacaoDetalhes" titulo="Registo Realizado com sucesso" v-if="transacaoStatus == 'adicionado'"></alert-component>
-            <alert-component tipo="danger" :detalhes="transacaoDetalhes" titulo="Erro ao tentar Registar Província" v-if="transacaoStatus == 'erro'"></alert-component>
+            <alert-component tipo="success" :detalhes="transacaoDetalhes" titulo="Dados da província Atualizada com sucesso" v-if="transacaoStatus == 'adicionado'"></alert-component>
+            <alert-component tipo="danger" :detalhes="transacaoDetalhes" titulo="Erro ao tentar atualizar Província" v-if="transacaoStatus == 'erro'"></alert-component>
         </template>
 
         <template v-slot:conteudo>
@@ -30,13 +30,13 @@
         </template>
         <template v-slot:rodape>
             <button type="button" class="btn btn-secondario" data-bs-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-principal" @click="salvar()">Salvar</button>
+            <button type="button" class="btn btn-principal" @click="salvar()">Atualizar</button>
         </template>
     </modal-component>
 </template>
 
 <style scoped>
-    @import '../../css/modalAdicionar.css';
+    @import '../../../css/modalAdicionar.css';
 </style>
 
 <script>

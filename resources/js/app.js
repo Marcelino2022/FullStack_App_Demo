@@ -7,13 +7,23 @@
 import './bootstrap';
 import { createApp } from 'vue';
 
+import Vuex from 'vuex';
+
+const store = new Vuex.Store({
+    state: {
+        teste: 'A ver se funciona'
+    }
+})
+
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
  * to use in your application's views. An example is included for you.
  */
 
-const app = createApp({});
+const app = createApp({
+    store
+});
 
 import ExampleComponent from './components/ExampleComponent.vue';
 import LoginComponent from './components/Login.vue';
@@ -29,8 +39,10 @@ import ButtonComponent from './components/ButtonComponent.vue';
 import AdicionarMembroComponent from './components/AdicionarMembro.vue';
 import AdicionarCoordenacaoComponent from './components/AdicionarCoordenacao.vue';
 import AdicionarLocalidadeComponent from './components/AdicionarCoordenacao.vue';
-import ProvinciaComponent from './components/Provincia.vue';
-import AdicionarProvinciaComponent from './components/AdicionarProvincia.vue';
+import ProvinciaComponent from './components/provincia/Provincia.vue';
+import AdicionarProvinciaComponent from './components/provincia/AdicionarProvincia.vue';
+import EditarProvinciaComponent from './components/provincia/EditarProvincia.vue';
+
 import InputContainerComponent from './components/InputContainer.vue';
 import FiltroComponent from './components/Filtro.vue'
 import CardComponent from './components/card.vue'
@@ -53,6 +65,8 @@ app.component('adicionarCoordenacao-component', AdicionarCoordenacaoComponent);
 app.component('adicionarLocalidade-component', AdicionarLocalidadeComponent);
 app.component('provincia-component', ProvinciaComponent);
 app.component('adicionarProvincia-component', AdicionarProvinciaComponent);
+app.component('editarProvincia-component', EditarProvinciaComponent);
+
 app.component('input-container-component', InputContainerComponent);
 app.component('filtro-component', FiltroComponent);
 app.component('card-component', CardComponent)

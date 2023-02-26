@@ -31,6 +31,6 @@
 
 <script>
     export default {
-        props: ['id', 'titulo', 'subtitulo']
+        props: ['id', 'titulo', 'subtitulo', 'editar', 'remover']
     }
 </script>
