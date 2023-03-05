@@ -14,7 +14,7 @@ class Municipio extends Model
     public function rules(){
         return [
             'Designacao_Municipio' => 'required|unique:municipios,Designacao_Municipio,'.$this->id.'|min:3',
-            "Codigo_Municipio" => 'required|unique:municipios',
+            //"Codigo_Municipio" => 'required|unique:municipios',
         ];
     }
 
@@ -23,14 +23,14 @@ class Municipio extends Model
             'required' => 'O campo :attribute é obrigatório',
             'Designacao_Municipio.min' => "O campo Designação do Município tem de ter no mínimo 3 caracteres",
             'Designacao_Municipio.unique' => 'A Província já existe.',
-            'Codigo_Municipio.unique' => 'O código da Município Já existe.',
+            //'Codigo_Municipio' => 'O código da Município Já existe.',
         ];
     }
 
     public function Provincia(){
         return $this->belongsTo('App\Models\Provincia');
     }
-    
+
     public function localidades(){
         return $this->hasMany('App\Models\localidade');
     }

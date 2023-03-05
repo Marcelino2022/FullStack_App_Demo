@@ -41,13 +41,13 @@
                 <template v-slot:redirect>Província</template>
             </buttonHome-component>
 
-            <buttonHome-component href="/">
+            <buttonHome-component href="/municipios">
                 <template v-slot:icon><i class="bi bi-pin-map-fill"></i></template>
                 <template v-slot:redirect>Município</template>
             </buttonHome-component>
 
 
-            <buttonHome-component href="/">
+            <buttonHome-component href="/localidades">
                 <template v-slot:icon><i class="bi bi-geo"></i></template>
                 <template v-slot:redirect>Localidade</template>
             </buttonHome-component>

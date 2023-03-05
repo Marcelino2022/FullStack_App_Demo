@@ -210,5 +210,5 @@
 </template>
 
 <style scoped>
-    @import '../../css/modalAdicionar.css';
+    @import '../../css/modal.css';
 </style>

@@ -6,12 +6,15 @@
 
 import './bootstrap';
 import { createApp } from 'vue';
-
-import Vuex from 'vuex';
+import Vuex from 'vuex'
+//import { createStore, Vuex } from 'vuex'
 
 const store = new Vuex.Store({
-    state: {
-        teste: 'A ver se funciona'
+    state(){
+        return {
+            item: {},
+            transacao: { status: 'avisar', mensagem: '', dados: ''}
+        }
     }
 })
 
@@ -21,9 +24,8 @@ const store = new Vuex.Store({
  * to use in your application's views. An example is included for you.
  */
 
-const app = createApp({
-    store
-});
+const app = createApp({});
+app.use(store)
 
 import ExampleComponent from './components/ExampleComponent.vue';
 import LoginComponent from './components/Login.vue';
@@ -40,11 +42,14 @@ import AdicionarMembroComponent from './components/AdicionarMembro.vue';
 import AdicionarCoordenacaoComponent from './components/AdicionarCoordenacao.vue';
 import AdicionarLocalidadeComponent from './components/AdicionarCoordenacao.vue';
 import ProvinciaComponent from './components/provincia/Provincia.vue';
-import AdicionarProvinciaComponent from './components/provincia/AdicionarProvincia.vue';
-import EditarProvinciaComponent from './components/provincia/EditarProvincia.vue';
+/*import AdicionarProvinciaComponent from './components/provincia/AdicionarProvincia.vue';
+import EditarProvinciaComponent from './components/provincia/EditarProvincia.vue'
+import RemoverProvinciaComponent from './components/provincia/RemoverProvincia.vue'*/
+import MunicipioComponent from './components/Municipio.vue';
+import LocalidadeComponent from './components/Localidade.vue';
 
 import InputContainerComponent from './components/InputContainer.vue';
-import FiltroComponent from './components/Filtro.vue'
+import SelectComponent from './components/Select.vue'
 import CardComponent from './components/card.vue'
 import AlertComponent from './components/Alert.vue'
 
@@ -55,8 +60,6 @@ app.component('register-component', RegisterComponent)
 app.component('home-component', HomeComponent);
 app.component('coordenacoes-component', CoordenacoesComponent);
 app.component('membros-component', MembrosComponent);
-app.component('adicionarMembro-component', AdicionarMembrosComponent);
-app.component('adicionarLocalidade-component', AdicionarLocalidadeComponent);
 app.component('modal-component', ModalComponent);
 app.component('buttonHome-component', ButtonHome)
 app.component('buttonComponent-component', ButtonComponent)
@@ -64,11 +67,14 @@ app.component('adicionarMembro-component', AdicionarMembroComponent);
 app.component('adicionarCoordenacao-component', AdicionarCoordenacaoComponent);
 app.component('adicionarLocalidade-component', AdicionarLocalidadeComponent);
 app.component('provincia-component', ProvinciaComponent);
-app.component('adicionarProvincia-component', AdicionarProvinciaComponent);
-app.component('editarProvincia-component', EditarProvinciaComponent);
+/*app.component('adicionarProvincia-component', AdicionarProvinciaComponent);
+app.component('editarProvincia-component', EditarProvinciaComponent)
+app.component('removerProvincia-component', RemoverProvinciaComponent)*/
+app.component('municipio-component', MunicipioComponent);
+app.component('localidade-component', LocalidadeComponent);
 
 app.component('input-container-component', InputContainerComponent);
-app.component('filtro-component', FiltroComponent);
+app.component('select-component', SelectComponent);
 app.component('card-component', CardComponent)
 app.component('alert-component', AlertComponent)
 

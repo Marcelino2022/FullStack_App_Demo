@@ -98,10 +98,10 @@
             <button type="button" class="btn btn-secondario" data-bs-dismiss="modal">Fechar</button>
             <button type="button" class="btn btn-principal">Submeter</button>
         </template>
-        
+
     </modal-component>
 </template>
 
 <style scoped>
-    @import '../../css/modalAdicionar.css';
+    @import '../../css/modal.css';
 </style>

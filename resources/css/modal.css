@@ -47,6 +47,10 @@
     border-color: #000000;
 }
 
+.btn-danger{
+    border-radius: 100px;
+}
+
 span i{
     position: absolute;
     color: #002490;

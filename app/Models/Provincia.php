@@ -14,7 +14,7 @@ class Provincia extends Model
     public function rules(){
         return [
             'Designacao_Provincia' => 'required|unique:provincias,Designacao_Provincia,'.$this->id.'|min:3',
-            "Codigo_Provincia" => 'required|unique:provincias',
+            "Codigo_Provincia" => 'required:provincias',
         ];
     }
 
@@ -23,7 +23,7 @@ class Provincia extends Model
             'required' => 'O campo :attribute é obrigatório',
             'Designacao_Provincia.min' => "O campo Designação da Província tem de ter no mínimo 3 caracteres",
             'Designacao_Provincia.unique' => 'A Província já existe.',
-            'Codigo_Provincia.unique' => 'O código da Província Já existe.',
+            'Codigo_Provincia.required' => 'O campo código da Província é obrigatório.',
         ];
     }
 

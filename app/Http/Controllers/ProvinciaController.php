@@ -123,10 +123,10 @@ class ProvinciaController extends Controller
         $provincia = $this->provincia->find($id);
 
         if($provincia === null)
-            return response()->json(['msg' => 'Impossível efetuar a operação, verifique os dados do recurso que pretende atualizar'], 404);
+            return response()->json(['msg' => 'Impossível efetuar a operação, verifique os dados do recurso que pretende aceder.'], 404);
         else {
             $provincia->delete();
-            return response()->json(['msg' => 'A coordenação foi removida com sucesso'], 200);
+            return response()->json(['msg' => 'A Provínica foi removida com sucesso'], 200);
         }
     }
 }

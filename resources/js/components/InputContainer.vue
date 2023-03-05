@@ -4,8 +4,7 @@
         <slot></slot>
         <div :id="idHelp" class="form-text text-muted"> {{ textoAjuda }}</div>
      </div>
-
-
+    
 </template>
 
 <script>

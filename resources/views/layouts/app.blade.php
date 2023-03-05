@@ -56,8 +56,8 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                   <li><a class="dropdown-item" href="/provincias">Províncias</a></li>
-                                  <li><a class="dropdown-item" href="#"> Municípios</a></li>
-                                  <li><a class="dropdown-item" href="#"> Localidades</a></li>
+                                  <li><a class="dropdown-item" href="/municipios"> Municípios</a></li>
+                                  <li><a class="dropdown-item" href="/localidades"> Localidades</a></li>
                                   <li><hr class="dropdown-divider"></li>
                                   <li><a class="dropdown-item" href="{{route('todos')}}">Todos os Locais</a></li>
                                 </ul>

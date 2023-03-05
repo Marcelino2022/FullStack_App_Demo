@@ -1,6 +1,4 @@
 <template>
-    <div>
-
         <div class="card genericCard" :id="id">
             <div class="card-body">
                 <div class="cabecalho-card">
@@ -20,7 +18,6 @@
         </div>
 
         <hr class="mb-3">
-    </div>
 
 </template>
 
@@ -31,6 +28,17 @@
 
 <script>
     export default {
+
+        methods: {
+            setStore(obj) {
+                console.log(obj)
+            },
+
+            say(w){
+                console.log(w)
+            }
+        },
+
         props: ['id', 'titulo', 'subtitulo', 'editar', 'remover']
     }
 </script>

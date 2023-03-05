@@ -34,3 +34,55 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
 //     enabledTransports: ['ws', 'wss'],
 // });
+
+
+//INTERCEPTAR OS REQUESTS DA APLICAÇÃO
+axios.interceptors.request.use(
+
+    config =>{
+
+        config.headers['Accept'] = 'application/json'
+
+        //Recuperando o Thoken de Autorização
+        let token = document.cookie.split(";").find(indice => {
+            return indice.includes("token=");
+        });
+        token = token.split("=")[1];
+        token = "Bearer" + token;
+
+        config.headers.Authorization = token
+
+        console.log("Interceptando o Request antes do envio", config)
+        return config
+    },
+
+    error => {
+        console.log('Erro na Requisição', error)
+        return Promise.reject(error)
+    }
+)
+
+
+//INTERCEPTAR OS RESPONSES DA APLICAÇÃO
+
+axios.interceptors.response.use(
+    response =>{
+        console.log("Interceptando as respostas antes da aplicação", response)
+        return response
+    },
+
+    error => {
+        console.log('Erro na Resposta ', error)
+
+        if(error.response.status == 401 && error.response.data.message == 'Token has expired'){
+            axios.post('http://localhost:8000/api/refresh')
+            .then(response => {
+                document.cookie = 'token='+response.data.token
+                window.location.reload()
+            })
+        }
+
+        return Promise.reject(error)
+    }
+)
+

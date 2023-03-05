@@ -1,5 +1,5 @@
 <template>
-    <modal-component id="editarProvinciaModal" titulo="Editar dados Provincia">
+    <modal-component id="editarProvinciaModal" titulo="Editar dados da Provincia">
 
         <template v-slot:alertas>
             <alert-component tipo="success" :detalhes="transacaoDetalhes" titulo="Dados da província Atualizada com sucesso" v-if="transacaoStatus == 'adicionado'"></alert-component>
@@ -7,19 +7,27 @@
         </template>
 
         <template v-slot:conteudo>
+
             <form>
                 <div class="row">
 
-                    <div class="col-md-6 mb-3">
-                        <input-container-component titulo="Designação Província:" id="designacaoProvincia" id-help="designacaoHelp" texto-ajuda="Informe a Designação da Província">
-                            <input type="text" class="form-control" id="designacaoProvincia" aria-describedby="idHelp" placeholder="Designaçao da Entidade" v-model="designacaoProvinciaFornecido">
+                    <div class="col-md-2 mb-3">
+                        <input-container-component titulo="ID Província:" id="idProvincia" id-help="designacaoHelp">
+                            <input type="text" class="form-control" id="idProvincia" aria-describedby="idHelp" texto-ajuda="" :value="$store.state.item.id" disabled>
+                            <span class="icon-input"><i class="bi bi-tags"></i></span>
+                        </input-container-component>
+                    </div>
+
+                    <div class="col-md mb-3">
+                        <input-container-component titulo="Designação Província:" id="designacaoProvincia" id-help="designacaoHelp" texto-ajuda="Atualizar Designação da Província">
+                            <input type="text" class="form-control" id="designacaoProvincia" aria-describedby="idHelp" :value="$store.state.item.Designacao_Provincia">
                             <span class="icon-input"><i class="bi bi-map-fill"></i></span>
                         </input-container-component>
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <input-container-component titulo="Sigla da Província:" id="siglaProvincia" id-help="siglaHelp" texto-ajuda="Informe a Sigla da Província">
-                            <input type="text" class="form-control" id="siglaProvincia" aria-describedby="idHelp" placeholder="Sigla da Entidade" v-model="siglaProvinciaFornecida">
+                    <div class="col-md-4 mb-3">
+                        <input-container-component titulo="Sigla da Província:" id="siglaProvincia" id-help="siglaHelp" texto-ajuda="Atualizar Sigla da Província">
+                            <input type="text" class="form-control" id="siglaProvincia" aria-describedby="idHelp" :value="$store.state.item.Codigo_Provincia">
                             <span class="icon-input"><i class="bi bi-bookmark-fill"></i></span>
                         </input-container-component>
 
@@ -29,14 +37,14 @@
             </form>
         </template>
         <template v-slot:rodape>
-            <button type="button" class="btn btn-secondario" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-secondario" data-bs-dismiss="modal">Cancelar</button>
             <button type="button" class="btn btn-principal" @click="salvar()">Atualizar</button>
         </template>
     </modal-component>
 </template>
 
 <style scoped>
-    @import '../../../css/modalAdicionar.css';
+    @import '../../../css/modal.css';
 </style>
 
 <script>
@@ -45,16 +53,16 @@ import axios from 'axios';
     export default{
 
         computed: {
-                token() {
-                    let token = document.cookie.split(';').find( indice => {
-                        return indice.includes('token=')
-                    })
+            token() {
+                let token = document.cookie.split(';').find( indice => {
+                    return indice.includes('token=')
+                })
 
-                    token = token.split('=')[1]
-                    token = 'Bearer' + token
+                token = token.split('=')[1]
+                token = 'Bearer' + token
 
-                    return token
-                }
+                return token
+            }
         },
 
         data() {
@@ -69,6 +77,7 @@ import axios from 'axios';
         },
 
         methods: {
+
             salvar(){
                 console.log(this.designacaoProvinciaFornecido, this.siglaProvinciaFornecida)
 
@@ -100,7 +109,7 @@ import axios from 'axios';
                             dados: errors.response.data.errors
                         }
                     })
-            }
+            },
         }
     }
 

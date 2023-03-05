@@ -35,3 +35,11 @@ Route::get('/todos-os-membros', function(){
 Route::get('/provincias', function(){
     return view('app.provincias');
 })->name('todas')->middleware('auth');
+
+Route::get('/municipios', function(){
+    return view('app.municipios');
+})->name('municipios')->middleware('auth');
+
+Route::get('/localidades', function(){
+    return view('app.localidades');
+})->name('localidades')->middleware('auth');

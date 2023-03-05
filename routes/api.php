@@ -21,7 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('jwt.auth')->group(function(){
 
     Route::post('me', 'App\Http\Controllers\AuthController@me');
-    Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
     Route::post('logout', 'App\Http\Controllers\AuthController@logout');
     Route::apiResource('coordenacao', 'App\Http\Controllers\CoordenacaoController');
     Route::apiResource('funcao', 'App\Http\Controllers\FuncaoController');
@@ -38,6 +37,7 @@ Route::middleware('jwt.auth')->group(function(){
 });
 
 Route::post('/', 'App\Http\Controllers\AuthController@login');
+Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
 
 
 
