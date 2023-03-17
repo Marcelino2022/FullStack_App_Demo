@@ -22,7 +22,7 @@ class MunicipioController extends Controller
     {
         $municipioRepository = new MunicipioRepository($this->municipio);
 
-        //COLETA DE DADOS DA ENTIDADE DO RELACIONAMENTO PROVÍNCIA TEM MEMBROS
+        //COLETA DE DADOS DA ENTIDADE DO RELACIONAMENTO MUNICÍPIO TEM LOALIDADES
         if($request->has('atributos_localidades')){
             $atributos_localidades = 'localidades:id,'.$request->atributos_localidades;
             $municipioRepository->selectAtributosRegistosRelacionados($atributos_localidades);
@@ -30,12 +30,12 @@ class MunicipioController extends Controller
             $municipioRepository->selectAtributosRegistosRelacionados('localidades');
         }
 
-        //IMPLEMENTAÇÃO DO FILTRO WHERE PARA A ENTIDADE PROVÍNCIA
+        //IMPLEMENTAÇÃO DO FILTRO WHERE PARA A ENTIDADE MUNICÍPIO
         if($request->has('filtro')){
             $municipioRepository->filtro($request->filtro);
         }
 
-        //COLETA DE DADOS DA ENTIDADE PROVÍNCIA
+        //COLETA DE DADOS DA ENTIDADE MUNICÍPIO
         if($request->has('atributos')){
             $atributos = $request->atributos;
             $municipioRepository->selectAtributos($request->atributos);

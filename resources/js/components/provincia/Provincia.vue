@@ -54,7 +54,8 @@
                 <div class="mb-2 ml-5">
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removerProvinciaModal" @click="setStore(obj)">
                         <i class="bi bi-trash3-fill"></i> Remover
-                    </button></div>
+                    </button>
+                </div>
             </template>
 
         </card-component>

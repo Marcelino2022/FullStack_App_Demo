@@ -52,6 +52,7 @@ import InputContainerComponent from './components/InputContainer.vue';
 import SelectComponent from './components/Select.vue'
 import CardComponent from './components/card.vue'
 import AlertComponent from './components/Alert.vue'
+import AccordionComponent from './components/Accordion.vue'
 
 
 app.component('example-component', ExampleComponent);
@@ -77,6 +78,7 @@ app.component('input-container-component', InputContainerComponent);
 app.component('select-component', SelectComponent);
 app.component('card-component', CardComponent)
 app.component('alert-component', AlertComponent)
+app.component('accordion-component', AccordionComponent)
 
 
 

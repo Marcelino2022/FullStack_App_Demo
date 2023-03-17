@@ -17,6 +17,14 @@
     margin-left: 20px;
 }
 
+.content-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #F2F2F2;
+}
+
+
 .cabecalho-card h6{
     margin-left: 20px;
     color: #7c9dfd;

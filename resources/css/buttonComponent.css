@@ -14,6 +14,10 @@
     border: none;
 }
 
+.button-component i{
+    color: #f8fafc !important;
+}
+
 .button-component:hover{
     border-radius: 100px;
     background-color: #08088A;
@@ -24,7 +28,7 @@ a{
     text-decoration: none;
 }
 
-span{
+samp{
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;

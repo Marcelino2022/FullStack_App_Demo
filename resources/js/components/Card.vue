@@ -6,11 +6,15 @@
                     <div>
                         <h3 class="mb-1"> {{ titulo }}</h3>
                         <h6>{{ subtitulo }}</h6>
+                        <h6 hidden> {{ item }}</h6>
                     </div>
                 </div>
 
-                <hr>
+                <div class="content-body">
+                    <slot name="localidades"></slot>
+                </div>
 
+                <hr>
                 <div class="info-footer">
                     <slot name="rodape"></slot>
                 </div>
@@ -39,6 +43,6 @@
             }
         },
 
-        props: ['id', 'titulo', 'subtitulo', 'editar', 'remover']
+        props: ['id', 'titulo', 'subtitulo', 'item', 'editar', 'remover']
     }
 </script>

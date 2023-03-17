@@ -53,8 +53,8 @@
             </buttonHome-component>
 
             <buttonHome-component href="/">
-                <template v-slot:icon><i class="bi bi-lock"></i></template>
-                <template v-slot:redirect>Permissão</template>
+                <template v-slot:icon><i class="bi bi-gear"></i></template>
+                <template v-slot:redirect>Função</template>
             </buttonHome-component>
 
         </div>
