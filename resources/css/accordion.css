@@ -45,9 +45,7 @@
 
 .accordion{
     width: 99%;
-    border-radius: 5px;
     border:none;
-
 }
 
 .accordion-body{
@@ -67,6 +65,7 @@
     align-items: center;
     flex-wrap: wrap;
     background-color: #08088A;
+    border-radius: 0px !important
 
 }
 
@@ -75,6 +74,7 @@
 }
 .accordion .list-group{
     width: 100%;
+    border-radius: 0px !important;
 }
 
 .accordion .mYBtn-group{

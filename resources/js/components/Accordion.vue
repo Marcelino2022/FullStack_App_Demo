@@ -7,29 +7,10 @@
             </button>
             </h2>
             <div :id="id" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-            <div class="accordion-body">
-                <ul class="list-group">
-                    <li class="list-group-item">
-
-
-                        <h5 id="icon-location_2">
-                            <i :class="class"></i><slot name="localidade"></slot>
-                        </h5>
-
-                        <div class="mYBtn-group">
-                            <slot name="butrons"></slot>
-                            <!--button type="button" class="btn btn-success mr" data-bs-toggle="modal" data-bs-target="#editarProvinciaModal" @click="setStore(obj)">
-                                <i class="bi bi-pencil-square"></i> Editar
-                            </button>
-
-                            <button type="button" class="btn btn-danger ml-3" data-bs-toggle="modal" data-bs-target="#removerProvinciaModal" @click="setStore(obj)">
-                                <i class="bi bi-trash3-fill"></i> Remover
-                            </button-->
-                        </div>
-
-                    </li>
-                </ul>
-            </div>
+                <slot name="items">
+                    <div class="accordion-body">
+                    </div>
+                </slot>
             </div>
         </div>
     </div>

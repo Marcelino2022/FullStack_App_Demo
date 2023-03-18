@@ -1,4 +1,3 @@
-T
 <template>
     <div class="container mt-3">
 
@@ -32,21 +31,48 @@ T
 
         <!--LOCALIDADES-->
         <div v-for="provinciaMunicipio, index in titulos" :key="index">
+            <div @mounted="obterLocalidadesPorMunicipio_id( provinciaMunicipio[1] )">
+                <div v-if="typeof this.numero_localidades[index] == 'object'">
+                    <card-component :titulo="provinciaMunicipio[0]" :subtitulo="this.numero_localidades[index][1]+' Localidade(s)'" >
+                    <template v-slot:image><img src="../../../public/imagens/bandeira-angola.png" class="float-start avatar" alt="..."></template>
+                    <template v-slot:localidades>
+                        <accordion-component titulo="Localidades" class="bi bi-geo-alt-fill">
+                            <template v-slot:items>
+                                <div v-for="localidade in this.localidades" :key="localidade.id">
+                                    <ul class="list-group" v-if="provinciaMunicipio[1] == localidade.municipio_id ">
+                                        <li class="list-group-item">
+                                            <h5 id="icon-location_2">
+                                                <i class="bi bi-geo-alt-fill"></i> {{ localidade.Designacao_Localidade }}
+                                            </h5>
 
-            <card-component :titulo="provinciaMunicipio[0]" subtitulo="25 Localidades">
+                                            <div class="mYBtn-group">
+                                                <slot name="butrons"></slot>
+                                                <button type="button" class="btn btn-success mr" data-bs-toggle="modal" data-bs-target="#editarProvinciaModal" @click="setStore(obj)">
+                                                    <i class="bi bi-pencil-square"></i> Editar
+                                                </button>
 
-                <template v-slot:image><img src="../../../public/imagens/bandeira-angola.png" class="float-start avatar" alt="..."></template>
-                <template v-slot:localidades>
-
-                        <accordion-component titulo="Localidades" class="bi bi-geo-alt-fill" @mounted="obterLocalidadesPorMunicipio_id(provinciaMunicipio[1])">
-                            <template v-slot:localidade v-for="localidade in this.localidadesDoMunicipio" > {{ localidade }} </template>
+                                                <button type="button" class="btn btn-danger ml-3" data-bs-toggle="modal" data-bs-target="#removerProvinciaModal" @click="setStore(obj)">
+                                                    <i class="bi bi-trash3-fill"></i> Remover
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <!--template v-slot:item_localidade>
+                                        {{ provinciaMunicipio[1]}}
+                                        {{ this.localidades}}
+                                    </template-->
+                                </div>
+                            </template>
+                            <template v-slot:item_localidade></template>
                         </accordion-component>
                         <div class="mt-3"></div>
-                </template>
-                <template v-slot:rodape>
-                    <span class="text-muted"><small class="text-muted"></small></span>
-                </template>
-            </card-component>
+                    </template>
+                    <template v-slot:rodape>
+                        <span class="text-muted"><small class="text-muted"></small></span>
+                    </template>
+                    </card-component>
+                </div>
+            </div>
         </div>
 
 
@@ -97,25 +123,38 @@ T
                     <button type="button" class="btn btn-principal" @click="salvar()">Salvar</button>
                 </template>
         </modal-component><!--ADICIONAR LOCALIDADE-->
-
     </div>
 </template>
-
 
 <style scoped>
     @import '../../css/locais.css';
     @import '../../css/modal.css';
+    @import '../../css/accordion.css';
 </style>
 
 <script>
 
     import axios from 'axios';
+    //import Localidade from 'localidade.js'
+
+    export class Localidade{
+
+        constructor(municipio_id){
+            this.municipio_id = municipio_id
+        }
+
+        getmunicipioId(){
+            return this.municipio_id
+        }
+
+        static criarmunicipio(municipio_id){
+            const municipio = new Localidade(municipio_id)
+            return municipio;
+        }
+    }
 
     export default {
-
-
         data(){
-
             return{
                 urlBase: "http://127.0.0.1:8000/api/localidade",
                 urlProvincia: "http://127.0.0.1:8000/api/provincia",
@@ -123,7 +162,10 @@ T
                 provincias: "",
                 provinciasComMunicipios:[],
                 municipios: "",
-                localidadesPorMunicipio: [],
+                localidadesPorMunicipio:[],
+                localidadesDoMunicipio:[],
+                localidades:[],
+                numero_localidades:"",
                 proviciaSelecionada:"",
                 municipioSelecionado:"",
                 designacaoLocalidade:"",
@@ -131,7 +173,6 @@ T
                 transacaoDetalhes: {},
                 provinciaMunicipio:"",
                 item_municipio:""
-
             }
         },
 
@@ -158,63 +199,81 @@ T
                 const url = this.urlMunicipio + '/?filtro=provincia_id:=:' + provincia_id
                 axios.get(url)
                      .then(response =>{
-                        this.municipios = response.data
-                     })
-                     .then(error => {
-                        //this.provincias = error.response.data
-                     });
+
+                        this.municipios = response.data })
+                     .then(error => {//
+                      });
             },
 
             obterLocalidadesPorMunicipio_id(municipio_id){
-
                 let url = this.urlBase + '/?filtro=municipio_id' + municipio_id
-                //console.log(url)
                 axios.get(url)
                     .then(response => {
-                        //this.localidadesPorMunicipio[municipio_id]  = response.data
-                        this.localidadesDoMunicipio = response.data
+                        this.obterLocalidadesPorMunicipio(response.data)
                     })
-                    .catch(errors =>{
-                        //
-                    });
+                    .catch(errors =>{});
+            },
 
+            obterLocalidadesPorMunicipio(localidade){
+                const municipio_id = new Array()
+                for (let i = 0; i < localidade.length; i++){
+                    this.localidades.push(localidade[i])
+                    municipio_id.push(localidade[i].municipio_id)
+                }
+
+                this.contarLodadesDeMunicipio(this.localidades)
+                return this.localidades
+            },
+
+            contarLodadesDeMunicipio(localidades){
+                const numero_localidades = localidades.reduce((acumuladorLocalPorMunicipioID, objectLocalidade) => {
+                    const { id, municipio_id} = objectLocalidade;
+                    const localidadeExistente = acumuladorLocalPorMunicipioID.find((item) => item[0] === municipio_id);
+                    if(localidadeExistente){
+                        localidadeExistente[1]++
+                    } else{
+                        acumuladorLocalPorMunicipioID.push([municipio_id, 1])
+                    }
+                    return acumuladorLocalPorMunicipioID;
+                }, [])
+
+                this.numero_localidades = numero_localidades;
+                return thois.numero_localidades
             },
 
             obterProvíncasComMunicipios(){
                 const url = this.urlProvincia+'/?atributos=id,Designacao_Provincia&atributos_municipios=id,Designacao_Municipio,provincia_id'
-
                 axios.get(url)
                     .then( response => {
 
                         let provinciasComMunicipios_Aux = []
-                        for(let i = 0; i < (response.data).length; i++){
+                        const localidade = response.data
 
+                        for(let i = 0; i < (response.data).length; i++){
                             if((response.data[i].municipios).length > 0){
-                                provinciasComMunicipios_Aux.push(response.data[i])
-                                //this.provinciasComMunicipios[i] = response.data[i]
+
+                                provinciasComMunicipios_Aux.push(localidade[i])
                             }
                         }
 
-                        this.provinciasComMunicipios = provinciasComMunicipios_Aux
+                        console.log(provinciasComMunicipios_Aux.length);
 
+                        //console.log( provinciasComMunicipios_Aux.length);
+
+                        this.provinciasComMunicipios = provinciasComMunicipios_Aux
                     })
-                    .catch(errors =>{
-                        //
-                    })
+                    .catch(errors =>{ })
             },
 
             salvar(){
-
                 let config = {
                     headers:{
                         'content.Type': 'multpart/form-data'
                     }
                 }
-
                 const formData = new FormData()
                 formData.append('Designacao_Localidade', this.designacaoLocalidade)
                 formData.append('municipio_id', this.municipioSelecionado)
-
                 axios.post(this.urlBase, formData, config)
                     .then(response =>{
                         this.transacaoStatus='adicionado'
@@ -240,32 +299,18 @@ T
                         const provinciaMunicipio_C = `${provincia.Designacao_Provincia} - ${municipio.Designacao_Municipio}`
                         return [provinciaMunicipio_C, municipio.id]
                     })
+
                 }).flat()
             },
-
-            /*localidadesPorProvinciasMunicipios(){
-                const procinciasMunicipios_C = {}
-
-                for(const provincia_cumputada of this.this.provinciasComMunicipios){
-                    for(const municipio_computado of this.provincia){
-                        const procinciaMunicipio_C = `${provincia_cumputada.Designacao_Provincia} - ${municipio_computado.Designacao_Municipio}`;
-                        if(!procinciasMunicipios_C[procinciaMunicipio_C]){
-                            procinciasMunicipios_C[procinciaMunicipio_C] = { procinciaMunicipio_C, numeroLocalidades: 0}
-                        }
-                    }
-
-                    //for(const localidade of this.municipios.localidades)
-                }
-
-                return Object.values(procinciasMunicipios_C)
-            }*/
-
         },
 
         mounted(){
             this.carregarProvincias()
+            this.obterMunicipioDaPrvincia()
             this.obterProvíncasComMunicipios()
             this.obterLocalidadesPorMunicipio_id()
+            this.obterLocalidadesPorMunicipio()
+            this.contarLodadesDeMunicipio()
         }
     }
 
