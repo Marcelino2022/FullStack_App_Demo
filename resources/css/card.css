@@ -31,12 +31,16 @@
 }
 
 .info-footer{
+   /*background-color: #7c9dfd;*/
    display: flex;
    justify-content: space-around;
    flex-wrap: wrap;
    align-items: center;
    font-weight: bold;
    color: #F2F2F2;
+   /*padding-bottom: .5rem;
+   padding-top: 1rem;*/
+   border-radius: 10px;
 }
 
 

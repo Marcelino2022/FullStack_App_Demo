@@ -52,7 +52,8 @@
                 <div class="mb-2 ml-5">
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removermunicipioModal" @click="setStore(municipio)">
                         <i class="bi bi-trash3-fill"></i> Remover
-                    </button></div>
+                    </button>
+                </div>
             </template>
 
         </card-component>
@@ -201,8 +202,8 @@
 </style>
 
 <script>
-    import axios from 'axios';
 
+    import axios from 'axios';
     export default {
 
         data() {
@@ -223,7 +224,6 @@
         },
 
         methods: {
-
             setStore(obj) {
                 this.$store.state.transacao.status = 'avisar'
                 this.$store.state.transacao.mensagem = ''
@@ -323,8 +323,8 @@
                 axios.post(url, formData, config)
                     .then(response => {
                         this.$store.state.transacao.status = 'atualizado'
-                        this.$store.state.transacao.mensagem = "Registas da Município Atualizado com sucesso"
-                        console.log('Atualizado', response)
+                        this.$store.state.transacao.mensagem = "Registos da Município Atualizado com sucesso"
+                        //console.log('Atualizado', response)
                         this.carregarMunicipios()
                     })
                     .catch(errors => {

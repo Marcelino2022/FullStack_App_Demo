@@ -48,6 +48,26 @@
     border:none;
 }
 
+.genericAcc .cabecalho-acc{
+    /*background-color: #08088A;
+    color: #F2F2F2;
+    border-radius: 50px;*/
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: .6rem;
+}
+
+.cabecalho-acc h4{
+    margin-left: 20px;
+}
+
+.cabecalho-acc h6{
+    margin-left: 20px;
+    color: #08088A;
+}
+
 .accordion-body{
     background-color: #7c9dfd;
 

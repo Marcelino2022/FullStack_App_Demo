@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProvinciaRequest;
 use App\Http\Requests\UpdateProvinciaRequest;
 use Illuminate\Http\Request;
 use App\Repositories\ProvinciaRepository;
+use Illuminate\Support\Facades\DB;
 
 class ProvinciaController extends Controller
 {
@@ -45,6 +46,20 @@ class ProvinciaController extends Controller
         }
 
         return  response()->json($provinciaRepository->getResultado(), 200);
+    }
+
+    public function provinciasComMunipios(Request $request){
+
+        $dadosProvinciasComMunicipios = DB::select(
+            '
+                SELECT p.id, Designacao_Provincia
+                From Provincias AS p
+                JOIN Municipios m ON m.provincia_id = p.id
+                GROUP BY 1;
+            '
+        );
+
+        return response()->json($dadosProvinciasComMunicipios, 201);
     }
 
     /**
