@@ -1,18 +1,17 @@
 <template>
-    <div class="accordion mt-3" :id="id">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" :data-bs-target="data-bs-target" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                <i class="bi bi-geo" id="icon-location"></i><h4>{{ titulo }}</h4>
-            </button>
-            </h2>
-            <div :id="id" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                <slot name="items">
-                    <div class="accordion-body">
-                    </div>
-                </slot>
-            </div>
+    <div class="accordion mt-3">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="dataBsTarget" aria-expanded="false" :aria-controls="ariaControls">
+            <i class="bi bi-geo" id="icon-location"></i><h4>{{ titulo }}</h4>
+          </button>
+        </h2>
+        <div  :id="parentId" class="accordion-collapse collapse" :data-bs-parent="dataBsParent">
+          <slot name="items">
+            <div class="accordion-body"></div>
+          </slot>
         </div>
+      </div>
     </div>
 </template>
 
@@ -21,6 +20,6 @@
 </style>
 <script>
     export default {
-        props:['id', 'titulo', 'class', 'localidade', 'data-bs-target', 'id']
+        props:['id', 'titulo', 'class', 'localidade', 'parentId', 'dataBsToggle', 'dataBsTarget', 'ariaExpanded', 'ariaControls', 'dataBsParent']
     }
 </script>

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreLocalidadeRequest;
 use App\Http\Requests\UpdateLocalidadeRequest;
 use illuminate\http\Request;
 use App\Repositories\LocalidadeRepository;
+use Illuminate\Support\Facades\DB;
 
 class LocalidadeController extends Controller
 {
@@ -45,6 +46,18 @@ class LocalidadeController extends Controller
 
         return  response()->json($localidadeRepository->getResultado(), 200);
     }
+
+
+    public function obterLocalidadesDeMunicipios(Request $request){
+
+        $dadosLocalidade = DB::select('select * from Localidades l
+                                       Join Municipios m ON l.municipio_id = m.id
+                                       join Provincias p ON m.provincia_id = p.id;'
+                                     );
+
+         return response()->json($dadosLocalidade, 201);
+    }
+
 
     /**
      * Store a newly created resource in storage.
