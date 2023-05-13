@@ -18,9 +18,10 @@ class Coordenacao extends Model
             "Bairro" => 'required|unique:coordenacoes',
             "Telefone"=>'unique:coordenacoes',
             "Telemovel"=>'unique:coordenacoes',
-            "Email" => 'required|unique:coordenacoes',
+            "Email" => 'required|string|email|max:255|unique:coordenacoes',
             "localidade_id" => 'required|unique:coordenacoes',
-            "permissoes_id" => 'required:coordenacoes'
+            "permissoes_id" => 'required:coordenacoes',
+            'password' => 'required|string|min:6',
         ];
     }
 

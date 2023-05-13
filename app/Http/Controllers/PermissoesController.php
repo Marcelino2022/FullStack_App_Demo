@@ -10,6 +10,13 @@ use GuzzleHttp\Psr7\Request;
 
 class PermissoesController extends Controller
 {
+    /**
+     * @var Permissoes
+     *
+     */
+    public $permissoes;
+    public $request;
+
     public function __construct(Permissoes $permissoes){
         $this->permissoes = $permissoes;
     }

@@ -10,9 +10,15 @@ use App\Repositories\MunicipioRepository;
 
 class MunicipioController extends Controller
 {
+    /**
+     * @var Municipio
+     */
+    public $municipio;
+
     public function __construct(Municipio $municipio){
         $this->municipio = $municipio;
     }
+    
     /**
      * Display a listing of the resource.
      *

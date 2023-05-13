@@ -63,6 +63,8 @@
                                 </ul>
                              </li>
 
+                             <li class="nav-item"><a class="nav-link" href="{{route('funcoes')}}">Funções</a></li>
+
                         @endauth
                     </ul>
 

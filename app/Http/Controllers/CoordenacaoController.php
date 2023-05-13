@@ -3,14 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Coordenacao;
+use App\Models\User;
 use App\Http\Requests\StoreCoordenacaoRequest;
 use App\Http\Requests\UpdateCoordenacaoRequest;
 use PhpParser\Node\Stmt\Return_;
 use Illuminate\Http\Request;
 use App\Repositories\CoordenacaoRepository;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
+// @ts-ignore
 class CoordenacaoController extends Controller
 {
+    /**
+     * @var Coordenacao
+    */
+    public $coordenacao;
+
     public function __construct(Coordenacao $coordenacao){
         $this->coordenacao = $coordenacao;
     }
@@ -58,7 +67,30 @@ class CoordenacaoController extends Controller
 
         $request->validate($this->coordenacao->rules(), $this->coordenacao->feedback());
         $coordenacao = $this->coordenacao->create($request->all());
-        return response()->json($coordenacao, 201 );
+
+        $coordenacaoData = Coordenacao::select('id')->where('Telemovel', $request->get('Telemovel'))->get();
+
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|string|min:6',
+            'password_Confirmation' => 'required|string|min:6',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['msg' => $validator->errors()], 400);
+        }
+
+        if($request->get('password') == $request->get('password_Confirmation')){
+            User::create([
+                            'name' =>  $request->get('Designacao_Coordenacao'),
+                            'email' => $request->get('Email'),
+                            'coordenacao_id' => $coordenacaoData[0]->id,
+                            'password' =>  Hash::make($request->get('password')),
+                        ]);
+        } else{
+            return response()->json(['msg' => 'Palavra Passe não correspode'], 404);
+        }
+
+        return response()->json($validator, 201 );
     }
 
     /**

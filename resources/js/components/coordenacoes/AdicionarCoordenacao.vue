@@ -94,6 +94,12 @@
                 </div>
             </form>
         </template>
+
+        <template v-slot:alertas>
+            <alert-component tipo="success" :detalhes="transacaoDetalhes" titulo="Registo Realizado com sucesso" v-if="transacaoStatus == 'adicionado'"></alert-component>
+            <alert-component tipo="danger" :detalhes="transacaoDetalhes" titulo="Erro ao tentar Registar Província" v-if="transacaoStatus == 'erro'"></alert-component>
+        </template>
+
         <template v-slot:rodape>
             <button type="button" class="btn btn-secondario" data-bs-dismiss="modal">Fechar</button>
             <button type="button" class="btn btn-principal">Submeter</button>
@@ -103,5 +109,13 @@
 </template>
 
 <style scoped>
-    @import '../../css/modal.css';
+    @import '../../../css/modal.css';
 </style>
+
+<script>
+
+    export default {
+        
+    }
+
+</script>

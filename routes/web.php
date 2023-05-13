@@ -43,3 +43,7 @@ Route::get('/municipios', function(){
 Route::get('/localidades', function(){
     return view('app.localidades');
 })->name('localidades')->middleware('auth');
+
+Route::get('/funcoes', function(){
+    return view('app.funcoes');
+})->name('funcoes')->middleware('auth');

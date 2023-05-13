@@ -31,16 +31,17 @@ import ExampleComponent from './components/ExampleComponent.vue';
 import LoginComponent from './components/Login.vue';
 import RegisterComponent from './components/RegisterComponent.vue'
 import HomeComponent from './components/Home.vue';
-import CoordenacoesComponent from './components/Coordenacoes.vue';
+import CoordenacoesComponent from './components/coordenacoes/Coordenacoes.vue';
 import MembrosComponent from './components/Membros.vue';
+import FuncoesComponent from './components/Funcao.vue';
 import AdicionarMembrosComponent from './components/AdicionarMembro.vue';
 
 import ModalComponent from './components/Modal.vue';
 import ButtonHome from './components/ButtonHome.vue';
 import ButtonComponent from './components/ButtonComponent.vue';
 import AdicionarMembroComponent from './components/AdicionarMembro.vue';
-import AdicionarCoordenacaoComponent from './components/AdicionarCoordenacao.vue';
-import AdicionarLocalidadeComponent from './components/AdicionarCoordenacao.vue';
+import AdicionarCoordenacaoComponent from './components/coordenacoes/AdicionarCoordenacao.vue';
+/* import AdicionarLocalidadeComponent from './components/AdicionarCoordenacao.vue'; */
 import ProvinciaComponent from './components/provincia/Provincia.vue';
 /*import AdicionarProvinciaComponent from './components/provincia/AdicionarProvincia.vue';
 import EditarProvinciaComponent from './components/provincia/EditarProvincia.vue'
@@ -66,13 +67,14 @@ app.component('buttonHome-component', ButtonHome)
 app.component('buttonComponent-component', ButtonComponent)
 app.component('adicionarMembro-component', AdicionarMembroComponent);
 app.component('adicionarCoordenacao-component', AdicionarCoordenacaoComponent);
-app.component('adicionarLocalidade-component', AdicionarLocalidadeComponent);
+/* app.component('adicionarLocalidade-component', AdicionarLocalidadeComponent); */
 app.component('provincia-component', ProvinciaComponent);
 /*app.component('adicionarProvincia-component', AdicionarProvinciaComponent);
 app.component('editarProvincia-component', EditarProvinciaComponent)
 app.component('removerProvincia-component', RemoverProvinciaComponent)*/
 app.component('municipio-component', MunicipioComponent);
 app.component('localidade-component', LocalidadeComponent);
+app.component('funcoes-component', FuncoesComponent);
 
 app.component('input-container-component', InputContainerComponent);
 app.component('select-component', SelectComponent);

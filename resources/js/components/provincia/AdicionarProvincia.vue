@@ -22,9 +22,7 @@
                             <input type="text" class="form-control" id="siglaProvincia" aria-describedby="idHelp" placeholder="Sigla da Entidade" v-model="siglaProvinciaFornecida">
                             <span class="icon-input"><i class="bi bi-bookmark-fill"></i></span>
                         </input-container-component>
-
                     </div>
-
                 </div>
             </form>
         </template>

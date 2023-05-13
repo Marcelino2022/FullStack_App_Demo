@@ -11,6 +11,11 @@ use App\Repositories\MembroRepository;
 
 class MembroController extends Controller
 {
+    /**
+     * @var Membro
+     */
+    public $membro;
+    
     public function __construct(Membro $membro){
         $this->membro = $membro;
     }

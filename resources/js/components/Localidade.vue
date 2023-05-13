@@ -42,22 +42,22 @@
                     >
             <template v-slot:icone_i><i class="bi bi-geo" id="icon-location"></i></template>
             <template v-slot:items>
-                    <ul class="list-group">
-                        <li class="list-group-item"  v-for="itemlocalidade, item in localidade.localidades"  :key="itemlocalidade.id">
-                            <h5><i class="bi bi-geo-alt-fill"></i> {{ itemlocalidade.localidade }}</h5>
-                            <div class="mYBtn-group">
-                                <slot name="butrons"></slot>
-                                <button type="button" class="btn btn-success mr" data-bs-toggle="modal" data-bs-target="#editarlocalidadeModal" @click="setStore(itemlocalidade)">
-                                    <i class="bi bi-pencil-square"></i> Editar
-                                </button>
+                <ul class="list-group">
+                    <li class="list-group-item"  v-for="itemlocalidade, item in localidade.localidades"  :key="itemlocalidade.id">
+                        <h5><i class="bi bi-geo-alt-fill"></i> {{ itemlocalidade.localidade }}</h5>
+                        <div class="mYBtn-group">
+                            <slot name="butrons"></slot>
+                            <button type="button" class="btn btn-success mr" data-bs-toggle="modal" data-bs-target="#editarlocalidadeModal" @click="setStore(itemlocalidade)">
+                                <i class="bi bi-pencil-square"></i> Editar
+                            </button>
 
-                                <button type="button" class="btn btn-danger ml-3" data-bs-toggle="modal" data-bs-target="#removerlocalidadeModal" @click="setStore(itemlocalidade)">
-                                    <i class="bi bi-trash3-fill"></i> Remover
-                                </button>
-                            </div>
+                            <button type="button" class="btn btn-danger ml-3" data-bs-toggle="modal" data-bs-target="#removerlocalidadeModal" @click="setStore(itemlocalidade)">
+                                <i class="bi bi-trash3-fill"></i> Remover
+                            </button>
+                        </div>
 
-                        </li>
-                    </ul>
+                    </li>
+                </ul>
             </template>
         </accordion-component>
         <!--FIM LISTA DE LOCALIDADES-->
@@ -113,8 +113,6 @@
 
         <!--ATUALIZAR LOCALIDADE-->
         <modal-component id="editarlocalidadeModal" titulo="Editar Localidade">
-
-
             <template v-slot:alertas>
                 <alert-component tipo="success" :detalhes="transacaoDetalhes" titulo="Registo Realizado com sucesso" v-if="transacaoStatus == 'atualizado'"></alert-component>
                 <alert-component tipo="danger" :detalhes="transacaoDetalhes" titulo="Erro ao tentar Registar Província" v-if="transacaoStatus == 'erro'"></alert-component>
@@ -321,6 +319,7 @@
                         this.transacaoDetalhes = {
                             mensagem: "Nova Localidade Registada com sucesso"
                         }
+                        this.obterLocalidadesdeMunicipio()
                     })
                     .catch(errors => {
                         this.transacaoStatus = 'erro'
@@ -346,8 +345,10 @@
 
                 axios.post(url, formData, config)
                     .then(response => {
-                        this.$store.state.transacao.status = 'atualizado'
-                        this.$store.state.transacao.mensagem = "Registos da Localidade Atualizado com sucesso"
+                        this.transacaoStatus='atualizado'
+                        this.transacaoDetalhes = {
+                            mensagem: "Registos da Localidade Atualizado com sucesso"
+                        }
                         this.obterLocalidadesdeMunicipio()
                     })
                     .catch(errors => {

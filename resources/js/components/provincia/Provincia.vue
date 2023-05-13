@@ -145,7 +145,6 @@
 
         <!--REMOVER PROVÍNCIA-->
         <modal-component id="removerProvinciaModal" titulo="Remover Provincia">
-
             <template v-slot:alertas>
                 <alert-component tipo="success" :detalhes="this.$store.state.transacao" titulo="" v-if="$store.state.transacao.status == 'removido'"></alert-component>
                 <alert-component tipo="warning" :detalhes=" {mensagem: 'Tem Certeza que pretende remover a província'+ ' ' + $store.state.item.Designacao_Provincia+' ?'}" titulo="" v-if="$store.state.transacao.status == 'avisar'"></alert-component>
@@ -173,7 +172,6 @@
                 <button type="button" class="btn btn-secondario" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-danger" @click="remover()" v-if="$store.state.transacao.status != 'removido'">Eliminar</button>
             </template>
-
         </modal-component> <!--REMOVER PROVÍNCIA-->
 
     </div>

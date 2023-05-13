@@ -68,6 +68,8 @@ class ProvinciaController extends Controller
      * @param  \App\Http\Requests\StoreProvinciaRequest  $request
      * @return \Illuminate\Http\Response
      */
+    public $provincia;
+
     public function store(StoreProvinciaRequest $request)
     {
         $request->validate($this->provincia->rules(), $this->provincia->feedback());
