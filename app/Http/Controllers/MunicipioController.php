@@ -7,6 +7,7 @@ use App\Http\Requests\StoreMunicipioRequest;
 use App\Http\Requests\UpdateMunicipioRequest;
 use Illuminate\Http\Request;
 use App\Repositories\MunicipioRepository;
+use Illuminate\Support\Facades\DB;
 
 class MunicipioController extends Controller
 {
@@ -18,7 +19,7 @@ class MunicipioController extends Controller
     public function __construct(Municipio $municipio){
         $this->municipio = $municipio;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -75,6 +76,17 @@ class MunicipioController extends Controller
         if($municipio === null)
             return response()->json(['msg' => 'Dado do Recurso requisitado iválido'], 404);
         else return response()->json($municipio, 200);
+    }
+
+
+    public function obterMunicipiosComLocalidades($provincia_id){
+
+        $municipios = DB::select('  SELECT DISTINCT(m.id) ,Designacao_Municipio FROM Municipios m
+                                    JOIN Localidades l ON m.id = l.municipio_id
+                                    WHERE provincia_id = ?', [$provincia_id]);
+
+
+        return response()->json($municipios, 200);
     }
 
 

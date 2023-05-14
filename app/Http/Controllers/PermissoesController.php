@@ -6,7 +6,7 @@ use App\Models\Permissoes;
 use App\Http\Requests\StorePermissoesRequest;
 use App\Http\Requests\UpdatePermissoesRequest;
 use App\Repositories\PermissoesRepository;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 
 class PermissoesController extends Controller
 {
@@ -26,9 +26,13 @@ class PermissoesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     /**
+      * @
+      */
     public function index(Request $request)
     {
-        $permissoesRepository = new PermissoesRepository($this->permissoes);
+/*         $permissoesRepository = new PermissoesRepository($this->permissoes);
 
         //COLETA DE DADOS DA ENTIDADE DO RELACIONAMENTO PROVÍNCIA TEM MEMBROS
         if($request->has('atributos_coordenacoes')){
@@ -47,9 +51,10 @@ class PermissoesController extends Controller
         if($request->has('atributos')){
             $atributos = $request->atributos;
             $permissoesRepository->selectAtributos($request->atributos);
-        }
+        } */
 
-        return  response()->json($permissoesRepository->getResultado(), 200);
+        $permissoes = Permissoes::all();
+        return  response()->json($permissoes, 200);
     }
 
     /**

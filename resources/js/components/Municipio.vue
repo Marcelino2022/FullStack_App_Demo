@@ -75,7 +75,7 @@
                             <input-container-component titulo="Município da Provínca:" id="procinciaMunicipio" id-help="procinciaMunicipioHelp" texto-ajuda="Informe a Província do Município">
                                 <select class="form-select" aria-label="Default select example" v-model="proviciaSelecionada">
                                     <!--option selected>Clique aqui para Selecionar</option-->
-                                    <option v-for="provincia in provinciasDoMunicipio" :key="provincia.id" :value="provincia.id"> {{ provincia.Designacao_Provincia }}</option>
+                                    <option v-for="provincia in provinciasDoMunicipio" :key="provincia.id" :value="provincia.id"> {{ provincia.Designacao_Provincia }} </option>
                                 </select>
                                 <span class="icon-input"><i class="bi bi-map-fill"></i></span>
                             </input-container-component>

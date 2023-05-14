@@ -49,7 +49,6 @@ class CoordenacaoController extends Controller
 
         //COLETA DE DADOS DA ENTIDADE COORDENAÇÃO
         if($request->has('atributos')){
-            $atributos = $request->atributos;
             $coordenacaoRepository->selectAtributos($request->atributos);
         }
 

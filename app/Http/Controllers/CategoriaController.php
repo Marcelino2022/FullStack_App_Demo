@@ -10,6 +10,11 @@ use App\Repositories\CategoriaRepository;
 
 class CategoriaController extends Controller
 {
+    /**
+     *@var categoria
+     */
+    public $categoria;
+    
     public function __construct(Categoria $categoria)
     {
         $this->categoria = $categoria;

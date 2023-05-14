@@ -47,3 +47,8 @@ Route::get('/localidades', function(){
 Route::get('/funcoes', function(){
     return view('app.funcoes');
 })->name('funcoes')->middleware('auth');
+
+Route::get('/permissoes', function(){
+    return view('app.permissoes');
+})->name('permissoes.index')->middleware('auth');
+

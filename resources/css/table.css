@@ -1,0 +1,57 @@
+
+.tableHeader
+{
+    background-color: #08088A;
+    color: white;
+}
+
+element.style {
+    background-color: #01df800f;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    --bs-table-accent-bg: #08088a15;
+    color: var(--bs-table-striped-color);
+}
+
+.btn-add{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #08088A;
+    color: white;
+    height: 40px;
+    width: 40px;
+    border-radius: 100px;
+    transition: 0.2s ease-in;
+}
+
+.btn-add:hover{
+    background-color: #001962;
+}
+
+.col-float-right .btn-add{
+    display: flex;
+    margin-left: auto;
+}
+
+tbody{
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+}
+
+
+tbody i{
+    cursor: pointer;
+    margin: 0.3rem;
+    font-size: 20px;
+}
+
+.view{
+    color: #0101DF;
+}
+
+.edit{ color: #03aa00;}
+
+.delete{ color: red }

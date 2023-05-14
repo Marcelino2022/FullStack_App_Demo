@@ -34,26 +34,23 @@ import HomeComponent from './components/Home.vue';
 import CoordenacoesComponent from './components/coordenacoes/Coordenacoes.vue';
 import MembrosComponent from './components/Membros.vue';
 import FuncoesComponent from './components/Funcao.vue';
-import AdicionarMembrosComponent from './components/AdicionarMembro.vue';
 
 import ModalComponent from './components/Modal.vue';
 import ButtonHome from './components/ButtonHome.vue';
 import ButtonComponent from './components/ButtonComponent.vue';
 import AdicionarMembroComponent from './components/AdicionarMembro.vue';
 import AdicionarCoordenacaoComponent from './components/coordenacoes/AdicionarCoordenacao.vue';
-/* import AdicionarLocalidadeComponent from './components/AdicionarCoordenacao.vue'; */
 import ProvinciaComponent from './components/provincia/Provincia.vue';
-/*import AdicionarProvinciaComponent from './components/provincia/AdicionarProvincia.vue';
-import EditarProvinciaComponent from './components/provincia/EditarProvincia.vue'
-import RemoverProvinciaComponent from './components/provincia/RemoverProvincia.vue'*/
 import MunicipioComponent from './components/Municipio.vue';
 import LocalidadeComponent from './components/Localidade.vue';
+import PermissaoComponent from './components/permissoes/Permissao.vue'
 
 import InputContainerComponent from './components/InputContainer.vue';
 import SelectComponent from './components/Select.vue'
 import CardComponent from './components/card.vue'
 import AlertComponent from './components/Alert.vue'
 import AccordionComponent from './components/Accordion.vue'
+import TableComponent from './components/Table.vue'
 
 
 app.component('example-component', ExampleComponent);
@@ -67,20 +64,17 @@ app.component('buttonHome-component', ButtonHome)
 app.component('buttonComponent-component', ButtonComponent)
 app.component('adicionarMembro-component', AdicionarMembroComponent);
 app.component('adicionarCoordenacao-component', AdicionarCoordenacaoComponent);
-/* app.component('adicionarLocalidade-component', AdicionarLocalidadeComponent); */
 app.component('provincia-component', ProvinciaComponent);
-/*app.component('adicionarProvincia-component', AdicionarProvinciaComponent);
-app.component('editarProvincia-component', EditarProvinciaComponent)
-app.component('removerProvincia-component', RemoverProvinciaComponent)*/
 app.component('municipio-component', MunicipioComponent);
 app.component('localidade-component', LocalidadeComponent);
 app.component('funcoes-component', FuncoesComponent);
-
+app.component('permissao-component', PermissaoComponent);
 app.component('input-container-component', InputContainerComponent);
 app.component('select-component', SelectComponent);
 app.component('card-component', CardComponent)
 app.component('alert-component', AlertComponent)
 app.component('accordion-component', AccordionComponent)
+app.component('table-component',TableComponent)
 
 
 

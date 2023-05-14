@@ -36,6 +36,8 @@ Route::middleware('jwt.auth')->group(function(){
     Route::apiResource('permissoes', 'App\Http\Controllers\PermissoesController');
     Route::get('localidades_de_municipios', 'App\Http\Controllers\LocalidadeController@obterLocalidadesDeMunicipios');
     Route::get('provinciasComMunicipios', 'App\Http\Controllers\ProvinciaController@provinciasComMunipios');
+    Route::get('localidadePorMunicipio/{municipio_id}', 'App\Http\Controllers\LocalidadeController@obterLocalidadesPorMunicipio');
+    Route::get('municipioComLocalidades/{provincia_id}', 'App\Http\Controllers\municipioController@obterMunicipiosComLocalidades');
 });
 
 Route::post('/', 'App\Http\Controllers\AuthController@login');

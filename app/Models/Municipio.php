@@ -31,6 +31,7 @@ class Municipio extends Model
         return $this->belongsTo('App\Models\Provincia');
     }
 
+
     public function localidades(){
         return $this->hasMany('App\Models\localidade');
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Municipio;
 
 class Localidade extends Model
 {
@@ -25,8 +26,9 @@ class Localidade extends Model
     }
 
     public function Municipio(){
-        return $this->belongsTo('App\Models\Municipio');
+        return $this->belongsTo(Municipio::class);
     }
+
     public function coordenacoes(){
         return $this->hasOne('App\Models\Coordenacao');
     }

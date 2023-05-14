@@ -11,7 +11,14 @@ use Illuminate\Support\Facades\DB;
 
 class LocalidadeController extends Controller
 {
-    public function __construct(Localidade $localidade)
+
+/**
+ * @var Localidade
+ */
+
+ public $localidade;
+
+ public function __construct(Localidade $localidade)
     {
         $this->localidade = $localidade;
     }
@@ -40,7 +47,7 @@ class LocalidadeController extends Controller
 
         //COLETA DE DADOS DA ENTIDADE LOCALIDADE
         if($request->has('atributos')){
-            $atributos = $request->atributos;
+       /*      $atributos = $request->atributos; */
             $localidadeRepository->selectAtributos($request->atributos);
         }
 
@@ -62,7 +69,6 @@ class LocalidadeController extends Controller
 
          return response()->json($dadosLocalidade, 201);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -90,6 +96,14 @@ class LocalidadeController extends Controller
             return response()->json(['msg' => 'Dado do Recurso requisitado iválido'], 404);
         else return response()->json($localidade, 200);
     }
+
+
+    public function obterLocalidadesPorMunicipio($municipio_id){
+        $dadosLocalidade = Localidade::select()->where('municipio_id', $municipio_id)->get();
+         return response()->json($dadosLocalidade, 201);
+    }
+
+
 
 
 
