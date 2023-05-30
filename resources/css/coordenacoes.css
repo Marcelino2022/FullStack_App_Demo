@@ -43,3 +43,10 @@
 .info-footer .icon-color{
     color: #7c9dfd !important;
 }
+
+.custom-table{
+    box-shadow: 0 0 0.5rem 0;
+    background-color: white;
+    border-color: white;
+    margin-top: 3rem;
+}

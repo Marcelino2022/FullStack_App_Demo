@@ -20,7 +20,7 @@
 
                 <hr>
 
-                <table class="table table-striped table-borderless table-hover table-bordered mt-3">
+                <table class="table table-striped table-borderless table-hover table-bordered mt-3 custom-table" >
                     <thead class="tableHeader">
                         <tr>
                             <th scope="col">#</th>

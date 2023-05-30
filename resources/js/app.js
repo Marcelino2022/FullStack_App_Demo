@@ -15,6 +15,20 @@ const store = new Vuex.Store({
             item: {},
             transacao: { status: 'avisar', mensagem: '', dados: ''}
         }
+    },
+
+    mutations: {
+        setPermission(state, permissions){
+            state.permissions = permissions;
+        }
+    },
+
+    actions: {
+        fetchPermissions({ commit }){
+
+            const permissoes = ['Nacional', 'Provincial', 'Municipal', 'Local' ]
+            commit('setPermissions', permissoes);
+        }
     }
 })
 
