@@ -12,7 +12,7 @@ class Permissoes extends Model
 
     public function rules(){
         return [
-            'Designacao_Permissao' => 'required|unique:permissoes,Designacao_Permissao,'.$this->id.'|min:13'
+            'Designacao_Permissao' => 'required|unique:permissoes,Designacao_Permissao,'.$this->id.'|min:3'
         ];
     }
 
