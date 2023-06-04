@@ -1,6 +1,8 @@
-import { js } from 'laravel-mix';
+import mix from 'laravel-mix';
 
-js(['resources/js/app.js',
+mix.setPublicPath('public');
+
+mix.js(['resources/js/app.js',
     'resources/js/scripts/localidades/localidade.js',
 ],'public/js' )
     .vue()

@@ -3,6 +3,12 @@
 {
     background-color: #08088A;
     color: white;
+    border-color:#7c9cfd86;
+}
+
+.tableHeader tr{
+    align-items: center;
+    text-align: center;
 }
 
 element.style {
@@ -10,8 +16,13 @@ element.style {
 }
 
 .table-striped > tbody > tr:nth-of-type(odd) > * {
-    --bs-table-accent-bg: #08088a15;
-    color: var(--bs-table-striped-color);
+    --bs-table-accent-bg: #7c9cfd5f;
+    color:#08088A;
+}
+
+.table-striped > tbody > tr:nth-of-type(even) > * {
+    --bs-table-accent-bg: #0000ff15;
+    color:  #08088A;
 }
 
 .btn-add{
@@ -22,12 +33,15 @@ element.style {
     color: white;
     height: 40px;
     width: 40px;
+    border: none;
+    box-shadow: 0 0 0.5rem 0.3rem #7c9cfd3e;
     border-radius: 100px;
     transition: 0.2s ease-in;
 }
 
 .btn-add:hover{
-    background-color: #001962;
+    background-color: #0101DF;
+    box-shadow: 0 0 0.3rem 0.3rem #7c9cfd12;
 }
 
 .col-float-right .btn-add{
@@ -39,6 +53,7 @@ tbody{
     justify-content: center;
     align-items: center;
     font-weight: 400;
+    border-color:#7c9cfd86;
 }
 
 
@@ -47,6 +62,16 @@ tbody i{
     margin: 0.3rem;
     font-size: 20px;
 }
+
+td{
+    align-items: center;
+}
+.item-img{
+    height: 25px;
+    width: 25px;
+    border-radius: 100px;
+}
+
 
 .view{
     color: #0101DF;

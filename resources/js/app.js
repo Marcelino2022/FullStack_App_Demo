@@ -7,27 +7,31 @@
 import './bootstrap';
 import { createApp } from 'vue';
 import Vuex from 'vuex'
+import axios from 'axios';
+
 //import { createStore, Vuex } from 'vuex'
 
 const store = new Vuex.Store({
     state(){
         return {
             item: {},
-            transacao: { status: 'avisar', mensagem: '', dados: ''}
+            transacao: { status: 'avisar', mensagem: '', dados: ''},
+            user: [],
+            apiUrl: import.meta.env.VITE_API_URL,
         }
     },
 
-    mutations: {
-        setPermission(state, permissions){
-            state.permissions = permissions;
-        }
-    },
+/*     plugins: [
+        VuexPersistedState()
+    ],
+ */
+    mutations:{
 
-    actions: {
-        fetchPermissions({ commit }){
-
-            const permissoes = ['Nacional', 'Provincial', 'Municipal', 'Local' ]
-            commit('setPermissions', permissoes);
+        setUser(state, user) {
+            state.user = user;
+        },
+        clearUser(state) {
+            state.user = null;
         }
     }
 })
@@ -48,6 +52,7 @@ import HomeComponent from './components/Home.vue';
 import CoordenacoesComponent from './components/coordenacoes/Coordenacoes.vue';
 import MembrosComponent from './components/Membros.vue';
 import FuncoesComponent from './components/Funcao.vue';
+import CategoriaComponent from './components/Categoria.vue';
 
 import ModalComponent from './components/Modal.vue';
 import ButtonHome from './components/ButtonHome.vue';
@@ -65,6 +70,7 @@ import CardComponent from './components/card.vue'
 import AlertComponent from './components/Alert.vue'
 import AccordionComponent from './components/Accordion.vue'
 import TableComponent from './components/Table.vue'
+import AuthComponent from './components/Auth.vue'
 
 
 app.component('example-component', ExampleComponent);
@@ -82,6 +88,7 @@ app.component('provincia-component', ProvinciaComponent);
 app.component('municipio-component', MunicipioComponent);
 app.component('localidade-component', LocalidadeComponent);
 app.component('funcoes-component', FuncoesComponent);
+app.component('categorias-component', CategoriaComponent);
 app.component('permissao-component', PermissaoComponent);
 app.component('input-container-component', InputContainerComponent);
 app.component('select-component', SelectComponent);
@@ -89,6 +96,7 @@ app.component('card-component', CardComponent)
 app.component('alert-component', AlertComponent)
 app.component('accordion-component', AccordionComponent)
 app.component('table-component',TableComponent)
+app.component('auth-component',AuthComponent)
 
 
 

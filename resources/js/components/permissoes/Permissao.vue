@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-md-6"></div>
                     <div class="col-md-3 col-float-right">
-                        <button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#PermissaoModal"><i class="bi bi-plus"></i></button>
+                        <button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#PermissaoModal" v-if="admin"><i class="bi bi-plus"></i></button>
                     </div>
                 </div>
 
@@ -77,12 +77,14 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-1"></div>
+            <div class="col-md-1">
+                <div hidden>  {{ usuario }} </div>
+            </div>
         </div>
     </div>
 </template>
 
-<style>
+<style scoped>
     @import '../../../css/provincias.css';
     @import '../../../css/modal.css';
 </style>
@@ -90,22 +92,49 @@
 <script>
 
 import axios from 'axios';
+import { mapState } from 'vuex';
 
 export default {
 
     data(){
         return{
-            urlBase: "http://127.0.0.1:8000/api/",
+            urlBase: import.meta.env.VITE_API_URL,
             permissoes: "",
             permissaoFornecida:"",
             siglaFornecida:"",
+            admin: "",
 
             transacaoStatus: "",
             transacaoDetalhes: {},
         }
     },
 
+    computed: {
+        ...mapState(['user']),
+        usuario(){
+            const usuario = this.user && this.user[0] ? this.user[0] : '';
+            this.carragarDadosDoUtilizador(usuario)
+            return this.user && this.user[0] ? this.user[0] : '';
+        },
+    },
+
     methods: {
+
+        carragarDadosDoUtilizador(usuario){
+
+            const url = `${this.urlBase}user/autenticado/dados/?id=${usuario.coordenacao_id}`
+            axios.get(url)
+                .then( response => {
+
+                    this.permissao =response.data.coordenacao[0].Designacao_Permissao
+
+                    if(this.permissao == 'Nível Nacional'){
+                        this.admin = true
+                        this.acessorURL =`${this.urlBase}membro`
+                    }
+            })
+        },
+
 
        listarPermissoes(){
 
@@ -158,6 +187,7 @@ export default {
     },
     mounted(){
         this.listarPermissoes()
+        this.carragarDadosDoUtilizador()
     }
 }
 

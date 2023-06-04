@@ -71,7 +71,7 @@
     export default {
         data(){
            return{
-                urlBase: "http://127.0.0.1:8000/api/",
+                urlBase: import.meta.env.VITE_API_URL,
                 coordenacoes: [],
                 permissoes:[]
            }

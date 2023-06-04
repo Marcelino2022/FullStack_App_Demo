@@ -48,6 +48,10 @@ Route::get('/funcoes', function(){
     return view('app.funcoes');
 })->name('funcoes')->middleware('auth');
 
+Route::get('/categorias', function(){
+    return view('app.categorias');
+})->name('categorias')->middleware('auth');
+
 Route::get('/permissoes', function(){
     return view('app.permissoes');
 })->name('permissoes.index')->middleware('auth');

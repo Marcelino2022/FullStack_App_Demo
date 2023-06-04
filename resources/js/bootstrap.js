@@ -61,7 +61,6 @@ axios.interceptors.request.use(
 
 
 //INTERCEPTAR OS RESPONSES DA APLICAÇÃO
-
 axios.interceptors.response.use(
     response =>{
         return response
@@ -70,11 +69,16 @@ axios.interceptors.response.use(
     error => {
 
         if(error.response.status == 401 && error.response.data.message == 'Token has expired'){
-            axios.post('http://localhost:8000/api/refresh')
+            axios.post('http://localhost:8000/api/logout')
             .then(response => {
                 document.cookie = 'token='+response.data.token
                 window.location.reload()
+                router.push('/login');
+            }).catch( error => {
+                router.push('/login');
             })
+
+            router.push('/login');
         }
 
         return Promise.reject(error)

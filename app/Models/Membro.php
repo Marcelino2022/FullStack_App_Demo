@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Membro extends Model
 {
     use HasFactory;
-    protected $fillable = ['Nome_Membro', 'Data_Nascimento', 'Numero_Documento', 'Tipo_Documento',
-                            'Sigla_Tipo_Documento','Imagem_Membro', 'Telemovel_Membro' ,'Email_Membro',
+    protected $fillable = ['Nome_Membro', 'Data_Nascimento', 'Numero_Documento', 'Tipo_Documento','Morada_Membro',
+                            'Sigla_Tipo_Documento','Imagem_Membro', 'Telemovel_Membro' ,'Email_Membro', 'Data_Alistamento',
                             'mobilizador_id', 'funcao_id','coordenacao_id', 'categoria_id'];
 
     //DEFAULT VALUE
@@ -24,8 +24,8 @@ class Membro extends Model
             'categoria_id' => 'exists:categorias,id',
             'Nome_Membro' => 'required:membros,Nome_Membro,'.$this->id.'|min:5',
             'Numero_Documento' => 'required|unique:membros',
-            'Sigla_Tipo_Documento' => 'required:membros|max:5',
-            'Imagem_Membro' => 'required|file|mimes:png,jpeg,jpg',
+ /*            'Sigla_Tipo_Documento' => 'required:membros|max:5', */
+    /*         'Imagem_Membro' => 'required|file|mimes:png,jpeg,jpg', */
             "Telemovel_Membro" => 'required|unique:membros',
             "Email_Membro" => 'unique:membros',
             "Telemovel_Membro" => 'required|integer'

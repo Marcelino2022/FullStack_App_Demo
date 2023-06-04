@@ -6,7 +6,7 @@
         <!--editarmunicipio-component></editarmunicipio-component-->
         <!--removermunicipio-component></removermunicipio-component-->
 
-        <h2 class="margem-top">Municípios</h2>
+   <!--      <h2 class="margem-top">Municípios</h2>
 
         <hr class="mb-3">
 
@@ -57,7 +57,7 @@
             </template>
 
         </card-component>
-
+ -->
 
         <!--ADICIONAR Município-->
         <modal-component id="municipioModal" titulo="Adicionar Município">
@@ -107,7 +107,7 @@
 
 
         <!-- ATUALIZAR DADOS DA Município-->
-        <modal-component id="editarmunicipioModal" titulo="Editar dados da municipio">
+        <modal-component id="editarMunicipioModal" titulo="Editar dados da municipio">
             <template v-slot:alertas>
                 <alert-component tipo="success" :detalhes="this.$store.state.transacao" titulo="" v-if="$store.state.transacao.status == 'atualizado'"></alert-component>
                 <alert-component tipo="danger" :detalhes="this.$store.state.transacao" titulo="" v-if="$store.state.transacao.status == 'erro'"></alert-component>
@@ -153,14 +153,14 @@
                 </form>
             </template>
             <template v-slot:rodape>
-                <button type="button" class="btn btn-secondario" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondario" data-bs-dismiss="modal">Fechar</button>
                 <button type="button" class="btn btn-principal" @click="atualizar()">Atualizar</button>
             </template>
         </modal-component> <!--ATUALIZAR DADOS DA Município-->
 
 
         <!--REMOVER Município-->
-        <modal-component id="removermunicipioModal" titulo="Remover municipio">
+        <modal-component id="removerMunicipioModal" titulo="Remover municipio">
 
             <template v-slot:alertas>
                 <alert-component tipo="success" :detalhes="this.$store.state.transacao" titulo="" v-if="$store.state.transacao.status == 'removido'"></alert-component>
@@ -194,6 +194,58 @@
 
     </div>
 
+    <div class="container  margem-top">
+        <div class="row  mt-5">
+
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-3 form-floating" id="filter">
+                        <h2 class="">Províncias</h2>
+                    </div>
+                    <div class="col-md-6"></div>
+                    <div class="col-md-3 col-float-right">
+                        <button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#provinciaModal" v-if="admin"><i class="bi bi-plus"></i></button>
+                    </div>
+                </div>
+
+                <hr>
+
+                <table class="table table-striped table-borderless table-hover table-bordered ">
+                    <thead class="tableHeader">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Município</th>
+                            <th scope="col">Sigla</th>
+                            <th scope="col">Nº de Localidades</th>
+                            <th scope="col">Nº de Coordenações</th>
+                            <th scope="col"><i class="bi bi-tools"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  v-for="municipio in municipios" :key="municipio.id">
+                            <td class="text-center" scope="row">
+                                <img src="../../../public/imagens/bandeira-angola.png" class="item-img" alt="...">
+                            </td>
+                            <td>{{ municipio.Designacao_Municipio }}</td>
+                            <td>{{ municipio.Codigo_Municipio }}</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <th class="tools text-center">
+                                <i class="bi bi-eye-fill view" @click="setStore(municipio)"></i>
+                                <i class="bi bi-pencil-square edit" data-bs-toggle="modal" data-bs-target="#editarMunicipioModal" @click="setStore(municipio)" v-if="admin"></i>
+                                <i class="bi bi-trash-fill delete" data-bs-toggle="modal" data-bs-target="#removerMunicipioModal"  @click="setStore(municipio)" v-if="admin"></i>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-1">
+                <div hidden>  {{ usuario }} </div>
+            </div>
+        </div>
+    </div>
+
 </template>
 
 <style scoped>
@@ -204,12 +256,13 @@
 <script>
 
     import axios from 'axios';
+    import { mapState } from 'vuex';
+
     export default {
 
         data() {
             return {
-                urlBase: "http://127.0.0.1:8000/api/municipio",
-                urlProvincias: "http://127.0.0.1:8000/api/provincia",
+                urlBase: import.meta.env.VITE_API_URL,
                 designacaoMunicipioFornecido: "",
                 siglaMunicipioFornecida: "",
                 proviciaSelecionada: "",
@@ -218,12 +271,40 @@
                 municipios: [],
                 provinciasDoMunicipio: [],
                 provinciaDoMunicipio: [],
-                provincia_id: ""
-
+                provincia_id: "",
+                permissao: "",
+                admin: false,
             };
         },
 
+        computed: {
+            ...mapState(['user']),
+            usuario(){
+                const usuario = this.user && this.user[0] ? this.user[0] : '';
+                this.carragarDadosDoUtilizador(usuario)
+                return this.user && this.user[0] ? this.user[0] : '';
+            },
+        },
+
         methods: {
+
+            carragarDadosDoUtilizador(usuario){
+                const url = `${this.urlBase}user/autenticado/dados/?id=${usuario.coordenacao_id}`
+                axios.get(url)
+                    .then( response => {
+                        this.permissao =response.data.coordenacao[0].Designacao_Permissao
+
+                        console.log(this.permissao)
+
+                        if(this.permissao == 'Nível Nacional'){
+                            this.admin = true
+                            this.acessorURL =`${this.urlBase}membro`
+                        } else{
+                            this.acessorURL =`${this.urlBase}membro/listarMembros?id=${usuario.coordenacao_id}`
+                        }
+                })
+            },
+
             setStore(obj) {
                 this.$store.state.transacao.status = 'avisar'
                 this.$store.state.transacao.mensagem = ''
@@ -234,8 +315,8 @@
             },
 
             carregarMunicipios() {
-
-                axios.get(this.urlBase)
+                const url = `${this.urlBase}municipio`;
+                axios.get(url)
                     .then(response => {
                     this.municipios = response.data;
                 })
@@ -245,7 +326,9 @@
             },
 
             carregarProvincias(){
-                axios.get(this.urlProvincias)
+
+                const url = `${this.urlBase}provincia`
+                axios.get(url)
                     .then(response => {
                     this.provinciasDoMunicipio = response.data
                     })
@@ -258,7 +341,7 @@
 
             obterProvinciaPorID(provincia_id){
 
-                const urlProvincia = this.urlProvincias+'/'+provincia_id
+                const urlProvincia =`${this.urlBase}provincia/${provincia_id}`
 
                 console.log(urlProvincia);
                 axios.get(urlProvincia)
@@ -284,7 +367,9 @@
                     }
                 }
 
-                axios.post(this.urlBase, formData, config)
+                const url = `${this.urlBase}municipio`;
+
+                axios.post(url, formData, config)
                     .then(response => {
                         this.carregarMunicipios();
                         this.transacaoStatus = 'adicionado'
@@ -310,7 +395,7 @@
                 formData.append('Codigo_Municipio', this.$store.state.item.Codigo_Municipio)
                 formData.append('provincia_id', this.proviciaSelecionada)
 
-                let url = this.urlBase+'/'+this.$store.state.item.id;
+                let url =  `${this.urlBase}municipio`+'/'+this.$store.state.item.id;
                 console.log( this.proviciaSelecionada);
 
                 let config = {
@@ -336,8 +421,9 @@
 
                 remover(){
 
-                    let url = this.urlBase+'/'+this.$store.state.item.id;
 
+                    let url = `${ this.urlBase}municipio/${this.$store.state.item.id}`
+    /*                 this.urlBase+'/'+this.$store.state.item.id; */
                     const formData = new FormData();
                     formData.append('_method','delete')
 
@@ -361,6 +447,7 @@
             this.carregarMunicipios();
             this.carregarProvincias();
             this.obterProvinciaPorID();
+            this.carragarDadosDoUtilizador();
         },
     }
 </script>

@@ -1,12 +1,12 @@
 <template>
 
-    <div class="container mt-3">
+<!--     <div class="container mt-3"> -->
 
         <!--adicionarProvincia-component></adicionarProvincia-component-->
         <!--editarProvincia-component></editarProvincia-component-->
         <!--removerProvincia-component></removerProvincia-component-->
 
-        <h2 class="margem-top">Províncias</h2>
+<!--         <h2 class="margem-top">Províncias</h2>
 
         <hr class="mb-3">
 
@@ -35,8 +35,8 @@
         </div>
 
         <hr class="mb-3">
-
-
+ -->
+<!--
         <card-component v-for="obj in provincias" :key="obj.id" :titulo="obj.Designacao_Provincia+' - '+obj.Codigo_Provincia">
             <template v-slot:image> <img src="../../../../public/imagens/bandeira-angola.png" class="float-start avatar" alt="..."></template>
 
@@ -58,7 +58,7 @@
                 </div>
             </template>
 
-        </card-component>
+        </card-component> -->
 
 
         <!--ADICIONAR PROVÍNCIA-->
@@ -169,11 +169,64 @@
             </template>
 
             <template v-slot:rodape>
-                <button type="button" class="btn btn-secondario" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondario" data-bs-dismiss="modal">Fechar</button>
                 <button type="button" class="btn btn-danger" @click="remover()" v-if="$store.state.transacao.status != 'removido'">Eliminar</button>
             </template>
         </modal-component> <!--REMOVER PROVÍNCIA-->
 
+   <!--  </div> -->
+
+
+    <div class="container  margem-top">
+        <div class="row  mt-5">
+
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-3 form-floating" id="filter">
+                        <h2 class="">Províncias</h2>
+                    </div>
+                    <div class="col-md-6"></div>
+                    <div class="col-md-3 col-float-right">
+                        <button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#provinciaModal" v-if="admin"><i class="bi bi-plus"></i></button>
+                    </div>
+                </div>
+
+                <hr>
+
+                <table class="table table-striped table-borderless table-hover table-bordered ">
+                    <thead class="tableHeader">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Província</th>
+                            <th scope="col">Sigla</th>
+                            <th scope="col">Nº de Municípios</th>
+                            <th scope="col">Nº de Lolalidades</th>
+                            <th scope="col"><i class="bi bi-tools"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  v-for="provinia in provincias" :key="provinia.id" :titulo="provinia.Designacao_Provincia+' - '+provinia.Codigo_Provincia">
+                            <td class="text-center" scope="row">
+                                <img src="../../../../public/imagens/bandeira-angola.png" class="item-img" alt="...">
+                            </td>
+                            <td>{{ provinia.Designacao_Provincia }}</td>
+                            <td>{{ provinia.Codigo_Provincia }}</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <th class="tools text-center">
+                                <i class="bi bi-eye-fill view" @click="setStore(provinia)"></i>
+                                <i class="bi bi-pencil-square edit" data-bs-toggle="modal" data-bs-target="#editarProvinciaModal" @click="setStore(provinia)" v-if="admin"></i>
+                                <i class="bi bi-trash-fill delete" data-bs-toggle="modal" data-bs-target="#removerProvinciaModal"  @click="setStore(provinia)" v-if="admin"></i>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-1">
+                <div hidden>  {{ usuario }} </div>
+            </div>
+        </div>
     </div>
 
 </template>
@@ -185,23 +238,50 @@
 
 <script>
     import axios from 'axios';
+    import { mapState } from 'vuex';
 
     export default {
 
         data() {
             return {
-                urlBase: "http://127.0.0.1:8000/api/provincia",
+                urlBase: import.meta.env.VITE_API_URL,
                 designacaoProvinciaFornecido: "",
                 siglaProvinciaFornecida: "",
                 transacaoStatus: "",
                 transacaoDetalhes: {},
-                provincias: []
+                provincias: [],
+                permissao: "",
+                admin: false,
             };
         },
+
+        computed: {
+            ...mapState(['user']),
+            usuario(){
+                const usuario = this.user && this.user[0] ? this.user[0] : '';
+                this.carragarDadosDoUtilizador(usuario)
+                return this.user && this.user[0] ? this.user[0] : '';
+            },
+        },
+
         methods: {
 
-            setStore(obj) {
+            carragarDadosDoUtilizador(usuario){
 
+                const url = `${this.urlBase}user/autenticado/dados/?id=${usuario.coordenacao_id}`
+                axios.get(url)
+                    .then( response => {
+
+                        this.permissao =response.data.coordenacao[0].Designacao_Permissao
+
+                        if(this.permissao == 'Nível Nacional'){
+                            this.admin = true
+                            this.acessorURL =`${this.urlBase}membro`
+                        } 
+                })
+            },
+
+            setStore(obj) {
                 this.$store.state.transacao.status = 'avisar'
                 this.$store.state.transacao.mensagem = ''
                 this.$store.state.transacao.dados = ''
@@ -210,7 +290,9 @@
 
             carregarProvincias() {
 
-                axios.get(this.urlBase)
+                const url = `${this.urlBase}provincia`
+
+                axios.get(url)
                     .then(response => {
                     this.provincias = response.data;
                 })
@@ -231,7 +313,9 @@
                     }
                 }
 
-                axios.post(this.urlBase, formData, config)
+                const url = `${this.urlBase}provincia`
+
+                axios.post(url, formData, config)
                     .then(response => {
                         this.carregarProvincias();
                         this.transacaoStatus = 'adicionado'
@@ -256,7 +340,7 @@
                 formData.append('Designacao_Provincia', this.$store.state.item.Designacao_Provincia)
                 formData.append('Codigo_Provincia', this.$store.state.item.Codigo_Provincia)
 
-                let url = this.urlBase+'/'+this.$store.state.item.id;
+                let url = `${this.urlBase}provincia/${this.$store.state.item.id}`
 
                 let config = {
 
@@ -269,7 +353,6 @@
                     .then(response => {
                         this.$store.state.transacao.status = 'atualizado'
                         this.$store.state.transacao.mensagem = "Registas da Província Atualizado com sucesso"
-                        console.log('Atualizado', response)
                         this.carregarProvincias()
                     })
                     .catch(errors => {
@@ -281,7 +364,8 @@
 
             remover(){
 
-                let url = this.urlBase+'/'+this.$store.state.item.id;
+                //let url = this.urlBase+'/'+this.$store.state.item.id;
+                let url = `${this.urlBase}provincia/${this.$store.state.item.id}`
 
                 const formData = new FormData();
                 formData.append('_method','delete')
@@ -304,6 +388,7 @@
 
         mounted() {
             this.carregarProvincias();
+            this.carragarDadosDoUtilizador();
         },
     }
 </script>

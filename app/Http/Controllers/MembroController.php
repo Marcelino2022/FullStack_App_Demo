@@ -15,7 +15,7 @@ class MembroController extends Controller
      * @var Membro
      */
     public $membro;
-    
+
     public function __construct(Membro $membro){
         $this->membro = $membro;
     }
@@ -55,6 +55,14 @@ class MembroController extends Controller
         return response()->json($membroRepository->getResultado(), 200);
     }
 
+
+    public function listarMembros(Request $request){
+
+        $membros = Membro::select()->where('id', $request->get('id'));
+
+        return response()->json(['membros' => $membros]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -66,12 +74,18 @@ class MembroController extends Controller
         $request->validate($this->membro->rules(), $this->membro->feedback());
 
         $imagem = $request->file('Imagem_Membro');
-        $imagem_URN = $imagem->store('imagens/perfil', 'public');
+        $imagem_URN = "";
+
+        if($request->file('Imagem_Membro')){
+            $imagem_URN = $imagem->store('imagens/perfil', 'public');
+        }
 
         $membro = $this->membro->create([
             'Nome_Membro' =>            $request->Nome_Membro,
             'Data_Nascimento' =>        $request->Data_Nascimento,
             'Numero_Documento' =>       $request->Numero_Documento,
+            'Data_Alistamento' =>       $request->Data_Alistamento,
+            'Morada_Membro' =>          $request->Morada_Membro,
             'Tipo_Documento' =>         $request->Tipo_Documento,
             'Sigla_Tipo_Documento' =>   $request->Sigla_Tipo_Documento,
             'Imagem_Membro' =>          $imagem_URN,
@@ -80,6 +94,7 @@ class MembroController extends Controller
             'mobilizador_id' =>         $request->mobilizador_id,
             'coordenacao_id' =>         $request->coordenacao_id,
             'categoria_id' =>           $request->categoria_id,
+            'funcao_id' =>              $request->funcao_id,
         ]);
 
         //$membro = $this->membro->create($request->all());

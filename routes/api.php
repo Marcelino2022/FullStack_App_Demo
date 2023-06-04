@@ -41,9 +41,13 @@ Route::middleware('jwt.auth')->group(function(){
     Route::get('provinciasComMunicipios', 'App\Http\Controllers\ProvinciaController@provinciasComMunipios');
     Route::get('localidadePorMunicipio/{municipio_id}', 'App\Http\Controllers\LocalidadeController@obterLocalidadesPorMunicipio');
     Route::get('municipioComLocalidades/{provincia_id}', 'App\Http\Controllers\municipioController@obterMunicipiosComLocalidades');
+    Route::get('user/autenticado', 'App\Http\Controllers\AuthController@getUserAuthenticated');
+    Route::get('user/autenticado/dados', 'App\Http\Controllers\AuthController@dadosCoordenacao');
+    Route::get('membro/listarMembros', 'App\Http\Controllers\MembroController@listarMembros');
 });
 
 Route::post('/', 'App\Http\Controllers\AuthController@login');
+//Route::apiResource('coordenacao/padrao', 'App\Http\Controllers\CoordenacaoController');
 Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
 
 

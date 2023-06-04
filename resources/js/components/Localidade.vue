@@ -1,36 +1,6 @@
 <template>
-    <div class="container mt-3">
 
-        <h2 class="margem-top">Localidades</h2>
-
-        <hr>
-        <div class="row">
-            <div class="col-md-3 form-floating" id="filter">
-                <select-component class="bi bi-filter-circle-fill">
-                    <template v-slot:optionSelected>Todas as Localidades</template>
-                    <template v-slot:option>
-                        <option value="">Luanda</option>
-                        <option value="">Benguela</option>
-                        <option value="">Cabinda</option>
-                    </template>
-                    <template v-slot:labelContent>Filtrar Município por:</template>
-                </select-component>
-            </div>
-
-            <div class="col-md-6"></div>
-
-            <div class="col-md-3 mt-1 col-btn">
-                <buttonComponent-component class="button-component" data-bs-toggle="modal" data-bs-target="#localidadeModal">
-                    <template v-slot:icon><i class="bi bi-plus-circle"></i></template>
-                    <template v-slot:conteudo>Adicionar Localidade</template>
-                </buttonComponent-component>
-            </div>
-        </div>
-
-        <hr>
-
-        <!--LISTA DE LOCALIDADES-->
-        <accordion-component
+<!--         <accordion-component
                     v-for="localidade in this.localidadesDoMunicipio" :key="localidade.municipio_id"
                     class="bi bi-geo-alt-fill"
                     :id="'localidade'+localidade.municipio_id"
@@ -59,8 +29,8 @@
                     </li>
                 </ul>
             </template>
-        </accordion-component>
-        <!--FIM LISTA DE LOCALIDADES-->
+        </accordion-component> -->
+
 
 
         <!--ADICIONAR LOCALIDADE-->
@@ -112,7 +82,7 @@
         </modal-component><!--ADICIONAR LOCALIDADE-->
 
         <!--ATUALIZAR LOCALIDADE-->
-        <modal-component id="editarlocalidadeModal" titulo="Editar Localidade">
+        <modal-component id="editarLocalidadeModal" titulo="Editar Localidade">
             <template v-slot:alertas>
                 <alert-component tipo="success" :detalhes="transacaoDetalhes" titulo="Registo Realizado com sucesso" v-if="transacaoStatus == 'atualizado'"></alert-component>
                 <alert-component tipo="danger" :detalhes="transacaoDetalhes" titulo="Erro ao tentar Registar Província" v-if="transacaoStatus == 'erro'"></alert-component>
@@ -146,7 +116,6 @@
                                 <input type="text" class="form-control" id="siglaProvincia" aria-describedby="idHelp" placeholder="Desgnação da Localidade" v-model="this.designacaoLocalidade">
                                 <span class="icon-input"><i class="bi bi-geo-fill"></i></span>
                             </input-container-component>
-
                         </div>
                     </div>
                 </form>
@@ -158,7 +127,59 @@
             </template>
         </modal-component><!--ADICIONAR LOCALIDADE-->
 
+    <div class="container  margem-top">
+        <div class="row  mt-5">
+
+            <div class="col-md-1"></div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-3 form-floating" id="filter">
+                        <h2 class="">Localidades</h2>
+                    </div>
+                    <div class="col-md-6"></div>
+                    <div class="col-md-3 col-float-right">
+                        <button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#localidadeModal" v-if="admin"><i class="bi bi-plus"></i></button>
+                    </div>
+                </div>
+
+                <hr>
+
+                <table class="table table-striped table-borderless table-hover table-bordered ">
+                    <thead class="tableHeader">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Localidade</th>
+                            <th scope="col">Município</th>
+                            <th scope="col">Provínca</th>
+                            <th scope="col">Nº de Coordenações</th>
+                            <th scope="col"><i class="bi bi-tools"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody v-for="localidade in localidadesDoMunicipio" :key="localidade.id">
+                        <tr  v-for="itemlocalidade, item in localidade.localidades"  :key="itemlocalidade.id">
+                            <td class="text-center" scope="row">
+                                <img src="../../../public/imagens/bandeira-angola.png" class="item-img" alt="...">
+                            </td>
+                            <td>{{ itemlocalidade.localidade }}</td>
+                            <td>{{ localidade.municipio }}</td>
+                            <td>{{ localidade.provincia }}</td>
+                            <td>--</td>
+                            <th class="tools text-center">
+                                <i class="bi bi-eye-fill view"  @click="setStore(itemlocalidade)"></i>
+                                <i class="bi bi-pencil-square edit" data-bs-toggle="modal" data-bs-target="#editarLocalidadeModal" @click="setStore(itemlocalidade)" v-if="admin"></i>
+                                <i class="bi bi-trash-fill delete" data-bs-toggle="modal" data-bs-target="#removerLocalidadeModal" @click="setStore(itemlocalidade)" v-if="admin"></i>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-1">
+                <div hidden>  {{ usuario }} </div>
+            </div>
+        </div>
     </div>
+
 </template>
 
 <style scoped>
@@ -168,17 +189,13 @@
 </style>
 
 <script>
-
     import axios from 'axios';
+    import { mapState } from 'vuex';
 
     export default {
         data(){
             return{
-                urlBase: "http://127.0.0.1:8000/api/localidade",
-                urlProvincia: "http://127.0.0.1:8000/api/provincia",
-                urlProvinciaComMunicipio: "http://127.0.0.1:8000/api/provinciasComMunicipios",
-                urlMunicipio: "http://127.0.0.1:8000/api/municipio",
-                urlLocalidadeDeMunicipios: "http://127.0.0.1:8000/api/localidades_de_municipios",
+                urlBase: import.meta.env.VITE_API_URL,
                 provincias: "",
                 provinciasMunicipios: "",
                 provinciasComMunicipios:[],
@@ -186,22 +203,38 @@
                 localidadesDoMunicipio:[],
                 designacaoLocalidade: "",
                 localidade: "",
-                transacaoStatus: "",
-                transacaoDetalhes: {},
                 proviciaSelecionada:"",
                 municipioSelecionado:"",
                 municipioDaLocalidade:"",
                 provinciaDaLocalidade: "",
+                permissao: "",
+                admin: false,
 
-                 /*localidades:[],
-                localidadesPorMunicipio:[],
-                localidadesDoMunicipio:[],
-                provinciaMunicipio:"",
-                item_municipio:""*/
+                transacaoStatus: "",
+                transacaoDetalhes: {},
             };
         },
 
+   /*      computed: {
+
+        }, */
+
         methods:{
+
+            carragarDadosDoUtilizador(usuario){
+                const url = `${this.urlBase}user/autenticado/dados/?id=${usuario.coordenacao_id}`
+                axios.get(url)
+                    .then( response => {
+
+                        this.permissao =response.data.coordenacao[0].Designacao_Permissao
+
+                        if(this.permissao == 'Nível Nacional'){
+                            this.admin = true
+                            this.acessorURL =`${this.urlBase}membro`
+                        }
+                })
+            },
+
             setStore(itemlocalidade){
                 this.$store.state.transacaoStatus =''
                 this.$store.state.transacao.mensagem=''
@@ -212,7 +245,8 @@
             },
 
             carregarProvincias(){
-                axios.get(this.urlProvincia)
+                const url = `${this.urlBase}provincia`
+                axios.get(url)
                      .then( response =>{
                         this.provincias = response.data
                      })
@@ -222,7 +256,8 @@
             },
 
             obterProvinciaComMunicipio(){
-                axios.get(this.urlProvinciaComMunicipio)
+                const url = `${this.urlBase}provinciasComMunicipios`
+                axios.get(url)
                     .then(response => {
                         this.provinciasMunicipios = response.data
                     }).catch(error => { })
@@ -230,7 +265,7 @@
 
             obterLocalidadesdeMunicipio(){
 
-                const url = this.urlLocalidadeDeMunicipios
+                const url = `${this.urlBase}localidades_de_municipios`
 
                 axios.get(url)
                      .then(response =>{
@@ -267,7 +302,7 @@
             },
 
             obterProvinciaPorID(provincia_id){
-                const url = this.urlProvincia + '/' + provincia_id
+                const url = `${this.urlBase}provincia/${provincia_id}`
                 axios(url).then( response => {
                     this.provinciaDaLocalidade = response.data
 
@@ -275,7 +310,7 @@
             },
 
             obterMunicipioPorID(municipio_id){
-                const url = this.urlMunicipio + '/' + municipio_id
+                const url = `${this.urlBase}municipio/${municipio_id}`
                 axios(url).then( response => {
                     this.municipioDaLocalidade = response.data
                     this.obterProvinciaPorID(response.data.provincia_id)
@@ -284,7 +319,7 @@
             },
 
             obterMunicipioDaPrvincia(provincia_id){
-                const url = this.urlMunicipio + '/?filtro=provincia_id:=:' + provincia_id
+                const url = `${this.urlBase}municipio/?filtro=provincia_id:=:${provincia_id}`
                 axios.get(url)
                      .then(response =>{
                         this.municipios = response.data })
@@ -292,9 +327,8 @@
                       });
             },
 
-
             obterLocalidadePorID(localidade){
-                const url = this.urlBase + '/' + localidade.id
+                const url = `${ this.urlBase}localidade/${localidade.id}`
                 axios.get(url)
                     .then(response =>{
                         this.designacaoLocalidade = response.data.Designacao_Localidade
@@ -313,7 +347,9 @@
                 const formData = new FormData()
                 formData.append('Designacao_Localidade', this.designacaoLocalidade)
                 formData.append('municipio_id', this.municipioSelecionado)
-                axios.post(this.urlBase, formData, config)
+
+                const url = `${this.urlBase}localidade`
+                axios.post(url, formData, config)
                     .then(response =>{
                         this.transacaoStatus='adicionado'
                         this.transacaoDetalhes = {
@@ -337,7 +373,8 @@
                 formData.append('_method', 'patch')
                 formData.append('Designacao_Localidade', this.designacaoLocalidade)
                 formData.append('municipio_id', this.municipioSelecionado)
-                let url = this.urlBase+'/'+this.$store.state.item.id;
+
+                let url = `${this.urlBase}localidade/${this.$store.state.item.id}`
 
                 let config = {
                     headers: { 'Content.Type': 'multipart/form-data'}
@@ -369,6 +406,13 @@
 
                 }).flat()
             },
+
+            ...mapState(['user']),
+            usuario(){
+                const usuario = this.user && this.user[0] ? this.user[0] : '';
+                this.carragarDadosDoUtilizador(usuario)
+                return this.user && this.user[0] ? this.user[0] : '';
+            },
         },
 
         mounted(){
@@ -379,6 +423,7 @@
             this.obterMunicipioPorID()
             this.obterProvinciaPorID()
             this.obterMunicipioDaPrvincia()
+            this.carragarDadosDoUtilizador();
         }
     }
 

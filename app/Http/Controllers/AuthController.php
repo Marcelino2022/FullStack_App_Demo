@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -33,6 +35,20 @@ class AuthController extends Controller
 
     public function me(){
         return response()->json(auth()->user());
+    }
+
+    public function getUserAuthenticated(Request $request){
+
+        $user = User::select()->where('email', $request->get('email'))->get();
+        return response()->json(['user' => $user]);
+    }
+
+    public function dadosCoordenacao(Request $request){
+        $coordenacao = DB::select(' SELECT * FROM Coordenacoes c
+                                    JOIN Permissoes p ON p.id = c.permissoes_id
+                                    WHERE c.id=?', [$request->get('id')]);
+
+        return response()->json(['coordenacao' => $coordenacao]);
     }
 
 }

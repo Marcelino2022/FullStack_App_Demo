@@ -1,6 +1,6 @@
 <template>
 
-    <modal-component id="FuncoesModal" titulo="Adicionar Função">
+    <modal-component id="CategoriasModal" titulo="Adicionar Categoria">
 
         <template v-slot:alertas>
             <alert-component tipo="success" :detalhes="transacaoDetalhes" titulo="Registo Realizado com sucesso" v-if="transacaoStatus == 'adicionado'"></alert-component>
@@ -11,19 +11,19 @@
             <form>
                 <div class="row">
 
-                    <div class="col-md-6 mb-3">
-                        <input-container-component titulo="Designação da Função:" id="designacaoFuncao" id-help="designacaoHelp" texto-ajuda="Informe a Designação da Função">
-                            <input type="text" class="form-control" id="designacaoFuncao" aria-describedby="idHelp" placeholder="Designaçao da Função" v-model="funcaoFornecida">
+                    <div class="col-md-12 mb-3">
+                        <input-container-component titulo="Designação da Categoria:" id="designacaoCategoria" id-help="designacaoHelp" texto-ajuda="Informe a Designação da Categoria">
+                            <input type="text" class="form-control" id="designacaoCategoria" aria-describedby="idHelp" placeholder="Designaçao da Categoria" v-model="categoriaFornecida">
                             <span class="icon-input"><i class="bi bi-person-lines-fill"></i></span>
                         </input-container-component>
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <input-container-component titulo="Sigla da Função:" id="siglaFuncao" id-help="siglaHelp" texto-ajuda="Informe a Sigla da Função">
-                            <input type="text" class="form-control" id="siglaFuncao" aria-describedby="idHelp" placeholder="Sigla da Função" v-mode="siglaFornecida">
+        <!--             <div class="col-md-6 mb-3">
+                        <input-container-component titulo="Sigla da Categoria:" id="siglaCategoria" id-help="siglaHelp" texto-ajuda="Informe a Sigla da Categoria">
+                            <input type="text" class="form-control" id="siglaCategoria" aria-describedby="idHelp" placeholder="Sigla da Categoria" v-mode="siglaFornecida">
                             <span class="icon-input"><i class="bi bi-bookmark-fill"></i></span>
                         </input-container-component>
-                    </div>
+                    </div> -->
                 </div>
             </form>
         </template>
@@ -42,11 +42,11 @@
 
                 <div class="row">
                     <div class="col-md-3 form-floating" id="filter">
-                        <h2 class="">Funções</h2>
+                        <h2 class="">Categorias</h2>
                     </div>
                     <div class="col-md-6"></div>
                     <div class="col-md-3 col-float-right">
-                        <button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#FuncoesModal"><i class="bi bi-plus"></i></button>
+                        <button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#CategoriasModal"><i class="bi bi-plus"></i></button>
                     </div>
                 </div>
 
@@ -56,17 +56,17 @@
                     <thead class="tableHeader">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Designacão da Função</th>
+                            <th scope="col">Designacão da Categoria</th>
                             <th scope="col">Adicionado em:</th>
                             <th scope="col">Sigla</th>
                             <th scope="col"><i class="bi bi-tools"></i></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="funcao in funcoes" :key="funcao.id">
-                            <td scope="row">{{ funcao.id }}</td>
-                            <td>{{ funcao.Designacao_Funcao }}</td>
-                            <td>{{ funcao.created_at }}</td>
+                        <tr v-for="categoria in funcoes" :key="categoria.id">
+                            <td scope="row">{{ categoria.id }}</td>
+                            <td>{{ categoria.Designacao_Categoria }}</td>
+                            <td>{{ categoria.created_at }}</td>
                             <td>--</td>
                             <th class="tools">
                                 <i class="bi bi-eye-fill view"></i>
@@ -98,10 +98,9 @@
             return {
                 urlBase: import.meta.env.VITE_API_URL,
                 funcoes: "",
-                funcaoFornecida: "",
+                categoriaFornecida: "",
                 siglaFornecida: "",
                 provincia_id: "",
-
 
                 transacaoStatus: "",
                 transacaoDetalhes: {},
@@ -115,13 +114,13 @@
                 this.$store.state.transacao.mensagem = ''
                 this.$store.state.transacao.dados = ''
                 this.$store.state.item = obj
-                this.funcao_id = obj.funcao_id
+                this.categoria_id = obj.categoria_id
               /*   this.obterProvinciaPorID(this.provincia_id) */
             },
 
-            listarFuncoes() {
+            listarCategorias() {
 
-                const url = `${this.urlBase}funcoes/listar`
+                const url = `${this.urlBase}categoria`
 
                 axios.get(url)
                     .then(response => {
@@ -162,8 +161,7 @@
             salvar(){
 
                 const formData = new FormData();
-                formData.append('Designacao_Funcao', this.funcaoFornecida)
-                //formData.append('Sigla_Funcao', this.siglaFornecida)
+                formData.append('Designacao_Categoria', this.categoriaFornecida)
 
                 let config = {
                     headers: {
@@ -171,17 +169,17 @@
                     }
                 }
 
-                const url = `${this.urlBase}funcao`
+                const url = `${this.urlBase}categoria`
 
                 axios.post(url, formData, config)
                     .then(response => {
-                        this.listarFuncoes();
+                        this.listarCategorias();
                         this.transacaoStatus = 'adicionado'
                         this.transacaoDetalhes = {
-                            mensagem: "Função adicionada com sucesso"
+                            mensagem: "Categoria adicionada com sucesso"
                         }
 
-                        this.funcaoFornecida=""
+                        this.categoriaFornecida=""
                         this.siglaFornecida=""
                     })
 
@@ -250,7 +248,7 @@
         },
 
         mounted() {
-            this.listarFuncoes();
+            this.listarCategorias();
         },
     }
 </script>

@@ -58,12 +58,13 @@
                                   <li><a class="dropdown-item" href="/provincias">Províncias</a></li>
                                   <li><a class="dropdown-item" href="/municipios"> Municípios</a></li>
                                   <li><a class="dropdown-item" href="/localidades"> Localidades</a></li>
-                                  <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="{{route('todos')}}">Todos os Locais</a></li>
+      {{--                             <li><hr class="dropdown-divider"></li>
+                                  <li><a class="dropdown-item" href="{{route('localidades')}}">Todos os Locais</a></li> --}}
                                 </ul>
                              </li>
 
                              <li class="nav-item"><a class="nav-link" href="{{route('funcoes')}}">Funções</a></li>
+                             <li class="nav-item"><a class="nav-link" href="{{route('categorias')}}">Categorias</a></li>
 
                         @endauth
                     </ul>
@@ -87,13 +88,14 @@
                             <li class="nav-item dropdown">
 
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="https://a7.pnghunt.com/preview/1010/196/39/forehead-silhouette-face-monochrome-contacts.jpg" class="float-start avatar" alt="...">
+                                    <img {{-- src="{{ asset('../../../public/imagens/bandeira-angola.png') }}" --}} class="float-start avatar" alt="...">
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" id="" aria-labelledby="navbarDropdown">
                                     <div class="list-group">
                                         <a href="#" class="list-group-item list-group-item-action active" id="dropMenu" aria-current="true">
                                             <i class="bi bi-person"></i> {{ Auth::user()->name }}
+                                            <auth-component email={{ Auth::user()->email }}></auth-component>
                                         </a>
                                         <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-tools"></i> Perfil</a>
                                         <a class="list-group-item list-group-item-action disabled"><br></a>

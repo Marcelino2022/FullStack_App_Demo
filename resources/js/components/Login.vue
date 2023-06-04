@@ -60,13 +60,14 @@
         props: [ 'csrf_token'],
         data(){
             return {
+                urlBase: import.meta.env.VITE_API_URL,
                 email: '',
                 password: ''
             }
         },
         methods: {
             login(e){
-                let url = 'http://127.0.0.1:8000/api/'
+                let url = this.urlBase
                 let configuracao = {
                     method: 'post',
                     body:  new URLSearchParams({
