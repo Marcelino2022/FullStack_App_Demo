@@ -50,14 +50,12 @@ class ProvinciaController extends Controller
 
     public function provinciasComMunipios(Request $request){
 
-        $dadosProvinciasComMunicipios = DB::select(
-            '
-                SELECT p.id, Designacao_Provincia
-                From Provincias AS p
-                JOIN Municipios m ON m.provincia_id = p.id
-                GROUP BY 1;
-            '
-        );
+        $dadosProvinciasComMunicipios=DB::select('SELECT p.id, Designacao_Provincia
+                                                    From provincias AS p
+                                                    JOIN municipios m ON m.provincia_id = p.id
+                                                    GROUP BY 1;
+                                                        '
+                                                    );
 
         return response()->json($dadosProvinciasComMunicipios, 201);
     }

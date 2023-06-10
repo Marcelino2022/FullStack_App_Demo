@@ -201,7 +201,7 @@
             <div class="col-md-10">
                 <div class="row">
                     <div class="col-md-3 form-floating" id="filter">
-                        <h2 class="">Províncias</h2>
+                        <h2 class="">Município</h2>
                     </div>
                     <div class="col-md-6"></div>
                     <div class="col-md-3 col-float-right">
@@ -294,8 +294,6 @@
                     .then( response => {
                         this.permissao =response.data.coordenacao[0].Designacao_Permissao
 
-                        console.log(this.permissao)
-
                         if(this.permissao == 'Nível Nacional'){
                             this.admin = true
                             this.acessorURL =`${this.urlBase}membro`
@@ -322,6 +320,7 @@
                 })
                     .catch(errors => {
                     this.municipios = errors.response.data.msg;
+                    //console.log(errors);
                 });
             },
 
@@ -342,8 +341,6 @@
             obterProvinciaPorID(provincia_id){
 
                 const urlProvincia =`${this.urlBase}provincia/${provincia_id}`
-
-                console.log(urlProvincia);
                 axios.get(urlProvincia)
                     .then(response => {
                     this.provinciaDoMunicipio = response.data
@@ -396,8 +393,7 @@
                 formData.append('provincia_id', this.proviciaSelecionada)
 
                 let url =  `${this.urlBase}municipio`+'/'+this.$store.state.item.id;
-                console.log( this.proviciaSelecionada);
-
+             
                 let config = {
 
                     headers: {

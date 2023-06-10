@@ -9,7 +9,7 @@
         "@popperjs/core": "^2.11.8",
         "@vitejs/plugin-vue": "^3.0.1",
         "@volar-plugins/vetur": "latest",
-        "axios": "^0.27",
+        "axios": "^0.27.2",
         "bootstrap": "^5.2.1",
         "dotenv": "^16.1.3",
         "laravel-vite-plugin": "^0.6.1",

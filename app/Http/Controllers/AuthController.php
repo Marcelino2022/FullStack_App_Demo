@@ -44,8 +44,8 @@ class AuthController extends Controller
     }
 
     public function dadosCoordenacao(Request $request){
-        $coordenacao = DB::select(' SELECT * FROM Coordenacoes c
-                                    JOIN Permissoes p ON p.id = c.permissoes_id
+        $coordenacao = DB::select(' SELECT * FROM coordenacoes c
+                                    JOIN permissoes p ON p.id = c.permissoes_id
                                     WHERE c.id=?', [$request->get('id')]);
 
         return response()->json(['coordenacao' => $coordenacao]);

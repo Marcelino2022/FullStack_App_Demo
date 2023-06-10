@@ -81,9 +81,11 @@ class MunicipioController extends Controller
 
     public function obterMunicipiosComLocalidades($provincia_id){
 
-        $municipios = DB::select('  SELECT DISTINCT(m.id) ,Designacao_Municipio FROM Municipios m
-                                    JOIN Localidades l ON m.id = l.municipio_id
-                                    WHERE provincia_id = ?', [$provincia_id]);
+        $municipios=DB::select('SELECT  DISTINCT(m.id), 
+                                        Designacao_Municipio 
+                                FROM municipios m
+                                JOIN localidades l ON m.id = l.municipio_id
+                                WHERE provincia_id = ?', [$provincia_id]);
 
 
         return response()->json($municipios, 200);

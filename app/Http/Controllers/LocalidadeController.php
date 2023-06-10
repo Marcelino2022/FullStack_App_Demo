@@ -62,9 +62,9 @@ class LocalidadeController extends Controller
                                                 Designacao_Municipio,
                                                 m.provincia_id,
                                                 Designacao_Provincia
-                                        from Localidades l
-                                        Join Municipios m ON l.municipio_id = m.id
-                                        join Provincias p ON m.provincia_id = p.id;'
+                                        from localidades l
+                                        Join municipios m ON l.municipio_id = m.id
+                                        join provincias p ON m.provincia_id = p.id;'
                                      );
 
          return response()->json($dadosLocalidade, 201);

@@ -85,9 +85,9 @@
                 axios.get(url)
                     .then( response => {
                         this.coordenacoes = response.data
-                        console.log(response.data);
+                      
                     }).catch( error =>{
-                        console.log(error);
+                    /*     console.log(error); */
                      })
             },
 

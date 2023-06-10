@@ -33,6 +33,6 @@ class Municipio extends Model
 
 
     public function localidades(){
-        return $this->hasMany('App\Models\localidade');
+        return $this->hasMany('App\Models\Localidade');
     }
 }

@@ -29,7 +29,7 @@ Route::middleware('jwt.auth')->group(function(){
     Route::apiResource('membro', 'App\Http\Controllers\MembroController');
     Route::apiResource('mobilizador', 'App\Http\Controllers\MobilizadorController');
     Route::apiResource('provincia', 'App\Http\Controllers\ProvinciaController');
-    Route::apiResource('municipio', 'App\Http\Controllers\municipioController');
+    Route::apiResource('municipio', 'App\Http\Controllers\MunicipioController');
     Route::apiResource('responsavel', 'App\Http\Controllers\responsavelController');
     Route::apiResource('telefone_coordenacao', 'App\Http\Controllers\TelefoneCoordenacaoController');
     Route::apiResource('categoria', 'App\Http\Controllers\CategoriaController');
@@ -40,14 +40,14 @@ Route::middleware('jwt.auth')->group(function(){
     Route::get('localidades_de_municipios', 'App\Http\Controllers\LocalidadeController@obterLocalidadesDeMunicipios');
     Route::get('provinciasComMunicipios', 'App\Http\Controllers\ProvinciaController@provinciasComMunipios');
     Route::get('localidadePorMunicipio/{municipio_id}', 'App\Http\Controllers\LocalidadeController@obterLocalidadesPorMunicipio');
-    Route::get('municipioComLocalidades/{provincia_id}', 'App\Http\Controllers\municipioController@obterMunicipiosComLocalidades');
+    Route::get('municipioComLocalidades/{provincia_id}', 'App\Http\Controllers\MunicipioController@obterMunicipiosComLocalidades');
     Route::get('user/autenticado', 'App\Http\Controllers\AuthController@getUserAuthenticated');
     Route::get('user/autenticado/dados', 'App\Http\Controllers\AuthController@dadosCoordenacao');
     Route::get('membro/listarMembros', 'App\Http\Controllers\MembroController@listarMembros');
 });
 
 Route::post('/', 'App\Http\Controllers\AuthController@login');
-//Route::apiResource('coordenacao/padrao', 'App\Http\Controllers\CoordenacaoController');
+Route::apiResource('coordenacao/padrao', 'App\Http\Controllers\CoordenacaoController');
 Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
 
 
