@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('Membros', function (Blueprint $table) {
+        Schema::table('membros', function (Blueprint $table) {
             $table->string('mobilizador_id')->nullable()->default(null)->change();
             $table->string('funcao_id')->nullable()->default(null)->change();
             $table->string('categoria_id')->nullable()->default(null)->change();

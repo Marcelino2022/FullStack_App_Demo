@@ -66,7 +66,7 @@ import PermissaoComponent from './components/permissoes/Permissao.vue'
 
 import InputContainerComponent from './components/InputContainer.vue';
 import SelectComponent from './components/Select.vue'
-import CardComponent from './components/card.vue'
+import CardComponent from './components/Card.vue'
 import AlertComponent from './components/Alert.vue'
 import AccordionComponent from './components/Accordion.vue'
 import TableComponent from './components/Table.vue'

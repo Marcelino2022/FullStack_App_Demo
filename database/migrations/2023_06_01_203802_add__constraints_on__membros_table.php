@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('Membros', function (Blueprint $table) {
+        Schema::table('membros', function (Blueprint $table) {
             $table->foreign('coordenacao_id')
             ->references('id')
-            ->on('Coordenacoes')
+            ->on('coordenacoes')
             ->onDelete('cascade')
             ->onUpdate('cascade');
         });

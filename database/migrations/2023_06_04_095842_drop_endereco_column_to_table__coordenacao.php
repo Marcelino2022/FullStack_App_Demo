@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('coordenacoes', function (Blueprint $table) {
-            $table->dropColumn('Endereco');
+            $table->dropColumn('endereco');
         });
     }
 

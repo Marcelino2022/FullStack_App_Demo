@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Support\Facades\Redirect;
 
 class Handler extends ExceptionHandler
 {
@@ -47,4 +49,16 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+{
+    // Redirecionar exceções de autenticação para a página de login
+    if ($exception instanceof AuthenticationException) {
+        return Redirect::guest(route('login'));
+    }
+
+    // Resto da lógica de renderização das exceções...
+
+    return parent::render($request, $exception);
+}
 }

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::table('localidades', function (Blueprint $table) {
             $table->foreign('municipio_id')
                   ->references('id')
-                  ->on('Municipios')
+                  ->on('municipios')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
 

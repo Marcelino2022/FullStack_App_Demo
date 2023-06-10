@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('coordenacoes', function (Blueprint $table) {
-            $table->string('Bairro', 200)->after('Endereco_Coordenacao')->nullable(true)->default(null);
+            $table->string('Bairro', 200)->after('endereco_coordenacao')->nullable(true)->default(null);
         });
     }
 

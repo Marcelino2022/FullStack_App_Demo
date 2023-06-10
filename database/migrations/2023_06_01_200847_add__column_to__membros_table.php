@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('Membros', function (Blueprint $table) {
+        Schema::table('membros', function (Blueprint $table) {
             $table->string('Morada_Membro', 100)->after('Email_Membro')->nullable(true)->default(null);
             $table->date('Data_Alistamento', 100)->after('Email_Membro')->nullable(true)->default(null);
         });
