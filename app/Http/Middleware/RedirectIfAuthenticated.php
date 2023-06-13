@@ -29,4 +29,11 @@ class RedirectIfAuthenticated
 
         return $next($request);
     }
+
+    protected function redirectTo($request)
+    {
+        if (!$request->expectsJson()) {
+            return route('login'); // Altere 'login' para o nome da rota da página de login da sua aplicação
+        }
+    }
 }
