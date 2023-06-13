@@ -57,8 +57,8 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Designacão da Função</th>
-                            <th scope="col">Adicionado em:</th>
                             <th scope="col">Sigla</th>
+                            <th scope="col">Adicionado em:</th>
                             <th scope="col"><i class="bi bi-tools"></i></th>
                         </tr>
                     </thead>
@@ -66,8 +66,8 @@
                         <tr v-for="funcao in funcoes" :key="funcao.id">
                             <td scope="row">{{ funcao.id }}</td>
                             <td>{{ funcao.Designacao_Funcao }}</td>
+                            <td>{{ funcao.Sigla_Funcao }}</td>
                             <td>{{ funcao.created_at }}</td>
-                            <td>--</td>
                             <th class="tools">
                                 <i class="bi bi-eye-fill view"></i>
                                 <i class="bi bi-pencil-square edit"></i>
@@ -163,7 +163,7 @@
 
                 const formData = new FormData();
                 formData.append('Designacao_Funcao', this.funcaoFornecida)
-                //formData.append('Sigla_Funcao', this.siglaFornecida)
+                formData.append('Sigla_Funcao', this.siglaFornecida)
 
                 let config = {
                     headers: {

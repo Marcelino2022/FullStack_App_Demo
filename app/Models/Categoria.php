@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Categoria extends Model
 {
     use HasFactory;
-    protected $fillable = ['Designacao_Categoria'];
+    protected $fillable = ['Designacao_Categoria', 'Sigla_Categoria'];
 
     public function rules(){
         return[

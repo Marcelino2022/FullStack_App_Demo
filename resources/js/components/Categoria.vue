@@ -1,5 +1,7 @@
 <template>
 
+    <editaCateforia-component id="editarCategoriaModal" ></editaCateforia-component>
+
     <modal-component id="CategoriasModal" titulo="Adicionar Categoria">
 
         <template v-slot:alertas>
@@ -11,19 +13,19 @@
             <form>
                 <div class="row">
 
-                    <div class="col-md-12 mb-3">
+                    <div class="col-md-6 mb-3">
                         <input-container-component titulo="Designação da Categoria:" id="designacaoCategoria" id-help="designacaoHelp" texto-ajuda="Informe a Designação da Categoria">
                             <input type="text" class="form-control" id="designacaoCategoria" aria-describedby="idHelp" placeholder="Designaçao da Categoria" v-model="categoriaFornecida">
                             <span class="icon-input"><i class="bi bi-person-lines-fill"></i></span>
                         </input-container-component>
                     </div>
 
-        <!--             <div class="col-md-6 mb-3">
+                   <div class="col-md-6 mb-3">
                         <input-container-component titulo="Sigla da Categoria:" id="siglaCategoria" id-help="siglaHelp" texto-ajuda="Informe a Sigla da Categoria">
-                            <input type="text" class="form-control" id="siglaCategoria" aria-describedby="idHelp" placeholder="Sigla da Categoria" v-mode="siglaFornecida">
+                            <input type="text" class="form-control" id="siglaCategoria" aria-describedby="idHelp" placeholder="Sigla da Categoria" v-model="siglaFornecida">
                             <span class="icon-input"><i class="bi bi-bookmark-fill"></i></span>
                         </input-container-component>
-                    </div> -->
+                    </div>
                 </div>
             </form>
         </template>
@@ -57,8 +59,8 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Designacão da Categoria</th>
-                            <th scope="col">Adicionado em:</th>
                             <th scope="col">Sigla</th>
+                            <th scope="col">Adicionado em:</th>
                             <th scope="col"><i class="bi bi-tools"></i></th>
                         </tr>
                     </thead>
@@ -66,18 +68,20 @@
                         <tr v-for="categoria in funcoes" :key="categoria.id">
                             <td scope="row">{{ categoria.id }}</td>
                             <td>{{ categoria.Designacao_Categoria }}</td>
+                            <td>{{ categoria.Sigla_Categoria }}</td>
                             <td>{{ categoria.created_at }}</td>
-                            <td>--</td>
-                            <th class="tools">
-                                <i class="bi bi-eye-fill view"></i>
-                                <i class="bi bi-pencil-square edit"></i>
-                                <i class="bi bi-trash-fill delete"></i>
-                            </th>
+                            <td class="tools">
+                                <i class="bi bi-eye-fill view" @click="setStore(provinia)"></i>
+                                <i class="bi bi-pencil-square edit" data-bs-toggle="modal" data-bs-target="#editarCategoriaModal" @click="setStore(categoria)" v-if="admin"></i>
+                                <i class="bi bi-trash-fill delete" data-bs-toggle="modal" data-bs-target="#removerProvinciaModal"  @click="setStore(categoria)" v-if="admin"></i>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-1"></div>
+            <div class="col-md-1">
+                <div hidden>  {{ usuario }} </div>
+            </div>
 
         </div>
     </div>
@@ -92,163 +96,145 @@
 <script>
 
     import axios from 'axios';
+    import { mapState } from 'vuex';
+
     export default {
+    data() {
+        return {
+            urlBase: import.meta.env.VITE_API_URL,
+            funcoes: "",
+            categoriaFornecida: "",
+            siglaFornecida: "",
+            provincia_id: "",
+            transacaoStatus: "",
+            transacaoDetalhes: {},
+            permissao:"",
+            admin: false,
+        };
+    },
 
-        data() {
-            return {
-                urlBase: import.meta.env.VITE_API_URL,
-                funcoes: "",
-                categoriaFornecida: "",
-                siglaFornecida: "",
-                provincia_id: "",
+    computed: {
+        ...mapState(['user']),
+        usuario(){
+            const usuario = this.user && this.user[0] ? this.user[0] : '';
+            this.carragarDadosDoUtilizador(usuario)
+            return this.user && this.user[0] ? this.user[0] : '';
+        },
+    },
 
-                transacaoStatus: "",
-                transacaoDetalhes: {},
+    methods: {
 
+        carragarDadosDoUtilizador(usuario){
+                const url = `${this.urlBase}user/autenticado/dados/?id=${usuario.coordenacao_id}`
+            axios.get(url)
+                .then( response => {
+                    this.permissao =response.data.coordenacao[0].Designacao_Permissao
+
+                    if(this.permissao == 'Nível Nacional'){
+                        this.admin = true
+                        this.acessorURL =`${this.urlBase}membro`
+                    } else{
+                        this.acessorURL =`${this.urlBase}membro/listarMembros?id=${usuario.coordenacao_id}`
+                    }
+            })
+        },
+
+        setStore(obj) {
+            this.$store.state.transacao.status = "avisar";
+            this.$store.state.transacao.mensagem = "";
+            this.$store.state.transacao.dados = "";
+            this.$store.state.item = obj;
+            this.categoria_id = obj.categoria_id;
+        },
+
+        listarCategorias() {
+            const url = `${this.urlBase}categoria`;
+            axios.get(url)
+                .then(response => {
+                this.funcoes = response.data;
+            })
+                .catch(errors => {
+                this.funcoes = errors.response.data.msg;
+            });
+        },
+
+        salvar() {
+            const formData = new FormData();
+            formData.append("Designacao_Categoria", this.categoriaFornecida);
+            formData.append("Sigla_Categoria", this.siglaFornecida);
+            let config = {
+                headers: {
+                    "Content.Type": "multipart/form-data"
+                }
             };
+
+
+            const url = `${this.urlBase}categoria`;
+            axios.post(url, formData, config)
+                .then(response => {
+                this.listarCategorias();
+                this.transacaoStatus = "adicionado";
+                this.transacaoDetalhes = {
+                    mensagem: "Categoria adicionada com sucesso"
+                };
+                this.categoriaFornecida = "";
+                this.siglaFornecida = "";
+            })
+                .catch(errors => {
+                this.transacaoStatus = "erro";
+                this.transacaoDetalhes = {
+                    mensagem: errors.response.data.message,
+                    dados: errors.response.data.errors
+                };
+            });
         },
-
-        methods: {
-            setStore(obj) {
-                this.$store.state.transacao.status = 'avisar'
-                this.$store.state.transacao.mensagem = ''
-                this.$store.state.transacao.dados = ''
-                this.$store.state.item = obj
-                this.categoria_id = obj.categoria_id
-              /*   this.obterProvinciaPorID(this.provincia_id) */
-            },
-
-            listarCategorias() {
-
-                const url = `${this.urlBase}categoria`
-
-                axios.get(url)
-                    .then(response => {
-                    this.funcoes = response.data;
-                })
-                    .catch(errors => {
-                    this.funcoes = errors.response.data.msg;
-                });
-            },
-/*
-            carregarProvincias(){
-                axios.get(this.urlProvincias)
-                    .then(response => {
-                    this.provinciasDoMunicipio = response.data
-                    })
-
-                    .catch(errors =>{
-                        this.provinciasDoMunicipio = errors.response.data.msg
-                    })
-            }, */
-
-
-/*             obterProvinciaPorID(provincia_id){
-
-                const urlProvincia = this.urlProvincias+'/'+provincia_id
-
-                console.log(urlProvincia);
-                axios.get(urlProvincia)
-                    .then(response => {
-                    this.provinciaDoMunicipio = response.data
-                    })
-
-                    .catch(errors =>{
-                        this.provinciaDoMunicipio = errors.response.data.msg
-                })
-            }, */
-
-            salvar(){
-
-                const formData = new FormData();
-                formData.append('Designacao_Categoria', this.categoriaFornecida)
-
-                let config = {
-                    headers: {
-                        'Content.Type': 'multipart/form-data'
-                    }
+        atualizar() {
+            let formData = new FormData();
+            formData.append("_method", "patch");
+            formData.append("Designacao_Categoria", this.categoriaFornecida);
+            formData.append("Sigla_Categoria", this.siglaFornecida);
+            let url = this.urlBase `${this.$store.state.item.id}`;
+            let config = {
+                headers: {
+                    "Content.Type": "multipart/form-data"
                 }
+            };
+            axios.post(url, formData, config)
+                .then(response => {
+                this.$store.state.transacao.status = "atualizado";
+                this.$store.state.transacao.mensagem = "Registos da Categoria Atualizada com sucesso";
+                this.listarCategorias();
+            })
+                .catch(errors => {
+                this.$store.state.transacao.status = "erro";
+                this.$store.state.transacao.mensagem = errors.response.data.message;
+                this.$store.state.transacao.dados = errors.response.data.errors;
+            });
+        },
+        /*remover(){
 
-                const url = `${this.urlBase}categoria`
+            let url = this.urlBase+'/'+this.$store.state.item.id;
 
-                axios.post(url, formData, config)
-                    .then(response => {
-                        this.listarCategorias();
-                        this.transacaoStatus = 'adicionado'
-                        this.transacaoDetalhes = {
-                            mensagem: "Categoria adicionada com sucesso"
-                        }
+            const formData = new FormData();
+            formData.append('_method','delete')
 
-                        this.categoriaFornecida=""
-                        this.siglaFornecida=""
-                    })
+            axios.post(url, formData)
+                .then(response => {
 
-                    .catch(errors => {
-                        this.transacaoStatus = 'erro'
-                        this.transacaoDetalhes = {
-                            mensagem: errors.response.data.message,
-                            dados: errors.response.data.errors
-                        }
+                    this.$store.state.transacao.status = 'removido'
+                    this.$store.state.transacao.mensagem = response.data.msg
+                    this.carregarMunicipios();
                 })
-            },
 
- /*            atualizar(){
-
-                let formData = new FormData()
-                formData.append('_method', 'patch')
-                formData.append('Designacao_Municipio', this.$store.state.item.Designacao_Municipio)
-                formData.append('Codigo_Municipio', this.$store.state.item.Codigo_Municipio)
-                formData.append('provincia_id', this.proviciaSelecionada)
-
-                let url = this.urlBase+'/'+this.$store.state.item.id;
-                console.log( this.proviciaSelecionada);
-
-                let config = {
-
-                    headers: {
-                        'Content.Type': 'multipart/form-data'
-                    }
-                }
-
-                axios.post(url, formData, config)
-                    .then(response => {
-                        this.$store.state.transacao.status = 'atualizado'
-                        this.$store.state.transacao.mensagem = "Registos da Município Atualizado com sucesso"
-                        //console.log('Atualizado', response)
-                        this.carregarMunicipios()
-                    })
-                    .catch(errors => {
-                        this.$store.state.transacao.status = 'erro'
-                        this.$store.state.transacao.mensagem = errors.response.data.message
-                        this.$store.state.transacao.dados = errors.response.data.errors
-                    })
-                },
-
-                remover(){
-
-                    let url = this.urlBase+'/'+this.$store.state.item.id;
-
-                    const formData = new FormData();
-                    formData.append('_method','delete')
-
-                    axios.post(url, formData)
-                        .then(response => {
-
-                            this.$store.state.transacao.status = 'removido'
-                            this.$store.state.transacao.mensagem = response.data.msg
-                            this.carregarMunicipios();
-                        })
-
-                        .catch(errors => {
-                            this.$store.state.transacao.status = 'erro'
-                            this.$store.state.transacao.mensagem = errors.response.data.msg
-                        })
-                }, */
-
-        },
-
-        mounted() {
-            this.listarCategorias();
-        },
-    }
+                .catch(errors => {
+                    this.$store.state.transacao.status = 'erro'
+                    this.$store.state.transacao.mensagem = errors.response.data.msg
+                })
+        }, */
+    },
+    mounted() {
+        this.listarCategorias();
+        this.carragarDadosDoUtilizador();
+    },
+}
 </script>

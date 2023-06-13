@@ -11,7 +11,7 @@ class Funcao extends Model
     use HasFactory;
     protected $table = 'funcoes';
 
-    protected $fillable = ['Designacao_Funcao'];
+    protected $fillable = ['Designacao_Funcao', 'Sigla_Funcao'];
 
     public function rules(){
         return [

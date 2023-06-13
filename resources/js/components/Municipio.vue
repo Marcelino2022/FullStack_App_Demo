@@ -205,7 +205,7 @@
                     </div>
                     <div class="col-md-6"></div>
                     <div class="col-md-3 col-float-right">
-                        <button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#provinciaModal" v-if="admin"><i class="bi bi-plus"></i></button>
+                        <button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#municipioModal" v-if="admin"><i class="bi bi-plus"></i></button>
                     </div>
                 </div>
 
@@ -393,7 +393,7 @@
                 formData.append('provincia_id', this.proviciaSelecionada)
 
                 let url =  `${this.urlBase}municipio`+'/'+this.$store.state.item.id;
-             
+
                 let config = {
 
                     headers: {

@@ -1,66 +1,5 @@
 <template>
 
-<!--     <div class="container mt-3"> -->
-
-        <!--adicionarProvincia-component></adicionarProvincia-component-->
-        <!--editarProvincia-component></editarProvincia-component-->
-        <!--removerProvincia-component></removerProvincia-component-->
-
-<!--         <h2 class="margem-top">Províncias</h2>
-
-        <hr class="mb-3">
-
-        <div class="row mb-3">
-            <div class="col-md-3 form-floating" id="filter">
-
-                <select-component class="bi bi-filter-circle-fill">
-                    <template v-slot:optionSelected>Todas as Províncias</template>
-                    <template v-slot:option>
-                        <option v-for="obj in provincias" :key="obj.id" :value="obj.id"> {{ obj.Designacao_Provincia }}</option>
-                    </template>
-                    <template v-slot:labelContent>Clique aqui para filtrar </template>
-                </select-component>
-
-            </div>
-
-            <div class="col-md-6"></div>
-
-            <div class="col-md-3 mt-1 col-btn">
-                <buttonComponent-component class="button-component" data-bs-toggle="modal" data-bs-target="#provinciaModal">
-                    <template v-slot:icon><i class="bi bi-plus-circle"></i></template>
-                    <template v-slot:conteudo>Adicionar Província</template>
-                </buttonComponent-component>
-            </div>
-
-        </div>
-
-        <hr class="mb-3">
- -->
-<!--
-        <card-component v-for="obj in provincias" :key="obj.id" :titulo="obj.Designacao_Provincia+' - '+obj.Codigo_Provincia">
-            <template v-slot:image> <img src="../../../../public/imagens/bandeira-angola.png" class="float-start avatar" alt="..."></template>
-
-            <template v-slot:rodape>
-                <div class="mb-2"><i class="bi bi-building icon-color"></i> -- Coordenações</div>
-                <div class="mb-2 ml-5"><i class="bi bi-pin-map-fill icon-color"></i> -- Municípios </div>
-                <div class="mb-2 ml-5"><i class="bi bi-geo-alt-fill icon-color"></i> -- Localidades </div>
-
-                <div class="mb-2 ml-5">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editarProvinciaModal" @click="setStore(obj)">
-                        <i class="bi bi-pencil-square"></i> Editar
-                    </button>
-                </div>
-
-                <div class="mb-2 ml-5">
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removerProvinciaModal" @click="setStore(obj)">
-                        <i class="bi bi-trash3-fill"></i> Remover
-                    </button>
-                </div>
-            </template>
-
-        </card-component> -->
-
-
         <!--ADICIONAR PROVÍNCIA-->
         <modal-component id="provinciaModal" titulo="Adicionar provinciade">
 
@@ -277,7 +216,7 @@
                         if(this.permissao == 'Nível Nacional'){
                             this.admin = true
                             this.acessorURL =`${this.urlBase}membro`
-                        } 
+                        }
                 })
             },
 
@@ -360,7 +299,7 @@
                         this.$store.state.transacao.mensagem = errors.response.data.message
                         this.$store.state.transacao.dados = errors.response.data.errors
                     })
-                },
+            },
 
             remover(){
 
