@@ -35,7 +35,7 @@
                     <ul class="navbar-nav ml-auto">
                         @auth
                             <li class="nav-item"><a class="nav-link" href="{{route('home')}}">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{route('coordenacoes')}}">Coordenacões</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('coordenacoes')}}">Secretariado</a></li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                   Membros
@@ -48,7 +48,7 @@
                                 </ul>
                              </li>
 
-                             <li class="nav-item"><a class="nav-link" href="{{route('permissoes.index')}}">Permissões</a></li>
+                             <li class="nav-item"><a class="nav-link" href="{{route('permissoes.index')}}">Nível acesso</a></li>
 
                              <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -57,7 +57,7 @@
                                 <ul class="dropdown-menu">
                                   <li><a class="dropdown-item" href="/provincias">Províncias</a></li>
                                   <li><a class="dropdown-item" href="/municipios"> Municípios</a></li>
-                                  <li><a class="dropdown-item" href="/localidades"> Localidades</a></li>
+                                  <li><a class="dropdown-item" href="/localidades">Distrito ou Cumuna</a></li>
       {{--                             <li><hr class="dropdown-divider"></li>
                                   <li><a class="dropdown-item" href="{{route('localidades')}}">Todos os Locais</a></li> --}}
                                 </ul>

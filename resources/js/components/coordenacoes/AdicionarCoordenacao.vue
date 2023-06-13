@@ -1,5 +1,5 @@
 <template>
-    <modal-component :id="id" titulo="Adicionar Coordenação">
+    <modal-component :id="id" titulo="Adicionar Secretariado">
 
         <template v-slot:alertas>
             <alert-component tipo="success" :detalhes="transacaoDetalhes" titulo="Registo Realizado com sucesso" v-if="transacaoStatus == 'adicionado'"></alert-component>
@@ -10,35 +10,35 @@
             <form ref="formInserirCoordenacao">
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <input-container-component titulo="Designação Coordenação:" id="designacaoCoordenacao" id-help="designacaoHelp" texto-ajuda="Designação da Coordenação">
-                            <input type="text" class="form-control" id="designacaoCoordenacao" aria-describedby="idHelp" placeholder="Coordenação" v-model="inputDesignacaoCoordenacao">
+                        <input-container-component titulo="Designação Secretariado:" id="designacaoCoordenacao" id-help="designacaoHelp" texto-ajuda="Designação do Secretariado">
+                            <input type="text" class="form-control" id="designacaoCoordenacao" aria-describedby="idHelp" placeholder="Secretariado" v-model="inputDesignacaoCoordenacao">
                             <span class="icon-input"><i class="bi bi-building"></i></span>
                         </input-container-component>
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <input-container-component titulo="Email Coordenação:" id="emailCoordenacao" id-help="emailHelp" texto-ajuda="Email da Coordenação">
+                        <input-container-component titulo="Email Secretariado:" id="emailCoordenacao" id-help="emailHelp" texto-ajuda="Email do Secretariado">
                             <input type="text" class="form-control" id="emailCoordenacao" aria-describedby="idHelp" placeholder="Eamil" v-model="inputEmailCoordenacao">
                             <span class="icon-input"><i class="bi bi-envelope-fill"></i></span>
                         </input-container-component>
                     </div>
 
                     <div class="col-md-3 mb-3">
-                        <input-container-component titulo="Telefone Coordenação:" id="telefoneCoordenacao" id-help="telefoneHelp" texto-ajuda="Telefone da Coordenação">
+                        <input-container-component titulo="Telefone Secretariado:" id="telefoneCoordenacao" id-help="telefoneHelp" texto-ajuda="Telefone do Secretariado">
                             <input type="text" class="form-control" id="telefoneCoordenacao" aria-describedby="idHelp" placeholder="Telefone" v-model="inputTelefoneCoordenacao">
                             <span class="icon-input"><i class="bi bi-telephone-fill"></i></span>
                         </input-container-component>
                     </div>
 
                     <div class="col-md-3 mb-3">
-                        <input-container-component titulo="Telemóvel Coordenação:" id="telemovelCoordenacao" id-help="telemovelHelp" texto-ajuda="Telefone da Coordenação">
+                        <input-container-component titulo="Telemóvel Secretariado:" id="telemovelCoordenacao" id-help="telemovelHelp" texto-ajuda="Telefone do Secretariado">
                             <input type="text" class="form-control" id="telemovelCoordenacao" aria-describedby="idHelp" placeholder="Telemóvel" v-model="inputTelemovelCoordenacao">
                             <span class="icon-input"><i class="bi bi-phone-vibrate-fill"></i></span>
                         </input-container-component>
                     </div>
 
                     <div class="col-md-3 mb-3">
-                        <input-container-component titulo="Província Coordenação:" id="provinciaCoordenacao" id-help="provinciaHelp" texto-ajuda="Pronvíncia da Coordenação">
+                        <input-container-component titulo="Província Secretariado:" id="provinciaCoordenacao" id-help="provinciaHelp" texto-ajuda="Pronvíncia do Secretariado">
                             <select class="form-select" aria-label="Default select example" v-model="provinciaSelecionada"  @change="obterMunicipioDaPrvincia(provinciaSelecionada)">
                                 <option value="">Selecione aqui</option>
                                 <option v-for="provincia in provincias" :key="provincia.id" :value="provincia.id">{{ provincia.Designacao_Provincia }}</option>
@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="col-md-3 mb-3">
-                        <input-container-component titulo="Município Coordenação:" id="municipioCoordenacao" id-help="municipioHelp" texto-ajuda="Município da Coordenação">
+                        <input-container-component titulo="Município Secretariado:" id="municipioCoordenacao" id-help="municipioHelp" texto-ajuda="Município do Secretariado">
                             <select class="form-select" aria-label="Default select example" v-model="municipioSelecionado" @change="ObterLocalidadesDoMunicipio(municipioSelecionado)">
                                 <option value="">Selecione aqui</option>
                                 <option v-for="municipio in municipios" :key="municipio.id" :value="municipio.id">{{ municipio.Designacao_Municipio }}</option>
@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <input-container-component titulo="Localidade Coordenação:" id="localidadeCoordenacao" id-help="localidadeHelp" texto-ajuda="Localidade da Coordenação">
+                        <input-container-component titulo="Localidade Secretariado:" id="localidadeCoordenacao" id-help="localidadeHelp" texto-ajuda="Selecione Distrito ou Comuna">
                             <select class="form-select" aria-label="Default select example" v-model="LocalidadeSelecionada">
                                 <option value="">Selecione aqui</option>
                                 <option v-for="localidade in localidades" :key="localidade.id" :value="localidade.id">{{ localidade.Designacao_Localidade }}</option>
@@ -68,21 +68,21 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <input-container-component titulo="Endereço Coordenação:" id="enderecoCoordenacao" id-help="enderecoHelp" texto-ajuda="Endereço da Coordenação">
+                        <input-container-component titulo="Endereço Secretariado:" id="enderecoCoordenacao" id-help="enderecoHelp" texto-ajuda="Endereço da Secretariado">
                             <input type="text" class="form-control" id="enderecoCoordenacao" aria-describedby="idHelp" placeholder="Endereço" v-model="inputEnderecoCoordenacao">
                             <span class="icon-input"><i class="bi bi-geo-alt-fill"></i></span>
                         </input-container-component>
                     </div>
 
                     <div class="col-md-3 mb-3">
-                        <input-container-component titulo="Bairro Coordenação:" id="bairroCoordenacao" id-help="barrioHelp" texto-ajuda="Bairro da Coordenação">
+                        <input-container-component titulo="Bairro Secretariado:" id="bairroCoordenacao" id-help="barrioHelp" texto-ajuda="Bairro da Secretariado">
                             <input type="text" class="form-control" id="bairroCoordenacao" aria-describedby="idHelp" placeholder="Bairro" v-model="inputBairroCoordenacao">
                             <span class="icon-input"><i class="bi bi-geo-alt"></i></span>
                         </input-container-component>
                     </div>
 
                     <div class="col-md-3  mb-3">
-                        <input-container-component titulo="Permissão Coordenação:" id="permissaoCoordenacao" id-help="permissaocaoHelp" texto-ajuda="Permissão da Coordenação">
+                        <input-container-component titulo="Permissão Secretariado:" id="permissaoCoordenacao" id-help="permissaocaoHelp" texto-ajuda="Permissão da Secretariado">
                             <select class="form-select" v-model="permissaoSelecionada">
                                 <option value="">Selecione aqui</option>
                                 <option  v-for="permissao in permissoes" :key="permissao.id" :value="permissao.id">{{ permissao.Designacao_Permissao }}</option>
@@ -92,7 +92,7 @@
                     </div>
 
                     <div class="col-md-3 mb-3">
-                        <input-container-component titulo="Palavra Passe:" id="passwordCoordenacao" id-help="passwordHelp" texto-ajuda="Password da Coordenação">
+                        <input-container-component titulo="Palavra Passe:" id="passwordCoordenacao" id-help="passwordHelp" texto-ajuda="Password da Secretariado">
                             <input type="password" class="form-control" id="passwordCoordenacao" aria-describedby="idHelp" placeholder="Password" v-model="inputPasswordCoordenacao">
                             <span class="icon-input"><i class="bi bi-unlock-fill"></i></span>
                         </input-container-component>
@@ -214,7 +214,7 @@
                      .then( response => {
                         this.transacaoStatus = "adicionado"
                         this.transacaoDetalhes = {
-                            mensagem: `Coordenação ${this.inputDesignacaoCoordenacao} adicionada com Sucesso`
+                            mensagem: `Secretariado ${this.inputDesignacaoCoordenacao} adicionada com Sucesso`
                         }
 
                             this.$refs.formInserirCoordenacao.reset();

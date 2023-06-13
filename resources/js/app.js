@@ -54,6 +54,8 @@ import MembrosComponent from './components/Membros.vue';
 import FuncoesComponent from './components/Funcao.vue';
 import CategoriaComponent from './components/Categoria.vue';
 import EditarCategoriaComponent from './components/categorias/EditarCategoria.vue'
+import EditarPermissaoComponent from './components/permissoes/EditarPermissoes.vue'
+import EditarFuncoesComponent from './components/Funcoes/EditarFuncoes.vue'
 
 import ModalComponent from './components/Modal.vue';
 import ButtonHome from './components/ButtonHome.vue';
@@ -90,7 +92,9 @@ app.component('municipio-component', MunicipioComponent);
 app.component('localidade-component', LocalidadeComponent);
 app.component('funcoes-component', FuncoesComponent);
 app.component('categorias-component', CategoriaComponent);
-app.component('editaCateforia-component', EditarCategoriaComponent);
+app.component('editarCateforia-component', EditarCategoriaComponent);
+app.component('editarPermissao-component', EditarPermissaoComponent);
+app.component('editarFuncao-component', EditarFuncoesComponent);
 
 app.component('permissao-component', PermissaoComponent);
 app.component('input-container-component', InputContainerComponent);

@@ -1,5 +1,5 @@
 <template>
-    <modal-component :id="id" :listarCategorias="listarCategorias" titulo="Editar dados da Categoria" :categoria_id="categoria_id">
+    <modal-component :id="id" :listarAcessos="listarAcessos" titulo="Editar Nível de Acesso" :acesso_id="acesso_id">
 
         <template v-slot:alertas>
             <alert-component tipo="success" :detalhes="transacaoDetalhes" titulo="Dados da Categoria Atualizados com sucesso" v-if="transacaoStatus == 'atualizado'"></alert-component>
@@ -12,15 +12,15 @@
                 <div class="row">
 
                     <div class="col-md-8 mb-3">
-                        <input-container-component titulo="Designação Categoria:" id="designacaoCategoria" id-help="designacaoHelp" texto-ajuda="Atualizar Designação da Categoria">
-                            <input type="text" class="form-control" id="designacaoCategoria" aria-describedby="idHelp" v-model="$store.state.item.Designacao_Categoria">
-                            <span class="icon-input"><i class="bi bi-person-lines-fill"></i></span>
+                        <input-container-component titulo="Designação Permissão:" id="designacaoPermissao" id-help="designacaoHelp" texto-ajuda="Atualizar Designação da Permissão">
+                            <input type="text" class="form-control" id="designacaoPermissao" aria-describedby="idHelp" v-model="$store.state.item.Designacao_Permissao">
+                            <span class="icon-input"><i class="bi bi-person-check"></i></span>
                         </input-container-component>
                     </div>
 
                     <div class="col-md-4 mb-3">
-                        <input-container-component titulo="Sigla da Categoria:" id="siglaCategoria" id-help="siglaHelp" texto-ajuda="Atualizar Sigla da Categoria">
-                            <input type="text" class="form-control" id="siglaCategoria" aria-describedby="idHelp" v-model="$store.state.item.Sigla_Categoria">
+                        <input-container-component titulo="Sigla da Permissão:" id="siglaPermissao" id-help="siglaHelp" texto-ajuda="Atualizar Sigla da Permissão">
+                            <input type="text" class="form-control" id="siglaPermissao" aria-describedby="idHelp" v-model="$store.state.item.Sigla_Permissao">
                             <span class="icon-input"><i class="bi bi-bookmark-fill"></i></span>
                         </input-container-component>
                     </div>
@@ -55,7 +55,7 @@ import axios from 'axios';
             }
         },
 
-        props:['id', 'categoria_id', 'obterCategoria', 'listarCategorias'],
+        props:['id', 'acesso_id', 'obterCategoria', 'listarAcessos'],
 
         methods: {
 
@@ -70,29 +70,29 @@ import axios from 'axios';
 
                 let formData = new FormData()
                 formData.append('_method', 'patch')
-                formData.append('Designacao_Categoria', this.$store.state.item.Designacao_Categoria)
-                formData.append('Sigla_Categoria', this.$store.state.item.Sigla_Categoria)
+                formData.append('Designacao_Permissao', this.$store.state.item.Designacao_Permissao)
+                formData.append('Sigla_Permissao', this.$store.state.item.Sigla_Permissao)
 
-                let url = `${this.urlBase}categoria/${this.$store.state.item.id}`
+                let url = `${this.urlBase}permissoes/${this.$store.state.item.id}`
+
                 let config = {
                     headers: {
                         'Content.Type': 'multipart/form-data'
                     }
                 }
-/*
-                for (const [chave, valor] of formData.entries()) {
-                    console.log(`${chave}: ${valor}`);
-                }
- */
+
                 axios.post(url, formData, config)
                     .then(response => {
                         this.transacaoStatus = 'atualizado'
                         this.transacaoDetalhes = {
-                            mensagem: "Registo da Categoria atualizado com sucesso"
+                            mensagem: "Registo da Permissão atualizada com sucesso"
                         }
                     })
                     .catch(errors => {
                         this.transacaoStatus = 'erro'
+                        this.transacaoDetalhes = {
+                            mensagem: errors.response.data.message
+                        }
                         this.$store.state.transacao.mensagem = errors.response.data.message
                         this.$store.state.transacao.dados = errors.response.data.errors
                 })

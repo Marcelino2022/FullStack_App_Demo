@@ -1,38 +1,4 @@
 <template>
-
-<!--         <accordion-component
-                    v-for="localidade in this.localidadesDoMunicipio" :key="localidade.municipio_id"
-                    class="bi bi-geo-alt-fill"
-                    :id="'localidade'+localidade.municipio_id"
-                    :parentId="'localidade'+localidade.municipio_id"
-                    :dataBsParent="'#localidade'+localidade.municipio_id"
-                    :dataBsTarget="'#localidade'+localidade.municipio_id"
-                    :aria-controls="'localidade'+localidade.municipio_id"
-                    :titulo="localidade.provincia+' -'+localidade.municipio" :subtitulo="localidade.numero_localidades+' Localidade(s)'"
-                    >
-            <template v-slot:icone_i><i class="bi bi-geo" id="icon-location"></i></template>
-            <template v-slot:items>
-                <ul class="list-group">
-                    <li class="list-group-item"  v-for="itemlocalidade, item in localidade.localidades"  :key="itemlocalidade.id">
-                        <h5><i class="bi bi-geo-alt-fill"></i> {{ itemlocalidade.localidade }}</h5>
-                        <div class="mYBtn-group">
-                            <slot name="butrons"></slot>
-                            <button type="button" class="btn btn-success mr" data-bs-toggle="modal" data-bs-target="#editarlocalidadeModal" @click="setStore(itemlocalidade)">
-                                <i class="bi bi-pencil-square"></i> Editar
-                            </button>
-
-                            <button type="button" class="btn btn-danger ml-3" data-bs-toggle="modal" data-bs-target="#removerlocalidadeModal" @click="setStore(itemlocalidade)">
-                                <i class="bi bi-trash3-fill"></i> Remover
-                            </button>
-                        </div>
-
-                    </li>
-                </ul>
-            </template>
-        </accordion-component> -->
-
-
-
         <!--ADICIONAR LOCALIDADE-->
         <modal-component id="localidadeModal" titulo="Editar Localidade">
 
@@ -66,7 +32,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <input-container-component titulo="Designação da Localidade:" id="designacaoLocalidade" id-help="siglaHelp" texto-ajuda="Informe a Localidade">
-                                    <input type="text" class="form-control" id="siglaProvincia" aria-describedby="idHelp" placeholder="Desgnação da Localidade" v-model="designacaoLocalidade">
+                                    <input type="text" class="form-control" id="siglaProvincia" aria-describedby="idHelp" placeholder="Desgnação Distrito ou Comuna" v-model="designacaoLocalidade">
                                     <span class="icon-input"><i class="bi bi-geo-fill"></i></span>
                                 </input-container-component>
 
@@ -104,7 +70,7 @@
                         <div class="col-md-3 mb-3">
                             <input-container-component titulo="Município:" id="designacaoMunicipio" id-help="designacaoHelp" texto-ajuda="Informe o Município">
                                 <select class="form-select" aria-label="Default select example" v-model="municipioSelecionado">
-                                    <option :value="this.municipioDaLocalidade.id"> {{ this.municipioDaLocalidade.Designacao_Municipio }}</option>
+                                    <option value=""> {{ this.municipioDaLocalidade.Designacao_Municipio }}</option>
                                     <option v-for="municipio in municipios" :key="municipio.id" :value="municipio.id">{{ municipio.Designacao_Municipio }}</option>
                                 </select>
                                 <span class="icon-input"><i class="bi bi-pin-map-fill"></i></span>
@@ -134,11 +100,11 @@
 
             <div class="col-md-10">
                 <div class="row">
-                    <div class="col-md-3 form-floating" id="filter">
-                        <h2 class="">Localidades</h2>
+                    <div class="col-md-6 form-floating" id="filter">
+                        <h2 class="">Distritos ou Comunas</h2>
                     </div>
-                    <div class="col-md-6"></div>
-                    <div class="col-md-3 col-float-right">
+                 <!--    <div class="col-md-6"></div> -->
+                    <div class="col-md-6 col-float-right">
                         <button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#localidadeModal" v-if="admin"><i class="bi bi-plus"></i></button>
                     </div>
                 </div>
@@ -149,7 +115,7 @@
                     <thead class="tableHeader">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Localidade</th>
+                            <th scope="col">Designação</th>
                             <th scope="col">Município</th>
                             <th scope="col">Provínca</th>
                             <th scope="col">Nº de Coordenações</th>

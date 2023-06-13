@@ -10,7 +10,7 @@
                 <br><br>
                 <div class="row">
                     <div class="col-md-3 form-floating" id="filter">
-                        <h2 class="">Coordenações</h2>
+                        <h2 class="">Sercretariado</h2>
                     </div>
                     <div class="col-md-6"></div>
                     <div class="col-md-3 col-float-right">
@@ -85,7 +85,7 @@
                 axios.get(url)
                     .then( response => {
                         this.coordenacoes = response.data
-                      
+
                     }).catch( error =>{
                     /*     console.log(error); */
                      })

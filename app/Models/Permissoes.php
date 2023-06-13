@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Permissoes extends Model
 {
 
-    protected $fillable = ['Designacao_Permissao'];
+    protected $fillable = ['Designacao_Permissao', 'Sigla_Permissao'];
 
     public function rules(){
         return [

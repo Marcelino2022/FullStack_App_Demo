@@ -1,5 +1,7 @@
 <template>
 
+    <editarFuncao-component id="editarFuncaoModal" ></editarFuncao-component>
+
     <modal-component id="FuncoesModal" titulo="Adicionar Função">
 
         <template v-slot:alertas>
@@ -20,7 +22,7 @@
 
                     <div class="col-md-6 mb-3">
                         <input-container-component titulo="Sigla da Função:" id="siglaFuncao" id-help="siglaHelp" texto-ajuda="Informe a Sigla da Função">
-                            <input type="text" class="form-control" id="siglaFuncao" aria-describedby="idHelp" placeholder="Sigla da Função" v-mode="siglaFornecida">
+                            <input type="text" class="form-control" id="siglaFuncao" aria-describedby="idHelp" placeholder="Sigla da Função" v-model="siglaFornecida">
                             <span class="icon-input"><i class="bi bi-bookmark-fill"></i></span>
                         </input-container-component>
                     </div>
@@ -58,7 +60,6 @@
                             <th scope="col">#</th>
                             <th scope="col">Designacão da Função</th>
                             <th scope="col">Sigla</th>
-                            <th scope="col">Adicionado em:</th>
                             <th scope="col"><i class="bi bi-tools"></i></th>
                         </tr>
                     </thead>
@@ -66,18 +67,19 @@
                         <tr v-for="funcao in funcoes" :key="funcao.id">
                             <td scope="row">{{ funcao.id }}</td>
                             <td>{{ funcao.Designacao_Funcao }}</td>
-                            <td>{{ funcao.Sigla_Funcao }}</td>
-                            <td>{{ funcao.created_at }}</td>
-                            <th class="tools">
-                                <i class="bi bi-eye-fill view"></i>
-                                <i class="bi bi-pencil-square edit"></i>
-                                <i class="bi bi-trash-fill delete"></i>
-                            </th>
+                            <td class="text-center">{{ funcao.Sigla_Funcao }}</td>
+                            <td class="text-center tools">
+                                <i class="bi bi-eye-fill view" @click="setStore(funcao)"></i>
+                                <i class="bi bi-pencil-square edit" data-bs-toggle="modal" data-bs-target="#editarFuncaoModal" @click="setStore(funcao)" v-if="admin"></i>
+                                <i class="bi bi-trash-fill delete" data-bs-toggle="modal" data-bs-target="#removerFuncoesModal"  @click="setStore(funcao)" v-if="admin"></i>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-1"></div>
+            <div class="col-md-1">
+                <div hidden>  {{ usuario }} </div>
+            </div>
 
         </div>
     </div>
@@ -92,6 +94,8 @@
 <script>
 
     import axios from 'axios';
+    import { mapState } from 'vuex';
+
     export default {
 
         data() {
@@ -101,6 +105,8 @@
                 funcaoFornecida: "",
                 siglaFornecida: "",
                 provincia_id: "",
+                permissao:"",
+                admin: false,
 
 
                 transacaoStatus: "",
@@ -109,7 +115,33 @@
             };
         },
 
+        computed: {
+            ...mapState(['user']),
+            usuario(){
+                const usuario = this.user && this.user[0] ? this.user[0] : '';
+                this.carragarDadosDoUtilizador(usuario)
+                return this.user && this.user[0] ? this.user[0] : '';
+            },
+        },
+
+
         methods: {
+
+            carragarDadosDoUtilizador(usuario){
+                const url = `${this.urlBase}user/autenticado/dados/?id=${usuario.coordenacao_id}`
+                axios.get(url)
+                    .then( response => {
+                        this.permissao =response.data.coordenacao[0].Designacao_Permissao
+
+                        if(this.permissao == 'Nível Nacional'){
+                            this.admin = true
+                            this.acessorURL =`${this.urlBase}membro`
+                        } else{
+                            this.acessorURL =`${this.urlBase}membro/listarMembros?id=${usuario.coordenacao_id}`
+                        }
+                })
+            },
+
             setStore(obj) {
                 this.$store.state.transacao.status = 'avisar'
                 this.$store.state.transacao.mensagem = ''
@@ -251,6 +283,7 @@
 
         mounted() {
             this.listarFuncoes();
+            this.carragarDadosDoUtilizador();
         },
     }
 </script>

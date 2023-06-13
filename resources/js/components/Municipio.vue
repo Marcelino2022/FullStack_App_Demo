@@ -368,6 +368,10 @@
 
                 axios.post(url, formData, config)
                     .then(response => {
+                        this.designacaoMunicipioFornecido = ""
+                        this.siglaMunicipioFornecida = ""
+                        this.proviciaSelecionada = ""
+
                         this.carregarMunicipios();
                         this.transacaoStatus = 'adicionado'
                         this.transacaoDetalhes = {
@@ -405,7 +409,6 @@
                     .then(response => {
                         this.$store.state.transacao.status = 'atualizado'
                         this.$store.state.transacao.mensagem = "Registos da Município Atualizado com sucesso"
-                        //console.log('Atualizado', response)
                         this.carregarMunicipios()
                     })
                     .catch(errors => {

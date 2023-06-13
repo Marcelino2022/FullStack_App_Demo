@@ -33,7 +33,7 @@
 
             <buttonHome-component href="/coordenacoes">
                 <template v-slot:icon><i class="bi bi-building"></i></template>
-                <template v-slot:redirect>Coordenação</template>
+                <template v-slot:redirect>Secretariado</template>
             </buttonHome-component>
 
             <buttonHome-component href="/provincias">
@@ -49,7 +49,7 @@
 
             <buttonHome-component href="/localidades">
                 <template v-slot:icon><i class="bi bi-geo"></i></template>
-                <template v-slot:redirect>Localidade</template>
+                <template v-slot:redirect>Distrito ou Cumuna</template>
             </buttonHome-component>
 
             <buttonHome-component href="/funcoes">

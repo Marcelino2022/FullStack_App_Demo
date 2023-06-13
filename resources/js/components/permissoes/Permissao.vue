@@ -1,5 +1,7 @@
 <template>
 
+    <editarPermissao-component id="editarPermissaoModal" ></editarPermissao-component>
+
     <modal-component id="PermissaoModal" titulo="Adicionar Permissão">
 
         <template v-slot:alertas>
@@ -20,7 +22,7 @@
 
                     <div class="col-md-6 mb-3">
                         <input-container-component titulo="Sigla da Função:" id="siglaFuncao" id-help="siglaHelp" texto-ajuda="Informe a Sigla da Função">
-                            <input type="text" class="form-control" id="siglaFuncao" aria-describedby="idHelp" placeholder="Sigla da Função" v-mode="siglaFornecida">
+                            <input type="text" class="form-control" id="siglaFuncao" aria-describedby="idHelp" placeholder="Sigla da Função" v-model="siglaFornecida">
                             <span class="icon-input"><i class="bi bi-bookmark-fill"></i></span>
                         </input-container-component>
                     </div>
@@ -42,7 +44,7 @@
             <div class="col-md-10">
                 <div class="row">
                     <div class="col-md-3 form-floating" id="filter">
-                        <h2 class="">Permissões</h2>
+                        <h2 class="">Nível de Acesso</h2>
                     </div>
                     <div class="col-md-6"></div>
                     <div class="col-md-3 col-float-right">
@@ -56,8 +58,7 @@
                     <thead class="tableHeader">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Designacão da Permissão</th>
-                            <th scope="col">Adicionado em:</th>
+                            <th scope="col">Designação Acesso</th>
                             <th scope="col">Sigla</th>
                             <th scope="col"><i class="bi bi-tools"></i></th>
                         </tr>
@@ -66,13 +67,12 @@
                         <tr v-for="permissao in permissoes" :key="permissao.id">
                             <td scope="row">{{ permissao.id }}</td>
                             <td>{{ permissao.Designacao_Permissao }}</td>
-                            <td>{{ permissao.created_at }}</td>
-                            <td>--</td>
-                            <th class="tools">
-                                <i class="bi bi-eye-fill view"></i>
-                                <i class="bi bi-pencil-square edit"></i>
-                                <i class="bi bi-trash-fill delete"></i>
-                            </th>
+                            <td class="text-center">{{ permissao.Sigla_Permissao }}</td>
+                            <td class="text-center tools">
+                                <i class="bi bi-eye-fill view" @click="setStore(permissao)"></i>
+                                <i class="bi bi-pencil-square edit" data-bs-toggle="modal" data-bs-target="#editarPermissaoModal" @click="setStore(permissao)" v-if="admin"></i>
+                                <i class="bi bi-trash-fill delete" data-bs-toggle="modal" data-bs-target="#removerPermissaoModal"  @click="setStore(permissao)" v-if="admin"></i>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -135,6 +135,13 @@ export default {
             })
         },
 
+        setStore(obj) {
+            this.$store.state.transacao.status = "avisar";
+            this.$store.state.transacao.mensagem = "";
+            this.$store.state.transacao.dados = "";
+            this.$store.state.item = obj;
+            this.categoria_id = obj.categoria_id;
+        },
 
        listarPermissoes(){
 
@@ -154,7 +161,7 @@ export default {
         salvar(){
             const formData = new FormData();
             formData.append('Designacao_Permissao', this.permissaoFornecida)
-            //formData.append('Sigla_Funcao', this.siglaFornecida)
+            formData.append('Sigla_Permissao', this.siglaFornecida)
 
             let config = {
                 headers: {

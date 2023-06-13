@@ -1,6 +1,6 @@
 <template>
 
-    <editaCateforia-component id="editarCategoriaModal" ></editaCateforia-component>
+    <editarCateforia-component id="editarCategoriaModal" ></editarCateforia-component>
 
     <modal-component id="CategoriasModal" titulo="Adicionar Categoria">
 
@@ -60,18 +60,18 @@
                             <th scope="col">#</th>
                             <th scope="col">Designacão da Categoria</th>
                             <th scope="col">Sigla</th>
-                            <th scope="col">Adicionado em:</th>
+                      <!--       <th scope="col">Adicionado em:</th> -->
                             <th scope="col"><i class="bi bi-tools"></i></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="categoria in funcoes" :key="categoria.id">
+                        <tr v-for="categoria in categorias" :key="categoria.id">
                             <td scope="row">{{ categoria.id }}</td>
                             <td>{{ categoria.Designacao_Categoria }}</td>
-                            <td>{{ categoria.Sigla_Categoria }}</td>
-                            <td>{{ categoria.created_at }}</td>
-                            <td class="tools">
-                                <i class="bi bi-eye-fill view" @click="setStore(provinia)"></i>
+                            <td class="text-center">{{ categoria.Sigla_Categoria }}</td>
+<!--                             <td class="text-center">{{ categoria.created_at }}</td> -->
+                            <td class="text-center tools">
+                                <i class="bi bi-eye-fill view" @click="setStore(categoria)"></i>
                                 <i class="bi bi-pencil-square edit" data-bs-toggle="modal" data-bs-target="#editarCategoriaModal" @click="setStore(categoria)" v-if="admin"></i>
                                 <i class="bi bi-trash-fill delete" data-bs-toggle="modal" data-bs-target="#removerProvinciaModal"  @click="setStore(categoria)" v-if="admin"></i>
                             </td>
@@ -102,7 +102,7 @@
     data() {
         return {
             urlBase: import.meta.env.VITE_API_URL,
-            funcoes: "",
+            categorias: "",
             categoriaFornecida: "",
             siglaFornecida: "",
             provincia_id: "",
@@ -151,10 +151,10 @@
             const url = `${this.urlBase}categoria`;
             axios.get(url)
                 .then(response => {
-                this.funcoes = response.data;
+                this.categorias = response.data;
             })
                 .catch(errors => {
-                this.funcoes = errors.response.data.msg;
+                this.categorias = errors.response.data.msg;
             });
         },
 
