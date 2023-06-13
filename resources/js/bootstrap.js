@@ -49,7 +49,7 @@ axios.interceptors.request.use(
         });
 
         token = token.split("=")[1];
-        token = "Bearer" + token; 
+        token = "Bearer" + token;
 
         config.headers.Authorization = token
         return config
@@ -67,20 +67,21 @@ axios.interceptors.response.use(
       return response;
     },
     error => {
-       if(error.response.status == 401 && error.response.data.message == 'Token has expired') {
-        axios.post('http://144.126.234.33/api/refresh')
-          .then(response => {
-            document.cookie = 'token=' + response.data.token;
-            window.location.reload();
-            router.push('/login');
-          })
-          .catch(error => {
-            router.push('/login');
-          });
-      }
-  
-      return Promise.reject(error);
+
+        if(error.response.status == 401 && error.response.data.message == 'Token has expired'){
+           axios.post('http://localhost:8000/api/refresh')
+            .then(response => {
+                document.cookie = 'token='+response.data.token
+                window.location.reload()
+                //router.push('/login');
+            }).catch( error => {
+                //router.push('/login');
+            })
+
+        }
+
+        return Promise.reject(error)
     }
   );
-  
+
 
