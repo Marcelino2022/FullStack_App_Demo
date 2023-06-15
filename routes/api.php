@@ -43,7 +43,7 @@ Route::middleware('jwt.auth')->group(function(){
     Route::get('municipioComLocalidades/{provincia_id}', 'App\Http\Controllers\MunicipioController@obterMunicipiosComLocalidades');
     Route::get('user/autenticado', 'App\Http\Controllers\AuthController@getUserAuthenticated');
     Route::get('user/autenticado/dados', 'App\Http\Controllers\AuthController@dadosCoordenacao');
-    Route::get('membro/listarMembros', 'App\Http\Controllers\MembroController@listarMembros');
+    Route::get('listarMembros', 'App\Http\Controllers\MembroController@listarMembros');
 });
 
 Route::post('/', 'App\Http\Controllers\AuthController@login');

@@ -38,9 +38,9 @@
                             <td>{{ membro.Nome_Membro }}</td>
                             <td>{{ membro.Email_Membro }}</td>
                             <td>{{ membro.Telemovel_Membro }}</td>
-                            <td>{{ membro.coordenacao_id }}</td>
-                            <td>{{ membro.funcao_id }}</td>
-                            <td>{{ membro.categoria_id }}</td>
+                            <td>{{ membro.Designacao_Coordenacao }}</td>
+                            <td>{{ membro.Designacao_Funcao }}</td>
+                            <td>{{ membro.Designacao_Categoria }}</td>
                             <td class="text-center tools">
                                 <i class="bi bi-eye-fill view"></i>
                                 <i class="bi bi-pencil-square edit" v-if="admin"></i>
@@ -129,13 +129,15 @@ export default {
 
     methods:{
 
-        ListarMebros(url){
+        ListarMebros(){
+
+        const url = `${this.urlBase}listarMembros`
+
         axios.get(url)
             .then( response => {
                 this.membros = response.data
-
+                console.log(this.membros);
                 if(this.membros.length > 0){
-
                 }
             }).catch( errors => {
 

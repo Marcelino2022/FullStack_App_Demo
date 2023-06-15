@@ -41,8 +41,8 @@
                                   Membros
                                 </a>
                                 <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="">Juventude</a></li>
-                                  <li><a class="dropdown-item" href="#"> Mulheres</a></li>
+                                  <li><a class="dropdown-item" href="">JAAC</a></li>
+                                  <li><a class="dropdown-item" href="#"> MAAC</a></li>
                                   <li><hr class="dropdown-divider"></li>
                                   <li><a class="dropdown-item" href="{{route('todos')}}">Todos os membros</a></li>
                                 </ul>
@@ -57,7 +57,7 @@
                                 <ul class="dropdown-menu">
                                   <li><a class="dropdown-item" href="/provincias">Províncias</a></li>
                                   <li><a class="dropdown-item" href="/municipios"> Municípios</a></li>
-                                  <li><a class="dropdown-item" href="/localidades">Distrito ou Cumuna</a></li>
+                                  <li><a class="dropdown-item" href="/localidades">Distrito ou Comuna</a></li>
       {{--                             <li><hr class="dropdown-divider"></li>
                                   <li><a class="dropdown-item" href="{{route('localidades')}}">Todos os Locais</a></li> --}}
                                 </ul>

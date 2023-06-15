@@ -49,7 +49,7 @@
 
             <buttonHome-component href="/localidades">
                 <template v-slot:icon><i class="bi bi-geo"></i></template>
-                <template v-slot:redirect>Distrito ou Cumuna</template>
+                <template v-slot:redirect>Distrito ou Comuna</template>
             </buttonHome-component>
 
             <buttonHome-component href="/funcoes">

@@ -8,6 +8,7 @@ use App\Http\Requests\StoreMembroRequest;
 use App\Http\Requests\UpdateMembroRequest;
 use Illuminate\Http\Request;
 use App\Repositories\MembroRepository;
+use DB;
 
 class MembroController extends Controller
 {
@@ -58,9 +59,19 @@ class MembroController extends Controller
 
     public function listarMembros(Request $request){
 
-        $membros = Membro::select()->where('id', $request->get('id'));
+        //$membros = Membro::select()->where('id', $request->get('id'));
+        $membros = DB::select(' SELECT  Nome_Membro,
+                                        Email_Membro,
+                                        Telemovel_Membro,
+                                        Designacao_Categoria,
+                                        Designacao_Coordenacao,
+                                        Designacao_Funcao
+                                FROM membros m
+                                JOIN coordenacoes c ON c.id = m.coordenacao_id
+                                JOIN funcoes f ON f.id = m.funcao_id
+                                JOIN categorias cat ON cat.id = m.categoria_id');
 
-        return response()->json(['membros' => $membros]);
+        return response()->json(['membros' => $membros[0]]);
     }
 
     /**
