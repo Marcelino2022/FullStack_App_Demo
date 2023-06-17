@@ -85,7 +85,6 @@
     </div>
 </template>
 
-
 <style scoped>
     @import '../../css/provincias.css';
     @import '../../css/modal.css';
@@ -148,7 +147,6 @@
                 this.$store.state.transacao.dados = ''
                 this.$store.state.item = obj
                 this.funcao_id = obj.funcao_id
-              /*   this.obterProvinciaPorID(this.provincia_id) */
             },
 
             listarFuncoes() {
@@ -163,33 +161,7 @@
                     this.funcoes = errors.response.data.msg;
                 });
             },
-/*
-            carregarProvincias(){
-                axios.get(this.urlProvincias)
-                    .then(response => {
-                    this.provinciasDoMunicipio = response.data
-                    })
 
-                    .catch(errors =>{
-                        this.provinciasDoMunicipio = errors.response.data.msg
-                    })
-            }, */
-
-
-/*             obterProvinciaPorID(provincia_id){
-
-                const urlProvincia = this.urlProvincias+'/'+provincia_id
-
-                console.log(urlProvincia);
-                axios.get(urlProvincia)
-                    .then(response => {
-                    this.provinciaDoMunicipio = response.data
-                    })
-
-                    .catch(errors =>{
-                        this.provinciaDoMunicipio = errors.response.data.msg
-                })
-            }, */
 
             salvar(){
 
@@ -226,7 +198,7 @@
                 })
             },
 
- /*            atualizar(){
+            atualizar(){
 
                 let formData = new FormData()
                 formData.append('_method', 'patch')
@@ -258,7 +230,7 @@
                     })
                 },
 
-                remover(){
+                /*remover(){
 
                     let url = this.urlBase+'/'+this.$store.state.item.id;
 

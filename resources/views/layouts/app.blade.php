@@ -7,13 +7,14 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Pra-já') }}</title>
+    <title>Pra-já Servir Angola</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://th.bing.com/th/id/OIP.FLZA1XVHArMTlpRvQogtDAAAAA?pid=ImgDet&rs=1">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -88,7 +89,7 @@
                             <li class="nav-item dropdown">
 
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img {{-- src="{{ asset('../../../public/imagens/bandeira-angola.png') }}" --}} class="float-start avatar" alt="...">
+                                    <img src="http://144.126.234.33/build/assets/Logo-Web.c641d56e.png" class="float-start avatar" alt="...">
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" id="" aria-labelledby="navbarDropdown">

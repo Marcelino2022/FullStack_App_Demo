@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Funcao extends Model
 {
@@ -14,9 +13,9 @@ class Funcao extends Model
     protected $fillable = ['Designacao_Funcao', 'Sigla_Funcao'];
 
     public function rules(){
+
         return [
             'Designacao_Funcao' => 'required|unique:funcoes,Designacao_Funcao,'.$this->id.'|min:5',
-
         ];
     }
 
@@ -24,6 +23,7 @@ class Funcao extends Model
         return [
             'required' => 'O campo :attribute é obrigatório',
             'Designacao_Funcao.min' => "O campo Designação da Coordenação tem de ter no mínimo 10 caracteres",
+            'unique' => 'A Função já existe.'
         ];
     }
 

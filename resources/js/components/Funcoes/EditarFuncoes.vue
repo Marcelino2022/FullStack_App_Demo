@@ -68,13 +68,13 @@ import axios from 'axios';
 
             atualizar(){
 
-                let formData = new FormData()
-                formData.append('_method', 'patch')
+                const formData = new FormData()
+                formData.append('_method', 'PUT')
                 formData.append('Designacao_Funcao', this.$store.state.item.Designacao_Funcao)
                 formData.append('Sigla_Funcao', this.$store.state.item.Sigla_Funcao)
 
-                let url = `${this.urlBase}funcao/${this.$store.state.item.id}`
-                let config = {
+                const url = `${this.urlBase}funcao/${this.$store.state.item.id}`
+                const config = {
                     headers: {
                         'Content.Type': 'multipart/form-data'
                     }
@@ -82,6 +82,7 @@ import axios from 'axios';
 
                 axios.post(url, formData, config)
                     .then(response => {
+                        console.log(response);
                         this.transacaoStatus = 'atualizado'
                         this.transacaoDetalhes = {
                             mensagem: "Registo da Funcao atualizado com sucesso"

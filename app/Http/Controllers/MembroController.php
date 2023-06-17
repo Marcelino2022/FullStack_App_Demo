@@ -8,7 +8,7 @@ use App\Http\Requests\StoreMembroRequest;
 use App\Http\Requests\UpdateMembroRequest;
 use Illuminate\Http\Request;
 use App\Repositories\MembroRepository;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class MembroController extends Controller
 {

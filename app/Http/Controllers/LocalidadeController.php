@@ -125,10 +125,8 @@ class LocalidadeController extends Controller
 
             $regrasDinamicas = array();
 
-            //PERCORRENDO TODAS AS REGRAS DEFINIDAS NO MODEL
             foreach($localidade->rules() as $input => $regra){
 
-              //COLETAR APENAS AS REGRAS APLICÁVEIS AOS PARAMÊTROS DA REQUISIÇÃO
               if(array_key_exists($input, $request->all())){
                 $regrasDinamicas[$input] = $regra;
               }
@@ -158,7 +156,7 @@ class LocalidadeController extends Controller
             return response()->json(['msg' => 'Impossível efetuar a operação, verifique os dados do recurso que pretende atualizar'], 404);
         else {
             $localidade->delete();
-            return response()->json(['msg' => 'A coordenação foi removida com sucesso'], 200);
+            return response()->json(['msg' => 'A Localidade foi removida com sucesso'], 200);
         }
     }
 }

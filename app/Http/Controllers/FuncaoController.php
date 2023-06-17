@@ -7,6 +7,8 @@ use App\Http\Requests\StoreFuncaoRequest;
 use App\Http\Requests\UpdateFuncaoRequest;
 use App\Repositories\FuncaoRepository;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+
 
 class FuncaoController extends Controller
 {
@@ -89,9 +91,32 @@ class FuncaoController extends Controller
      * @param  \App\Models\Funcao  $funcao
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateFuncaoRequest $request, Funcao $funcao)
+    public function update(UpdateFuncaoRequest $request, $id)
     {
-        //
+        $funcao = $this->funcao->find($id);
+
+        if($funcao === null)
+            return response()->json(['msg' => 'Impossível efetuar a atualização, verifique os dados do recurso que pretende atualizar'], 404);
+
+        if($request->method() === 'PATCH'){
+
+            $regrasDinamicas = array();
+
+            foreach($funcao->rules() as $input => $regra){
+
+              if(array_key_exists($input, $request->all())){
+                $regrasDinamicas[$input] = $regra;
+              }
+            }
+
+            $request->validate($regrasDinamicas, $funcao->feedback());
+
+        } else{
+            $request->validate($funcao->rules(), $funcao->feedback());
+        }
+
+        $funcao->update($request->all());
+        return response()->json($funcao, 200);
     }
 
     /**

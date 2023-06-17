@@ -1,7 +1,9 @@
 
 .modal-content{
     position: fixed;
-    width: 900px;
+    max-height: 600px;
+    width: 1000px;
+    overflow-y: auto;
     margin-top: 70px;
     margin-left: -200px;
 }
